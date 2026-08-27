@@ -3,11 +3,19 @@
 import { useCart } from "@/lib/context/CartContext";
 import { useState } from "react";
 
+import Script from "next/script";
 import { useRouter } from "next/navigation";
+
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
 
 export default function CheckoutPage() {
   const { items, cartTotal, clearCart } = useCart();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<"razorpay" | "wise">("razorpay");
   const router = useRouter();
 
   const handlePayment = async (e: React.FormEvent) => {
@@ -15,18 +23,67 @@ export default function CheckoutPage() {
     if (items.length === 0) return;
     setIsProcessing(true);
 
+    if (paymentMethod === "wise") {
+      // Simulate order creation for wise
+      setTimeout(() => {
+        clearCart();
+        router.push(`/checkout/success?payment_id=WISE_${Math.random().toString(36).substring(7)}&method=wise`);
+      }, 1500);
+      return;
+    }
+
     try {
-      // Simulate order creation on backend
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // 1. Create order on backend
+      const response = await fetch("/api/checkout/razorpay", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ amount: cartTotal }),
+      });
       
-      // Generate a mock order ID
-      const orderId = "ORD-" + Math.floor(Math.random() * 1000000);
+      const orderData = await response.json();
       
-      // Navigate to success page
-      router.push(`/checkout/success?order_id=${orderId}`);
+      if (!response.ok) {
+        throw new Error(orderData.error || "Network response was not ok");
+      }
+
+      // 2. Initialize Razorpay options
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_test_placeholder",
+        amount: orderData.amount,
+        currency: orderData.currency,
+        name: "JustPrem",
+        description: "Instrument Purchase",
+        order_id: orderData.id,
+        handler: function (response: any) {
+          // Success Callback
+          console.log("Payment Successful", response);
+          router.push(`/checkout/success?payment_id=${response.razorpay_payment_id}`);
+        },
+        prefill: {
+          name: "Test User",
+          email: "test@example.com",
+          contact: "9999999999",
+        },
+        theme: {
+          color: "#2c1810", // Forest/Wood brand color
+        },
+      };
+
+      // 3. Open Razorpay checkout modal
+      const rzp1 = new window.Razorpay(options);
+      
+      rzp1.on("payment.failed", function (response: any) {
+        console.error("Payment Failed", response.error);
+        alert("Payment failed. Please try again.");
+      });
+      
+      rzp1.open();
     } catch (error) {
       console.error("Checkout Error:", error);
-      alert("There was an issue processing your order. Please try again.");
+      alert("There was an issue initializing payment. Please try again later.");
+    } finally {
       setIsProcessing(false);
     }
   };
@@ -45,6 +102,7 @@ export default function CheckoutPage() {
 
   return (
     <>
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" />
       <div className="min-h-screen bg-ivory pt-32 pb-24">
         <div className="max-w-5xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16">
           
@@ -83,15 +141,68 @@ export default function CheckoutPage() {
                 </div>
               </section>
               
-              <div className="bg-white/50 p-6 rounded-lg border border-charcoal/10">
-                <h3 className="font-medium text-charcoal mb-2">Manual Bank Transfer via Wise</h3>
-                <p className="text-charcoal/80 text-sm leading-relaxed mb-4">
-                  Since you selected Wise, your order will be placed immediately. You will receive Wise banking details on the next page to manually transfer the funds. Your order will be shipped once the payment clears.
-                </p>
-                <div className="flex items-center gap-3 text-forest text-sm font-medium">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
-                  Pay via Wise
+              {/* Step 3: Payment Method */}
+              <section>
+                <h2 className="text-xs tracking-widest uppercase text-charcoal/50 mb-6 flex items-center gap-4">
+                  <span className="w-6 h-6 rounded-full bg-charcoal/10 text-charcoal flex items-center justify-center">3</span>
+                  Payment Method
+                </h2>
+                <div className="space-y-4">
+                  <label className={`flex items-center gap-4 p-4 rounded-lg border cursor-pointer transition-colors ${paymentMethod === 'razorpay' ? 'border-forest bg-forest/5' : 'border-charcoal/20 hover:border-charcoal/40'}`}>
+                    <input 
+                      type="radio" 
+                      name="payment_method" 
+                      value="razorpay" 
+                      checked={paymentMethod === 'razorpay'} 
+                      onChange={() => setPaymentMethod('razorpay')}
+                      className="accent-forest"
+                    />
+                    <div>
+                      <h3 className="font-medium text-charcoal">Pay with Razorpay (Cards, UPI, Netbanking)</h3>
+                      <p className="text-xs text-charcoal/60 mt-1">Instant secure payment processing in INR.</p>
+                    </div>
+                  </label>
+
+                  <label className={`flex items-center gap-4 p-4 rounded-lg border cursor-pointer transition-colors ${paymentMethod === 'wise' ? 'border-forest bg-forest/5' : 'border-charcoal/20 hover:border-charcoal/40'}`}>
+                    <input 
+                      type="radio" 
+                      name="payment_method" 
+                      value="wise" 
+                      checked={paymentMethod === 'wise'} 
+                      onChange={() => setPaymentMethod('wise')}
+                      className="accent-forest"
+                    />
+                    <div>
+                      <h3 className="font-medium text-charcoal">Manual Bank Transfer (Wise)</h3>
+                      <p className="text-xs text-charcoal/60 mt-1">Best for international customers. We will provide our Wise account details.</p>
+                    </div>
+                  </label>
                 </div>
+              </section>
+              
+              <div className="bg-white/50 p-6 rounded-lg border border-charcoal/10">
+                <h3 className="font-medium text-charcoal mb-2">Secure Payment</h3>
+                {paymentMethod === 'razorpay' ? (
+                  <>
+                    <p className="text-charcoal/80 text-sm leading-relaxed mb-4">
+                      Your payment is processed securely via Razorpay. We support all major Credit/Debit cards, UPI, and Netbanking.
+                    </p>
+                    <div className="flex items-center gap-3 text-forest text-sm font-medium">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                      Pay Securely via Razorpay
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-charcoal/80 text-sm leading-relaxed mb-4">
+                      You will receive our Wise bank details on the next page to complete your transfer. Your order will be processed once payment is confirmed.
+                    </p>
+                    <div className="flex items-center gap-3 text-forest text-sm font-medium">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
+                      Manual Bank Transfer
+                    </div>
+                  </>
+                )}
               </div>
               
               <button 
@@ -99,7 +210,7 @@ export default function CheckoutPage() {
                 disabled={isProcessing}
                 className="w-full py-4 bg-forest text-ivory uppercase tracking-widest text-xs hover:bg-forest/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
               >
-                {isProcessing ? "Processing..." : "Place Order"}
+                {isProcessing ? "Processing..." : "Continue to Payment"}
               </button>
             </form>
           </div>

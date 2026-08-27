@@ -4,17 +4,22 @@ import { useCart } from "@/lib/context/CartContext";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function CheckoutSuccessPage() {
+import { Suspense } from "react";
+
+function CheckoutSuccessContent() {
   const { clearCart } = useCart();
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
-  const [orderId, setOrderId] = useState<string | null>(null);
+  const [paymentId, setPaymentId] = useState<string | null>(null);
+  const [paymentMethod, setPaymentMethod] = useState<string | null>(null);
 
   useEffect(() => {
-    const id = searchParams.get("order_id");
+    const id = searchParams.get("payment_id");
+    const method = searchParams.get("method");
     
     if (id) {
-      setOrderId(id);
+      setPaymentId(id);
+      if (method) setPaymentMethod(method);
       clearCart();
       setStatus("success");
     } else {
@@ -38,35 +43,30 @@ export default function CheckoutSuccessPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h1 className="font-serif text-4xl text-forest mb-2">Order Placed!</h1>
-          <p className="text-charcoal/80 mb-2">Order ID: <span className="font-mono font-medium">{orderId}</span></p>
-          <p className="text-charcoal/80 mb-8 max-w-lg">
-            Thank you for your order. To complete your purchase, please manually transfer the funds to our Wise account using the details below.
-          </p>
-
-          <div className="bg-white p-8 rounded-lg shadow-sm border border-charcoal/10 max-w-md w-full text-left mb-8">
-            <h2 className="font-serif text-xl text-charcoal mb-6 border-b border-charcoal/10 pb-4">Wise Bank Details</h2>
-            
-            <div className="space-y-4 text-sm">
-              <div>
-                <p className="text-charcoal/60 uppercase tracking-wider text-[10px] mb-1">Account Name</p>
-                <p className="font-medium text-charcoal">JustPrem Instruments</p>
+          <h1 className="font-serif text-4xl text-forest mb-2">Order Successful!</h1>
+          <p className="text-charcoal/80 mb-2">Order ID: <span className="font-mono font-medium">{paymentId}</span></p>
+          
+          {paymentMethod === 'wise' ? (
+            <div className="bg-white/80 p-8 rounded-lg border border-charcoal/10 text-left max-w-lg mx-auto mb-8 shadow-sm">
+              <h3 className="font-medium text-lg text-charcoal mb-4 border-b border-charcoal/10 pb-2">Wise Bank Transfer Instructions</h3>
+              <p className="text-sm text-charcoal/80 mb-4">
+                Please transfer the exact total amount to the following bank account. Include your <strong>Order ID</strong> in the reference.
+              </p>
+              <div className="space-y-3 text-sm text-charcoal mb-6">
+                <div className="grid grid-cols-2"><span className="text-charcoal/60">Account Name:</span> <span className="font-medium">JustPrem Instruments</span></div>
+                <div className="grid grid-cols-2"><span className="text-charcoal/60">Bank Name:</span> <span className="font-medium">Wise / Community Federal Savings Bank</span></div>
+                <div className="grid grid-cols-2"><span className="text-charcoal/60">Routing Number:</span> <span className="font-medium font-mono">122105155</span></div>
+                <div className="grid grid-cols-2"><span className="text-charcoal/60">Account Number:</span> <span className="font-medium font-mono">1234567890</span></div>
               </div>
-              <div>
-                <p className="text-charcoal/60 uppercase tracking-wider text-[10px] mb-1">Account Number / IBAN</p>
-                <p className="font-medium text-charcoal font-mono">WISE1234567890</p>
-              </div>
-              <div>
-                <p className="text-charcoal/60 uppercase tracking-wider text-[10px] mb-1">Bank Code / Routing</p>
-                <p className="font-medium text-charcoal font-mono">123456</p>
-              </div>
-              <div className="bg-saffron/10 p-3 rounded mt-4 border border-saffron/20">
-                <p className="text-charcoal/80 text-xs leading-relaxed">
-                  <span className="font-semibold">Important:</span> Please include your Order ID (<strong>{orderId}</strong>) in the transfer reference so we can match your payment. Your items will be shipped once the transfer clears.
-                </p>
-              </div>
+              <p className="text-xs text-charcoal/60 italic">
+                Your order will not ship until we receive the funds. It may take 1-2 business days for international transfers to clear.
+              </p>
             </div>
-          </div>
+          ) : (
+            <p className="text-charcoal/80 mb-8 max-w-lg mx-auto">
+              Thank you for your purchase. Your payment has been securely processed. You will receive an email confirmation shortly with your order details.
+            </p>
+          )}
 
           <a href="/" className="px-8 py-4 border border-forest text-forest uppercase tracking-widest text-xs hover:bg-forest/5 transition-colors">
             Return Home
@@ -81,9 +81,9 @@ export default function CheckoutSuccessPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </div>
-          <h1 className="font-serif text-4xl text-red-600 mb-6">Invalid Order</h1>
+          <h1 className="font-serif text-4xl text-red-600 mb-6">Invalid Payment</h1>
           <p className="text-charcoal/80 mb-8 max-w-lg">
-            We could not find your order details.
+            We could not verify your payment.
           </p>
           <a href="/checkout" className="px-8 py-4 bg-forest text-ivory uppercase tracking-widest text-xs">
             Return to Checkout
@@ -91,5 +91,13 @@ export default function CheckoutSuccessPage() {
         </>
       )}
     </div>
+  );
+}
+
+export default function CheckoutSuccessPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-ivory pt-40 pb-24 px-6 flex flex-col items-center text-center"><div className="w-12 h-12 border-4 border-forest border-t-transparent rounded-full animate-spin mx-auto"></div></div>}>
+      <CheckoutSuccessContent />
+    </Suspense>
   );
 }
