@@ -3,38 +3,30 @@
 import { useCart } from "@/lib/context/CartContext";
 import { useState } from "react";
 
+import { useRouter } from "next/navigation";
+
 export default function CheckoutPage() {
   const { items, cartTotal, clearCart } = useCart();
   const [isProcessing, setIsProcessing] = useState(false);
+  const router = useRouter();
 
-  const handlePayment = async () => {
+  const handlePayment = async (e: React.FormEvent) => {
+    e.preventDefault();
     if (items.length === 0) return;
     setIsProcessing(true);
 
     try {
-      const response = await fetch("/api/checkout/stripe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ items }),
-      });
+      // Simulate order creation on backend
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
-      const sessionData = await response.json();
+      // Generate a mock order ID
+      const orderId = "ORD-" + Math.floor(Math.random() * 1000000);
       
-      if (!response.ok) {
-        throw new Error(sessionData.error || "Network response was not ok");
-      }
-
-      // Redirect to Stripe Checkout
-      if (sessionData.url) {
-        window.location.href = sessionData.url;
-      } else {
-        throw new Error("No session URL returned");
-      }
+      // Navigate to success page
+      router.push(`/checkout/success?order_id=${orderId}`);
     } catch (error) {
       console.error("Checkout Error:", error);
-      alert("There was an issue initializing payment. Please try again later.");
+      alert("There was an issue processing your order. Please try again.");
       setIsProcessing(false);
     }
   };
@@ -62,25 +54,54 @@ export default function CheckoutPage() {
               Checkout
             </h1>
             
-            <div className="space-y-12">
+            <form onSubmit={handlePayment} className="space-y-12">
+              {/* Step 1: Contact */}
+              <section>
+                <h2 className="text-xs tracking-widest uppercase text-charcoal/50 mb-6 flex items-center gap-4">
+                  <span className="w-6 h-6 rounded-full bg-forest text-ivory flex items-center justify-center">1</span>
+                  Contact Information
+                </h2>
+                <div className="space-y-4">
+                  <input required type="email" placeholder="Email Address" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-sm focus:outline-none focus:border-saffron transition-colors" />
+                  <input required type="tel" placeholder="Phone Number" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-sm focus:outline-none focus:border-saffron transition-colors" />
+                </div>
+              </section>
+
+              {/* Step 2: Shipping */}
+              <section>
+                <h2 className="text-xs tracking-widest uppercase text-charcoal/50 mb-6 flex items-center gap-4">
+                  <span className="w-6 h-6 rounded-full bg-charcoal/10 text-charcoal flex items-center justify-center">2</span>
+                  Shipping Address
+                </h2>
+                <div className="space-y-4">
+                  <input required type="text" placeholder="Full Name" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-sm focus:outline-none focus:border-saffron transition-colors" />
+                  <input required type="text" placeholder="Address" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-sm focus:outline-none focus:border-saffron transition-colors" />
+                  <div className="grid grid-cols-2 gap-4">
+                    <input required type="text" placeholder="City" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-sm focus:outline-none focus:border-saffron transition-colors" />
+                    <input required type="text" placeholder="Postal Code" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-sm focus:outline-none focus:border-saffron transition-colors" />
+                  </div>
+                </div>
+              </section>
+              
               <div className="bg-white/50 p-6 rounded-lg border border-charcoal/10">
+                <h3 className="font-medium text-charcoal mb-2">Manual Bank Transfer via Wise</h3>
                 <p className="text-charcoal/80 text-sm leading-relaxed mb-4">
-                  For your security, we use Stripe to process payments. Stripe will securely collect your payment details, contact information, and shipping address on the next step.
+                  Since you selected Wise, your order will be placed immediately. You will receive Wise banking details on the next page to manually transfer the funds. Your order will be shipped once the payment clears.
                 </p>
                 <div className="flex items-center gap-3 text-forest text-sm font-medium">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                  Secure Checkout
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+                  Pay via Wise
                 </div>
               </div>
               
               <button 
-                onClick={handlePayment}
+                type="submit"
                 disabled={isProcessing}
                 className="w-full py-4 bg-forest text-ivory uppercase tracking-widest text-xs hover:bg-forest/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
               >
-                {isProcessing ? "Processing..." : "Continue to Secure Payment"}
+                {isProcessing ? "Processing..." : "Place Order"}
               </button>
-            </div>
+            </form>
           </div>
 
           {/* Order Summary */}

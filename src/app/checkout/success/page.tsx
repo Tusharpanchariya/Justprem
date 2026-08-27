@@ -8,13 +8,13 @@ export default function CheckoutSuccessPage() {
   const { clearCart } = useCart();
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
+  const [orderId, setOrderId] = useState<string | null>(null);
 
   useEffect(() => {
-    // In a real app, you would verify the session_id with your backend here
-    const sessionId = searchParams.get("session_id");
+    const id = searchParams.get("order_id");
     
-    if (sessionId) {
-      // Clear the cart on successful payment
+    if (id) {
+      setOrderId(id);
       clearCart();
       setStatus("success");
     } else {
@@ -27,7 +27,7 @@ export default function CheckoutSuccessPage() {
       {status === "loading" && (
         <div className="space-y-4">
           <div className="w-12 h-12 border-4 border-forest border-t-transparent rounded-full animate-spin mx-auto"></div>
-          <h1 className="font-serif text-2xl text-charcoal">Verifying payment...</h1>
+          <h1 className="font-serif text-2xl text-charcoal">Processing...</h1>
         </div>
       )}
 
@@ -38,10 +38,36 @@ export default function CheckoutSuccessPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h1 className="font-serif text-4xl text-forest mb-6">Order Successful!</h1>
+          <h1 className="font-serif text-4xl text-forest mb-2">Order Placed!</h1>
+          <p className="text-charcoal/80 mb-2">Order ID: <span className="font-mono font-medium">{orderId}</span></p>
           <p className="text-charcoal/80 mb-8 max-w-lg">
-            Thank you for your purchase. Your payment has been securely processed by Stripe. You will receive an email confirmation shortly with your order details.
+            Thank you for your order. To complete your purchase, please manually transfer the funds to our Wise account using the details below.
           </p>
+
+          <div className="bg-white p-8 rounded-lg shadow-sm border border-charcoal/10 max-w-md w-full text-left mb-8">
+            <h2 className="font-serif text-xl text-charcoal mb-6 border-b border-charcoal/10 pb-4">Wise Bank Details</h2>
+            
+            <div className="space-y-4 text-sm">
+              <div>
+                <p className="text-charcoal/60 uppercase tracking-wider text-[10px] mb-1">Account Name</p>
+                <p className="font-medium text-charcoal">JustPrem Instruments</p>
+              </div>
+              <div>
+                <p className="text-charcoal/60 uppercase tracking-wider text-[10px] mb-1">Account Number / IBAN</p>
+                <p className="font-medium text-charcoal font-mono">WISE1234567890</p>
+              </div>
+              <div>
+                <p className="text-charcoal/60 uppercase tracking-wider text-[10px] mb-1">Bank Code / Routing</p>
+                <p className="font-medium text-charcoal font-mono">123456</p>
+              </div>
+              <div className="bg-saffron/10 p-3 rounded mt-4 border border-saffron/20">
+                <p className="text-charcoal/80 text-xs leading-relaxed">
+                  <span className="font-semibold">Important:</span> Please include your Order ID (<strong>{orderId}</strong>) in the transfer reference so we can match your payment. Your items will be shipped once the transfer clears.
+                </p>
+              </div>
+            </div>
+          </div>
+
           <a href="/" className="px-8 py-4 border border-forest text-forest uppercase tracking-widest text-xs hover:bg-forest/5 transition-colors">
             Return Home
           </a>
@@ -55,9 +81,9 @@ export default function CheckoutSuccessPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </div>
-          <h1 className="font-serif text-4xl text-red-600 mb-6">Invalid Session</h1>
+          <h1 className="font-serif text-4xl text-red-600 mb-6">Invalid Order</h1>
           <p className="text-charcoal/80 mb-8 max-w-lg">
-            We could not verify your payment session. If you completed a payment, please contact support.
+            We could not find your order details.
           </p>
           <a href="/checkout" className="px-8 py-4 bg-forest text-ivory uppercase tracking-widest text-xs">
             Return to Checkout
