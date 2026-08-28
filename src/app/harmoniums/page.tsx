@@ -94,7 +94,7 @@ export default function HarmoniumsPage() {
                       {product.name}
                     </Link>
                   </h2>
-                  <span className="text-sm tracking-widest">₹{product.priceINR.toLocaleString()}</span>
+                  <span className="text-sm tracking-widest">€{product.priceEUR.toLocaleString()}</span>
                 </div>
                 
                 <p className="text-xs text-charcoal/60 uppercase tracking-widest mb-3">

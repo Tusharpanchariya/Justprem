@@ -17,12 +17,12 @@ export async function POST(request: Request) {
       const isAbsoluteImage = item.image && item.image.startsWith('http');
       return {
         price_data: {
-          currency: 'inr',
+          currency: 'eur',
           product_data: {
             name: item.name,
             images: isAbsoluteImage ? [item.image] : undefined,
           },
-          unit_amount: Math.round(item.priceINR * 100), // Stripe expects amount in smallest currency unit (paise)
+          unit_amount: Math.round(item.priceEUR * 100), // Stripe expects amount in smallest currency unit (cents)
         },
         quantity: item.quantity,
       };

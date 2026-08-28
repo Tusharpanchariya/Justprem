@@ -21,11 +21,7 @@ export function Footer() {
               Explore
             </h3>
             <ul className="space-y-4 text-sm">
-              <li><Link href="/retreats" className="hover:text-saffron transition-colors">Retreats & Pilgrimages</Link></li>
               <li><Link href="/harmoniums" className="hover:text-saffron transition-colors">Harmoniums</Link></li>
-              <li><Link href="/community" className="hover:text-saffron transition-colors">Community</Link></li>
-              <li><Link href="/our-story" className="hover:text-saffron transition-colors">Our Story</Link></li>
-              <li><Link href="/gallery" className="hover:text-saffron transition-colors">Gallery</Link></li>
             </ul>
           </div>
 

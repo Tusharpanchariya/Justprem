@@ -15,7 +15,7 @@ declare global {
 export default function CheckoutPage() {
   const { items, cartTotal, clearCart } = useCart();
   const [isProcessing, setIsProcessing] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<"razorpay" | "wise">("razorpay");
+  const [paymentMethod, setPaymentMethod] = useState<"razorpay" | "wise" | "paypal">("razorpay");
   const router = useRouter();
 
   const handlePayment = async (e: React.FormEvent) => {
@@ -28,6 +28,15 @@ export default function CheckoutPage() {
       setTimeout(() => {
         clearCart();
         router.push(`/checkout/success?payment_id=WISE_${Math.random().toString(36).substring(7)}&method=wise`);
+      }, 1500);
+      return;
+    }
+
+    if (paymentMethod === "paypal") {
+      // Simulate order creation for paypal
+      setTimeout(() => {
+        clearCart();
+        router.push(`/checkout/success?payment_id=PAYPAL_${Math.random().toString(36).substring(7)}&method=paypal`);
       }, 1500);
       return;
     }
@@ -159,7 +168,7 @@ export default function CheckoutPage() {
                     />
                     <div>
                       <h3 className="font-medium text-charcoal">Pay with Razorpay (Cards, UPI, Netbanking)</h3>
-                      <p className="text-xs text-charcoal/60 mt-1">Instant secure payment processing in INR.</p>
+                      <p className="text-xs text-charcoal/60 mt-1">Instant secure payment processing in EUR.</p>
                     </div>
                   </label>
 
@@ -177,6 +186,21 @@ export default function CheckoutPage() {
                       <p className="text-xs text-charcoal/60 mt-1">Best for international customers. We will provide our Wise account details.</p>
                     </div>
                   </label>
+
+                  <label className={`flex items-center gap-4 p-4 rounded-lg border cursor-pointer transition-colors ${paymentMethod === 'paypal' ? 'border-forest bg-forest/5' : 'border-charcoal/20 hover:border-charcoal/40'}`}>
+                    <input 
+                      type="radio" 
+                      name="payment_method" 
+                      value="paypal" 
+                      checked={paymentMethod === 'paypal'} 
+                      onChange={() => setPaymentMethod('paypal')}
+                      className="accent-forest"
+                    />
+                    <div>
+                      <h3 className="font-medium text-charcoal">PayPal</h3>
+                      <p className="text-xs text-charcoal/60 mt-1">Fast, safe, and secure international payments.</p>
+                    </div>
+                  </label>
                 </div>
               </section>
               
@@ -192,7 +216,7 @@ export default function CheckoutPage() {
                       Pay Securely via Razorpay
                     </div>
                   </>
-                ) : (
+                ) : paymentMethod === 'wise' ? (
                   <>
                     <p className="text-charcoal/80 text-sm leading-relaxed mb-4">
                       You will receive our Wise bank details on the next page to complete your transfer. Your order will be processed once payment is confirmed.
@@ -202,8 +226,20 @@ export default function CheckoutPage() {
                       Manual Bank Transfer
                     </div>
                   </>
+                ) : (
+                  <>
+                    <p className="text-charcoal/80 text-sm leading-relaxed mb-4">
+                      Your payment will be processed securely via PayPal.
+                    </p>
+                    <div className="flex items-center gap-3 text-forest text-sm font-medium">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                      Pay Securely via PayPal
+                    </div>
+                  </>
                 )}
               </div>
+              
+
               
               <button 
                 type="submit"
@@ -233,7 +269,7 @@ export default function CheckoutPage() {
                       <h3 className="font-serif text-charcoal">{item.name}</h3>
                     </div>
                   </div>
-                  <span className="text-sm tracking-widest">₹{(item.priceINR * item.quantity).toLocaleString()}</span>
+                  <span className="text-sm tracking-widest">€{(item.priceEUR * item.quantity).toLocaleString()}</span>
                 </div>
               ))}
             </div>
@@ -241,7 +277,7 @@ export default function CheckoutPage() {
             <div className="border-t border-charcoal/10 pt-6 space-y-4 mb-6">
               <div className="flex justify-between text-sm text-charcoal/60">
                 <span>Subtotal</span>
-                <span>₹{cartTotal.toLocaleString()}</span>
+                <span>€{cartTotal.toLocaleString()}</span>
               </div>
               <div className="flex justify-between text-sm text-charcoal/60">
                 <span>Shipping</span>
@@ -252,8 +288,8 @@ export default function CheckoutPage() {
             <div className="border-t border-charcoal/10 pt-6 flex justify-between items-end">
               <span className="text-sm uppercase tracking-widest text-charcoal/60">Total</span>
               <span className="font-serif text-3xl text-charcoal">
-                <span className="text-xs uppercase tracking-widest mr-2 opacity-50">INR</span>
-                ₹{cartTotal.toLocaleString()}
+                <span className="text-xs uppercase tracking-widest mr-2 opacity-50">EUR</span>
+                €{cartTotal.toLocaleString()}
               </span>
             </div>
           </div>

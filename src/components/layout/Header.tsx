@@ -7,11 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/lib/context/CartContext";
 
 const navLinks = [
-  { name: "Retreats & Pilgrimages", href: "/retreats" },
   { name: "Harmoniums", href: "/harmoniums" },
-  { name: "Our Story", href: "/our-story" },
-  { name: "Community", href: "/community" },
-  { name: "Gallery", href: "/gallery" },
 ];
 
 export function Header() {

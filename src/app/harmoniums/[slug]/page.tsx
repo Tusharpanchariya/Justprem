@@ -4,8 +4,6 @@ import { use } from "react";
 import { notFound } from "next/navigation";
 import { motion } from "framer-motion";
 import { mockHarmoniums } from "@/lib/data/mockProducts";
-import { InteractiveKeyboard } from "@/components/harmonium/InteractiveKeyboard";
-import { Harmonium3DViewer } from "@/components/harmonium/Harmonium3DViewer";
 import { useCart } from "@/lib/context/CartContext";
 
 export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -22,7 +20,7 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
       id: product.id,
       name: product.name,
       slug: product.slug,
-      priceINR: product.priceINR,
+      priceEUR: product.priceEUR,
       image: product.image
     });
   };
@@ -37,8 +35,12 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
           transition={{ duration: 1 }}
           className="relative aspect-square rounded-sm overflow-hidden shadow-sm w-full"
         >
-          {/* Interactive 3D Viewer */}
-          <Harmonium3DViewer />
+          {/* Static Image Viewer */}
+          <img 
+            src={product.image} 
+            alt={product.name}
+            className="w-full h-full object-cover"
+          />
         </motion.div>
 
         <motion.div 
@@ -60,7 +62,7 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
           </p>
           
           <div className="flex items-end gap-6 mb-12">
-            <span className="text-3xl text-charcoal">₹{product.priceINR.toLocaleString()}</span>
+            <span className="text-3xl text-charcoal">€{product.priceEUR.toLocaleString()}</span>
             <span className="text-sm tracking-widest uppercase mb-1 px-3 py-1 bg-forest/10 text-forest">
               {product.availability.replace("_", " ")}
             </span>
@@ -80,19 +82,7 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
         </motion.div>
       </section>
 
-      {/* Interactive Feature Section */}
-      <section className="bg-sandstone/10 py-32 border-y border-sandstone/30">
-        <div className="px-6 md:px-12 max-w-5xl mx-auto text-center mb-16">
-          <h2 className="font-serif text-3xl md:text-4xl text-charcoal mb-4 uppercase tracking-widest">
-            Hear The Instrument
-          </h2>
-          <p className="text-sm tracking-widest text-charcoal/60 uppercase">
-            A Journey In Sound
-          </p>
-        </div>
-        
-        <InteractiveKeyboard />
-      </section>
+      {/* Interactive Feature Section (Removed) */}
 
       {/* Details Section */}
       <section className="px-6 md:px-12 max-w-4xl mx-auto py-32">

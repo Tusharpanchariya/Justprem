@@ -76,7 +76,7 @@ export function CartDrawer() {
                               <X className="w-4 h-4" />
                             </button>
                           </div>
-                          <p className="text-xs tracking-widest uppercase text-charcoal/60 mb-2">₹{item.priceINR.toLocaleString()}</p>
+                          <p className="text-xs tracking-widest uppercase text-charcoal/60 mb-2">€{item.priceEUR.toLocaleString()}</p>
                         </div>
                         
                         <div className="flex items-center gap-4">
@@ -108,7 +108,7 @@ export function CartDrawer() {
               <div className="p-6 bg-sandstone/10 border-t border-wood/10">
                 <div className="flex justify-between items-center mb-6">
                   <span className="text-sm tracking-widest uppercase text-charcoal/60">Subtotal</span>
-                  <span className="font-serif text-2xl text-charcoal">₹{cartTotal.toLocaleString()}</span>
+                  <span className="font-serif text-2xl text-charcoal">€{cartTotal.toLocaleString()}</span>
                 </div>
                 <p className="text-xs text-charcoal/50 mb-6 text-center italic">
                   Shipping and taxes calculated at checkout.

@@ -70,7 +70,7 @@ export function HomeCollection() {
                     {product.name}
                   </Link>
                 </h3>
-                <span className="text-sm tracking-widest text-charcoal/80">₹{product.priceINR.toLocaleString()}</span>
+                <span className="text-sm tracking-widest text-charcoal/80">€{product.priceEUR.toLocaleString()}</span>
               </div>
               
               <p className="text-xs text-charcoal/50 uppercase tracking-widest">

@@ -6,7 +6,7 @@ export type CartItem = {
   id: string;
   name: string;
   slug: string;
-  priceINR: number;
+  priceEUR: number;
   image: string;
   quantity: number;
 };
@@ -31,7 +31,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
     const savedCart = localStorage.getItem("justprem_cart");
     if (savedCart) {
       try {
@@ -40,6 +39,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         console.error("Failed to parse cart", e);
       }
     }
+    setIsMounted(true);
   }, []);
 
   useEffect(() => {
@@ -76,7 +76,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setItems([]);
   }, []);
 
-  const cartTotal = items.reduce((total, item) => total + item.priceINR * item.quantity, 0);
+  const cartTotal = items.reduce((total, item) => total + item.priceEUR * item.quantity, 0);
   const itemCount = items.reduce((count, item) => count + item.quantity, 0);
 
   return (

@@ -16,7 +16,7 @@ export async function POST(request: Request) {
 
     const options = {
       amount: Math.round(amount * 100), // Razorpay expects amount in paise (must be integer)
-      currency: "INR",
+      currency: "EUR",
       receipt: `receipt_${Math.floor(Math.random() * 1000000)}`,
     };
 
