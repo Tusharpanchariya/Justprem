@@ -113,39 +113,39 @@ export default function CheckoutPage() {
     <>
       <Script src="https://checkout.razorpay.com/v1/checkout.js" />
       <div className="min-h-screen bg-ivory pt-32 pb-24">
-        <div className="max-w-5xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="max-w-5xl mx-auto px-6 md:px-12 flex flex-col-reverse lg:grid lg:grid-cols-2 gap-12 lg:gap-16">
           
           {/* Checkout Form */}
-          <div>
-            <h1 className="font-serif text-3xl md:text-4xl text-charcoal mb-8 uppercase tracking-widest">
+          <div className="w-full">
+            <h1 className="font-serif text-3xl md:text-4xl text-charcoal mb-8 uppercase tracking-widest hidden lg:block">
               Checkout
             </h1>
             
-            <form onSubmit={handlePayment} className="space-y-12">
+            <form onSubmit={handlePayment} className="space-y-12 w-full">
               {/* Step 1: Contact */}
-              <section>
+              <section className="w-full">
                 <h2 className="text-xs tracking-widest uppercase text-charcoal/50 mb-6 flex items-center gap-4">
                   <span className="w-6 h-6 rounded-full bg-forest text-ivory flex items-center justify-center">1</span>
                   Contact Information
                 </h2>
-                <div className="space-y-4">
-                  <input required type="email" placeholder="Email Address" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-sm focus:outline-none focus:border-saffron transition-colors" />
-                  <input required type="tel" placeholder="Phone Number" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-sm focus:outline-none focus:border-saffron transition-colors" />
+                <div className="space-y-4 w-full">
+                  <input required type="email" placeholder="Email Address" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-base md:text-sm focus:outline-none focus:border-saffron transition-colors" />
+                  <input required type="tel" placeholder="Phone Number" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-base md:text-sm focus:outline-none focus:border-saffron transition-colors" />
                 </div>
               </section>
 
               {/* Step 2: Shipping */}
-              <section>
+              <section className="w-full">
                 <h2 className="text-xs tracking-widest uppercase text-charcoal/50 mb-6 flex items-center gap-4">
                   <span className="w-6 h-6 rounded-full bg-charcoal/10 text-charcoal flex items-center justify-center">2</span>
                   Shipping Address
                 </h2>
-                <div className="space-y-4">
-                  <input required type="text" placeholder="Full Name" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-sm focus:outline-none focus:border-saffron transition-colors" />
-                  <input required type="text" placeholder="Address" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-sm focus:outline-none focus:border-saffron transition-colors" />
+                <div className="space-y-4 w-full">
+                  <input required type="text" placeholder="Full Name" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-base md:text-sm focus:outline-none focus:border-saffron transition-colors" />
+                  <input required type="text" placeholder="Address" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-base md:text-sm focus:outline-none focus:border-saffron transition-colors" />
                   <div className="grid grid-cols-2 gap-4">
-                    <input required type="text" placeholder="City" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-sm focus:outline-none focus:border-saffron transition-colors" />
-                    <input required type="text" placeholder="Postal Code" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-sm focus:outline-none focus:border-saffron transition-colors" />
+                    <input required type="text" placeholder="City" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-base md:text-sm focus:outline-none focus:border-saffron transition-colors" />
+                    <input required type="text" placeholder="Postal Code" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-base md:text-sm focus:outline-none focus:border-saffron transition-colors" />
                   </div>
                 </div>
               </section>

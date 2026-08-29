@@ -11,13 +11,13 @@ export function HomeCollection() {
   return (
     <section className="bg-ivory py-32 px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-4 md:gap-6">
           <div>
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="font-serif text-3xl md:text-5xl text-charcoal uppercase tracking-widest mb-4"
+              className="font-serif text-[clamp(1.75rem,5vw,3rem)] text-charcoal uppercase tracking-widest mb-2 md:mb-4 leading-tight"
             >
               The Collection
             </motion.h2>

@@ -1,15 +1,41 @@
 export const mockHarmoniums = [
   {
     id: "1",
-    name: "Aura",
+    name: "Just Prem “Aura” (32 keys)",
     slug: "aura",
     priceEUR: 500,
+    originalPriceEUR: 1200,
     priceUSD: 650,
-    shortDescription: "A premium 32-key travel harmonium perfect for kirtan and personal practice.",
+    shortDescription: "A premium handcrafted harmonium designed for those who carry music, mantra, and devotion wherever they go.",
+    fullDescription: "Meet the Lavender Just Prem “Aura” – a premium handcrafted harmonium designed for those who carry music, mantra, and devotion wherever they go. Lightweight, compact, and full of rich resonant sound, it is the perfect companion for kirtan, meditation, yoga gatherings, ceremonies, and intimate moments of creativity.\n\nWith 32 responsive keys and an easy-to-carry design, the Just Prem “Aura” was created especially for traveling musicians, yogis, and seekers who do not want to compromise on sound quality while moving through the world. Finished in a soft lavender tone and paired with a practical travel bag, it combines elegance, simplicity, and portability in one soulful instrument.\n\nWhether you are singing mantras in the mountains, leading a ceremony by the ocean, hosting a cacao circle, or creating a peaceful atmosphere at home, the Just Prem harmoniums offers a grounding, heartfelt sound that instantly invites presence and connection.\n\nMinimal in form. Rich in spirit. Made to travel with you.",
     keyCount: 32,
     availability: "IN_STOCK",
-    image: "/harmonium-images/IMG_7611.webp",
+    image: "/harmonium-images/aura/Aura.webp",
+    images: [
+      "/harmonium-images/aura/Aura.webp",
+      "/harmonium-images/aura/aura2.webp",
+      "/harmonium-images/aura/aura3.webp",
+      "/harmonium-images/aura/aura4.webp",
+      "/harmonium-images/aura/aura5.webp",
+      "/harmonium-images/aura/Aura6.webp",
+      "/harmonium-images/aura/Aura7.webp",
+      "/harmonium-images/aura/Aura71).webp",
+      "/harmonium-images/aura/aura8.webp",
+      "/harmonium-images/aura/aura9.webp",
+      "/harmonium-images/aura/aura10.webp"
+    ],
     categories: ["Travel", "Kirtan"],
+    specifications: [
+      { label: "Materials", value: "Made from Kail wood (Himalayan Pine), which is known for its exceptional acoustic properties." },
+      { label: "Bellows", value: "High-quality multi-bellows guarantee a constant air supply without interruption of sound, even when playing quietly." },
+      { label: "Design", value: "Matte lilac finish with silver-colored metal hardware, matching handles, and a metal air intake grille." },
+      { label: "Keyboard", value: "32 keys (2.5 octaves), starting from E." },
+      { label: "Tuning", value: "Every harmonium is individually tuned to A = 440 Hz before shipping." },
+      { label: "Dimensions", value: "45 × 25 × 21 cm (L × W × H) – ultra compact and very easy to transport." },
+      { label: "Weight", value: "6.5 kg approx" },
+      { label: "Delivery", value: "Every Just Prem Harmonium includes a premium padded carrying case. Before dispatch, each instrument is individually inspected, tuned, and securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation. It arrives ready to play." },
+      { label: "Taxes/Duties", value: "International delivery is included. Any applicable import duties, taxes, customs clearance fees, VAT, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
+    ]
   },
   {
     id: "2",

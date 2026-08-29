@@ -12,13 +12,13 @@ export function FeaturedHarmonium() {
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
         
         {/* Text Content */}
-        <div className="lg:w-1/2 relative z-10 text-ivory">
+        <div className="w-full lg:w-1/2 relative z-10 text-ivory flex flex-col items-start px-4 md:px-0">
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            className="font-serif text-sm tracking-[0.3em] uppercase text-saffron mb-6"
+            className="font-serif text-xs md:text-sm tracking-[0.3em] uppercase text-saffron mb-4 md:mb-6"
           >
             The Sound of Devotion
           </motion.h2>
@@ -28,7 +28,7 @@ export function FeaturedHarmonium() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="font-serif text-4xl md:text-6xl mb-8 leading-tight"
+            className="font-serif text-[clamp(2rem,6vw,3.75rem)] mb-6 md:mb-8 leading-tight"
           >
             Handcrafted instruments for the journey within.
           </motion.h3>
@@ -38,7 +38,7 @@ export function FeaturedHarmonium() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.4 }}
-            className="text-ivory/70 mb-12 max-w-md"
+            className="text-ivory/70 mb-10 md:mb-12 max-w-md text-sm md:text-base leading-relaxed"
           >
             Each JustPrem harmonium is built by master craftsmen in India using aged teak and premium pine, tuned perfectly for kirtan and meditation.
           </motion.p>
@@ -48,10 +48,11 @@ export function FeaturedHarmonium() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.6 }}
+            className="w-full sm:w-auto"
           >
             <Link 
               href={`/harmoniums/${featured.slug}`}
-              className="inline-flex items-center gap-4 px-8 py-4 bg-ivory text-forest hover:bg-saffron hover:text-ivory transition-colors uppercase tracking-widest text-xs font-medium"
+              className="inline-flex items-center justify-center min-h-[56px] w-full sm:w-auto gap-4 px-8 py-4 bg-ivory text-forest hover:bg-saffron hover:text-ivory transition-colors uppercase tracking-widest text-xs font-medium"
             >
               Discover {featured.name} <span>→</span>
             </Link>

@@ -71,9 +71,9 @@ export function CartDrawer() {
                             <h3 className="font-serif text-lg text-charcoal">{item.name}</h3>
                             <button 
                               onClick={() => removeItem(item.id)}
-                              className="text-charcoal/40 hover:text-charcoal transition-colors p-1"
+                              className="text-charcoal/40 hover:text-charcoal transition-colors p-3 -mr-3 -mt-3"
                             >
-                              <X className="w-4 h-4" />
+                              <X className="w-5 h-5" />
                             </button>
                           </div>
                           <p className="text-xs tracking-widest uppercase text-charcoal/60 mb-2">€{item.priceEUR.toLocaleString()}</p>
@@ -83,14 +83,14 @@ export function CartDrawer() {
                           <div className="flex items-center border border-charcoal/20 rounded-sm">
                             <button 
                               onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                              className="p-1 hover:bg-charcoal/5 transition-colors"
+                              className="w-10 h-10 flex items-center justify-center hover:bg-charcoal/5 transition-colors"
                             >
                               <Minus className="w-4 h-4" />
                             </button>
                             <span className="w-8 text-center text-sm">{item.quantity}</span>
                             <button 
                               onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                              className="p-1 hover:bg-charcoal/5 transition-colors"
+                              className="w-10 h-10 flex items-center justify-center hover:bg-charcoal/5 transition-colors"
                             >
                               <Plus className="w-4 h-4" />
                             </button>
@@ -117,13 +117,13 @@ export function CartDrawer() {
                   <Link 
                     href="/checkout" 
                     onClick={() => setIsCartOpen(false)}
-                    className="w-full py-4 bg-forest text-ivory text-center uppercase tracking-widest text-xs hover:bg-forest/90 transition-colors"
+                    className="flex items-center justify-center w-full min-h-[56px] bg-forest text-ivory text-center uppercase tracking-widest text-xs hover:bg-forest/90 transition-colors"
                   >
                     Checkout
                   </Link>
                   <button 
                     onClick={() => setIsCartOpen(false)}
-                    className="w-full py-4 border border-forest text-forest text-center uppercase tracking-widest text-xs hover:bg-forest/5 transition-colors"
+                    className="flex items-center justify-center w-full min-h-[56px] border border-forest text-forest text-center uppercase tracking-widest text-xs hover:bg-forest/5 transition-colors"
                   >
                     Continue Shopping
                   </button>
