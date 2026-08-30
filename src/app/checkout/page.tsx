@@ -18,25 +18,79 @@ export default function CheckoutPage() {
   const [paymentMethod, setPaymentMethod] = useState<"razorpay" | "wise" | "paypal">("razorpay");
   const router = useRouter();
 
+  // Form States
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+
   const handlePayment = async (e: React.FormEvent) => {
     e.preventDefault();
     if (items.length === 0) return;
     setIsProcessing(true);
 
     if (paymentMethod === "wise") {
+      const paymentId = `WISE_${Math.random().toString(36).substring(7)}`;
       // Simulate order creation for wise
-      setTimeout(() => {
+      setTimeout(async () => {
+        try {
+          await fetch("/api/checkout/success", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email,
+              phone,
+              name,
+              address,
+              city,
+              postalCode,
+              items,
+              cartTotal,
+              paymentId,
+              paymentMethod: "wise"
+            }),
+          });
+        } catch (error) {
+          console.error("Failed to send order email:", error);
+        }
         clearCart();
-        router.push(`/checkout/success?payment_id=WISE_${Math.random().toString(36).substring(7)}&method=wise`);
+        router.push(`/checkout/success?payment_id=${paymentId}&method=wise`);
       }, 1500);
       return;
     }
 
     if (paymentMethod === "paypal") {
+      const paymentId = `PAYPAL_${Math.random().toString(36).substring(7)}`;
       // Simulate order creation for paypal
-      setTimeout(() => {
+      setTimeout(async () => {
+        try {
+          await fetch("/api/checkout/success", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email,
+              phone,
+              name,
+              address,
+              city,
+              postalCode,
+              items,
+              cartTotal,
+              paymentId,
+              paymentMethod: "paypal"
+            }),
+          });
+        } catch (error) {
+          console.error("Failed to send order email:", error);
+        }
         clearCart();
-        router.push(`/checkout/success?payment_id=PAYPAL_${Math.random().toString(36).substring(7)}&method=paypal`);
+        router.push(`/checkout/success?payment_id=${paymentId}&method=paypal`);
       }, 1500);
       return;
     }
@@ -65,15 +119,38 @@ export default function CheckoutPage() {
         name: "JustPrem",
         description: "Instrument Purchase",
         order_id: orderData.id,
-        handler: function (response: any) {
+        handler: async function (response: any) {
           // Success Callback
           console.log("Payment Successful", response);
+          try {
+            await fetch("/api/checkout/success", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email,
+                phone,
+                name,
+                address,
+                city,
+                postalCode,
+                items,
+                cartTotal,
+                paymentId: response.razorpay_payment_id,
+                paymentMethod: "razorpay"
+              }),
+            });
+          } catch (error) {
+            console.error("Failed to send order email:", error);
+          }
+          clearCart();
           router.push(`/checkout/success?payment_id=${response.razorpay_payment_id}`);
         },
         prefill: {
-          name: "Test User",
-          email: "test@example.com",
-          contact: "9999999999",
+          name: name,
+          email: email,
+          contact: phone,
         },
         theme: {
           color: "#2c1810", // Forest/Wood brand color
@@ -129,8 +206,8 @@ export default function CheckoutPage() {
                   Contact Information
                 </h2>
                 <div className="space-y-4 w-full">
-                  <input required type="email" placeholder="Email Address" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-base md:text-sm focus:outline-none focus:border-saffron transition-colors" />
-                  <input required type="tel" placeholder="Phone Number" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-base md:text-sm focus:outline-none focus:border-saffron transition-colors" />
+                  <input required type="email" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-transparent border-b border-charcoal/20 py-3 text-base md:text-sm focus:outline-none focus:border-saffron transition-colors" />
+                  <input required type="tel" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full bg-transparent border-b border-charcoal/20 py-3 text-base md:text-sm focus:outline-none focus:border-saffron transition-colors" />
                 </div>
               </section>
 
@@ -141,11 +218,11 @@ export default function CheckoutPage() {
                   Shipping Address
                 </h2>
                 <div className="space-y-4 w-full">
-                  <input required type="text" placeholder="Full Name" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-base md:text-sm focus:outline-none focus:border-saffron transition-colors" />
-                  <input required type="text" placeholder="Address" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-base md:text-sm focus:outline-none focus:border-saffron transition-colors" />
+                  <input required type="text" placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} className="w-full bg-transparent border-b border-charcoal/20 py-3 text-base md:text-sm focus:outline-none focus:border-saffron transition-colors" />
+                  <input required type="text" placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} className="w-full bg-transparent border-b border-charcoal/20 py-3 text-base md:text-sm focus:outline-none focus:border-saffron transition-colors" />
                   <div className="grid grid-cols-2 gap-4">
-                    <input required type="text" placeholder="City" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-base md:text-sm focus:outline-none focus:border-saffron transition-colors" />
-                    <input required type="text" placeholder="Postal Code" className="w-full bg-transparent border-b border-charcoal/20 py-3 text-base md:text-sm focus:outline-none focus:border-saffron transition-colors" />
+                    <input required type="text" placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} className="w-full bg-transparent border-b border-charcoal/20 py-3 text-base md:text-sm focus:outline-none focus:border-saffron transition-colors" />
+                    <input required type="text" placeholder="Postal Code" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} className="w-full bg-transparent border-b border-charcoal/20 py-3 text-base md:text-sm focus:outline-none focus:border-saffron transition-colors" />
                   </div>
                 </div>
               </section>

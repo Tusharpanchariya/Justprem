@@ -53,10 +53,10 @@ function CheckoutSuccessContent() {
                 Please transfer the exact total amount to the following bank account. Include your <strong>Order ID</strong> in the reference.
               </p>
               <div className="space-y-3 text-sm text-charcoal mb-6">
-                <div className="grid grid-cols-2"><span className="text-charcoal/60">Account Name:</span> <span className="font-medium">JustPrem Instruments</span></div>
-                <div className="grid grid-cols-2"><span className="text-charcoal/60">Bank Name:</span> <span className="font-medium">Wise / Community Federal Savings Bank</span></div>
-                <div className="grid grid-cols-2"><span className="text-charcoal/60">Routing Number:</span> <span className="font-medium font-mono">122105155</span></div>
-                <div className="grid grid-cols-2"><span className="text-charcoal/60">Account Number:</span> <span className="font-medium font-mono">1234567890</span></div>
+                <div className="grid grid-cols-2"><span className="text-charcoal/60">Account Name:</span> <span className="font-medium">vitthal prem travels llp</span></div>
+                <div className="grid grid-cols-2"><span className="text-charcoal/60">IBAN:</span> <span className="font-medium font-mono">BE75 9059 5938 2951</span></div>
+                <div className="grid grid-cols-2"><span className="text-charcoal/60">Swift/BIC:</span> <span className="font-medium font-mono">TRWIBEB1XXX</span></div>
+                <div className="grid grid-cols-2"><span className="text-charcoal/60">Bank Address:</span> <span className="font-medium">Wise, Rue du Trône 100, Brussels, 1050, Belgium</span></div>
               </div>
               <p className="text-xs text-charcoal/60 italic">
                 Your order will not ship until we receive the funds. It may take 1-2 business days for international transfers to clear.

@@ -6,9 +6,7 @@ import { Menu, X, ShoppingBag } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/lib/context/CartContext";
 
-const navLinks = [
-  { name: "Harmoniums", href: "/harmoniums" },
-];
+const navLinks: { name: string; href: string }[] = [];
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -35,7 +33,7 @@ export function Header() {
         {/* Logo */}
         <Link
           href="/"
-          className="font-serif text-2xl tracking-widest uppercase relative z-50"
+          className="font-serif text-2xl tracking-widest relative z-50"
         >
           JustPrem
         </Link>

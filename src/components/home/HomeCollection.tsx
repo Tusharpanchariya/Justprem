@@ -46,7 +46,7 @@ export function HomeCollection() {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
           {displayProducts.map((product, idx) => (
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -56,7 +56,7 @@ export function HomeCollection() {
               key={product.id}
               className="group flex flex-col"
             >
-              <Link href={`/harmoniums/${product.slug}`} className="block relative aspect-[4/5] bg-sandstone/20 overflow-hidden mb-6">
+              <Link href={`/harmoniums/${product.slug}`} className="block relative aspect-square md:aspect-[4/5] bg-sandstone/20 overflow-hidden mb-3 md:mb-6 rounded-sm">
                 <div 
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
                   style={{ backgroundImage: `url(${product.image})` }}
@@ -64,18 +64,19 @@ export function HomeCollection() {
                 <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </Link>
               
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="font-serif text-xl text-charcoal">
+              <div className="flex flex-col flex-1">
+                <p className="text-[10px] md:text-xs text-charcoal/60 uppercase tracking-widest mb-1">
+                  Just Prem
+                </p>
+                
+                <h3 className="font-serif text-sm sm:text-base md:text-xl text-charcoal leading-snug mb-1 md:mb-2">
                   <Link href={`/harmoniums/${product.slug}`} className="hover:text-saffron transition-colors">
                     {product.name}
                   </Link>
                 </h3>
-                <span className="text-sm tracking-widest text-charcoal/80">€{product.priceEUR.toLocaleString()}</span>
+                
+                <span className="text-xs md:text-sm tracking-widest text-charcoal/80 mb-2 md:mb-0">€{product.priceEUR.toLocaleString()}</span>
               </div>
-              
-              <p className="text-xs text-charcoal/50 uppercase tracking-widest">
-                {product.categories.join(" · ")}
-              </p>
             </motion.div>
           ))}
         </div>

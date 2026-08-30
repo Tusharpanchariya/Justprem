@@ -7,7 +7,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
           {/* Brand */}
           <div className="md:col-span-1">
-            <h2 className="font-serif text-3xl tracking-widest uppercase mb-4 text-saffron">
+            <h2 className="font-serif text-3xl tracking-widest mb-4 text-saffron">
               JustPrem
             </h2>
             <p className="text-sm opacity-80 leading-relaxed font-serif italic text-lg">
@@ -21,7 +21,7 @@ export function Footer() {
               Explore
             </h3>
             <ul className="space-y-4 text-sm">
-              <li><Link href="/harmoniums" className="hover:text-saffron transition-colors">Harmoniums</Link></li>
+              {/* Removed Harmoniums link as requested */}
             </ul>
           </div>
 

@@ -54,10 +54,28 @@ export default function HarmoniumsPage() {
           </div>
         </aside>
 
-        {/* Product Grid */}
-        <main className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {mockHarmoniums
-            .filter(h => activeFilter === "All" || h.categories.includes(activeFilter))
+        {/* Product Grid & Mobile Filters */}
+        <main className="flex-1">
+          {/* Mobile Filters */}
+          <div className="md:hidden flex overflow-x-auto pb-4 mb-6 gap-4 no-scrollbar">
+            {["All", "Travel", "Studio", "Kirtan", "Professional"].map(filter => (
+              <button 
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`whitespace-nowrap px-4 py-2 text-xs uppercase tracking-widest rounded-full border transition-colors ${
+                  activeFilter === filter 
+                    ? "border-saffron bg-saffron text-ivory" 
+                    : "border-charcoal/20 text-charcoal hover:border-charcoal/50"
+                }`}
+              >
+                {filter}
+              </button>
+            ))}
+          </div>
+          
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+            {mockHarmoniums
+              .filter(h => activeFilter === "All" || h.categories.includes(activeFilter))
             .map((product, idx) => (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -66,15 +84,15 @@ export default function HarmoniumsPage() {
               key={product.id}
               className="group flex flex-col"
             >
-              <Link href={`/harmoniums/${product.slug}`} className="block relative aspect-[4/5] bg-sandstone/20 overflow-hidden mb-6">
+              <Link href={`/harmoniums/${product.slug}`} className="block relative aspect-square md:aspect-[4/5] bg-sandstone/20 overflow-hidden mb-3 md:mb-6 rounded-sm">
                 {/* Status Badge */}
                 {product.availability === "SOLD_OUT" && (
-                  <div className="absolute top-4 left-4 z-10 text-[10px] uppercase tracking-widest px-3 py-1 bg-charcoal text-ivory">
+                  <div className="absolute top-2 left-2 md:top-4 md:left-4 z-10 text-[8px] md:text-[10px] uppercase tracking-widest px-2 py-1 md:px-3 md:py-1 bg-charcoal text-ivory">
                     Sold Out
                   </div>
                 )}
                 {product.availability === "ON_DEMAND" && (
-                  <div className="absolute top-4 left-4 z-10 text-[10px] uppercase tracking-widest px-3 py-1 bg-wood text-ivory">
+                  <div className="absolute top-2 left-2 md:top-4 md:left-4 z-10 text-[8px] md:text-[10px] uppercase tracking-widest px-2 py-1 md:px-3 md:py-1 bg-wood text-ivory">
                     On Demand
                   </div>
                 )}
@@ -88,26 +106,25 @@ export default function HarmoniumsPage() {
               </Link>
               
               <div className="flex flex-col flex-1">
-                <div className="flex justify-between items-start mb-2">
-                  <h2 className="font-serif text-2xl text-charcoal">
-                    <Link href={`/harmoniums/${product.slug}`} className="hover:text-saffron transition-colors">
-                      {product.name}
-                    </Link>
-                  </h2>
-                  <span className="text-sm tracking-widest">€{product.priceEUR.toLocaleString()}</span>
-                </div>
-                
-                <p className="text-xs text-charcoal/60 uppercase tracking-widest mb-3">
-                  {product.keyCount} Keys
+                <p className="text-[10px] md:text-xs text-charcoal/60 uppercase tracking-widest mb-1">
+                  Just Prem
                 </p>
                 
-                <p className="text-sm text-charcoal/80 mb-6 flex-1">
+                <h2 className="font-serif text-sm sm:text-base md:text-2xl text-charcoal leading-snug mb-1 md:mb-2">
+                  <Link href={`/harmoniums/${product.slug}`} className="hover:text-saffron transition-colors">
+                    {product.name}
+                  </Link>
+                </h2>
+                
+                <span className="text-xs md:text-sm tracking-widest text-charcoal/80 mb-2 md:mb-0">€{product.priceEUR.toLocaleString()}</span>
+                
+                <p className="hidden md:block text-sm text-charcoal/80 mb-6 flex-1 mt-3">
                   {product.shortDescription}
                 </p>
 
                 <Link
                   href={`/harmoniums/${product.slug}`}
-                  className="inline-flex items-center text-xs uppercase tracking-widest font-medium hover:text-saffron transition-colors group/btn"
+                  className="hidden md:inline-flex items-center text-xs uppercase tracking-widest font-medium hover:text-saffron transition-colors group/btn mt-auto"
                 >
                   Explore 
                   <span className="ml-2 transform group-hover/btn:translate-x-1 transition-transform">→</span>
@@ -115,6 +132,7 @@ export default function HarmoniumsPage() {
               </div>
             </motion.div>
           ))}
+          </div>
         </main>
       </div>
     </div>

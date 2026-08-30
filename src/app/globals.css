@@ -10,8 +10,8 @@
   --color-saffron: #d6864d;
   
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
-  --font-outfit: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-tenor), ui-sans-serif, system-ui, sans-serif;
+  --font-tenor: var(--font-tenor), ui-sans-serif, system-ui, sans-serif;
 
   --animate-fade-in: fade-in 1s ease-out;
   --animate-slide-up: slide-up 1s ease-out;

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export function Hero() {
   return (
-    <section className="relative h-screen min-h-[600px] flex items-end justify-start overflow-hidden pb-32 pl-12 md:pl-24">
+    <section className="relative h-screen min-h-[600px] flex items-end justify-start overflow-hidden pb-16 pl-6 md:pl-24">
       {/* Background Image */}
       <div className="absolute inset-0 z-0 bg-charcoal">
         <div className="absolute inset-0 bg-black/30 z-10" />
@@ -14,12 +14,12 @@ export function Hero() {
         />
       </div>
 
-      <div className="relative z-20 max-w-4xl w-full px-6 md:px-0">
+      <div className="relative z-20 max-w-full w-full px-6 md:px-0">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-          className="font-['Helvetica_Neue',Helvetica,Arial,sans-serif] font-light text-[clamp(2.5rem,8vw,4.5rem)] tracking-[0.03em] text-[#E5E5E5] mb-8 leading-tight w-full max-w-[90vw]"
+          className="font-serif text-[clamp(1.5rem,4.5vw,4rem)] tracking-[0.03em] text-[#E5E5E5] mb-6 leading-tight whitespace-nowrap"
         >
           Shop the New Collection
         </motion.h1>
@@ -31,7 +31,7 @@ export function Hero() {
         >
           <Link
             href="/harmoniums"
-            className="inline-flex items-center justify-center min-h-[56px] px-8 py-4 border border-ivory/30 bg-ivory/10 text-ivory hover:bg-ivory hover:text-charcoal transition-all duration-500 uppercase tracking-widest text-xs backdrop-blur-sm font-['Helvetica_Neue',Helvetica,Arial,sans-serif]"
+            className="inline-flex items-center justify-center min-h-[48px] md:min-h-[56px] px-6 md:px-8 py-3 md:py-4 border border-ivory/30 bg-ivory/10 text-ivory hover:bg-ivory hover:text-charcoal transition-all duration-500 uppercase tracking-widest text-[10px] md:text-xs backdrop-blur-sm font-serif"
           >
             Shop Now
           </Link>
