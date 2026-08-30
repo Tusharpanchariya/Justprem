@@ -22,7 +22,7 @@ export interface OrderDetails {
   paymentMethod: string;
 }
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || "re_temp_key_for_build_evaluation");
 
 /**
  * Sends an order confirmation email to the client and a copy to the shop admin.
