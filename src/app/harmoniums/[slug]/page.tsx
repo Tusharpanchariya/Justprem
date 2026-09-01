@@ -52,14 +52,14 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
       <section className="px-6 md:px-12 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
         
         {/* Left Side: Images (Sticky on Desktop) */}
-        <div className="relative md:sticky top-32 flex gap-4 md:gap-6 flex-col-reverse md:flex-row h-fit">
+        <div className="relative flex flex-col gap-4 md:sticky md:top-32 md:h-fit md:flex-row md:gap-6">
           {/* Thumbnails (Vertical on MD+) */}
           {images.length > 1 && (
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="flex md:flex-col gap-3 overflow-auto max-h-[70vh] md:w-24 flex-shrink-0 scrollbar-hide"
+              className="order-2 flex w-full gap-3 overflow-x-auto overflow-y-hidden pb-1 md:order-none md:max-h-[70vh] md:w-24 md:flex-col md:overflow-x-hidden md:overflow-y-auto md:pb-0 flex-shrink-0 scrollbar-hide"
             >
               {images.map((img, idx) => (
                 <button
@@ -80,7 +80,7 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
-            className="relative aspect-[4/3] rounded-sm overflow-hidden shadow-sm flex-1 group bg-white"
+            className="order-1 relative aspect-[4/3] rounded-sm overflow-hidden shadow-sm flex-1 group bg-white md:order-none"
           >
             <img 
               src={activeImage} 
