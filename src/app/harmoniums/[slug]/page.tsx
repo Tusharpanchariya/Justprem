@@ -1,7 +1,7 @@
 "use client";
 
 import { use, useState } from "react";
-import { notFound } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { mockHarmoniums } from "@/lib/data/mockProducts";
 import { useCart } from "@/lib/context/CartContext";
@@ -10,7 +10,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = use(params);
   const product = mockHarmoniums.find(h => h.slug === resolvedParams.slug);
-  const { addItem } = useCart();
+  const { addItem, setIsCartOpen } = useCart();
+  const router = useRouter();
 
   if (!product) {
     notFound();
@@ -28,8 +29,15 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
     });
   };
 
+  const handleBuyNow = () => {
+    handleAddToCart();
+    setIsCartOpen(false);
+    router.push("/checkout");
+  };
+
   const images = product.images || [product.image];
   const activeImage = images[activeImageIdx];
+  const isSoldOut = product.availability === "SOLD_OUT";
 
   const nextImage = () => {
     setActiveImageIdx((prev) => (prev + 1) % images.length);
@@ -136,17 +144,26 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
             {product.fullDescription || product.shortDescription}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 mb-16">
-            <button 
-              onClick={handleAddToCart}
-              className="flex items-center justify-center min-h-[56px] px-8 py-4 bg-forest text-ivory uppercase tracking-widest text-sm hover:bg-forest/90 transition-colors flex-1"
-            >
-              Add to Cart
-            </button>
-            <button className="flex items-center justify-center min-h-[56px] px-8 py-4 border border-forest text-forest uppercase tracking-widest text-sm hover:bg-forest/5 transition-colors flex-1">
-              Buy Now
-            </button>
-          </div>
+          {!isSoldOut && (
+            <div className="flex flex-col sm:flex-row gap-4 mb-16">
+              <>
+                <button
+                  type="button"
+                  onClick={handleAddToCart}
+                  className="flex items-center justify-center min-h-[56px] px-8 py-4 bg-forest text-ivory uppercase tracking-widest text-sm hover:bg-forest/90 transition-colors flex-1"
+                >
+                  Add to Cart
+                </button>
+                <button
+                  type="button"
+                  onClick={handleBuyNow}
+                  className="flex items-center justify-center min-h-[56px] px-8 py-4 border border-forest text-forest uppercase tracking-widest text-sm hover:bg-forest/5 transition-colors flex-1"
+                >
+                  Buy Now
+                </button>
+              </>
+            </div>
+          )}
 
           {/* Specifications */}
           <div className="border-t border-charcoal/10 pt-10">
@@ -180,6 +197,18 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
               )}
             </div>
           </div>
+
+          {isSoldOut && (
+            <div className="mt-10">
+              <button
+                type="button"
+                disabled
+                className="flex w-full items-center justify-center min-h-[56px] px-8 py-4 bg-forest text-ivory uppercase tracking-widest text-sm cursor-not-allowed opacity-50"
+              >
+                Sold Out
+              </button>
+            </div>
+          )}
 
         </motion.div>
       </section>

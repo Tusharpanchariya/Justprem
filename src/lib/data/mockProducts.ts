@@ -167,5 +167,195 @@ export const mockHarmoniums = [
       { label: "Delivery", value: "Every Just Prem Harmonium is individually inspected, tuned, and carefully prepared before dispatch. Each instrument is securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation." },
       { label: "Taxes/Duties", value: "International courier delivery is included in the product price for customers worldwide. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
     ]
+  },
+  {
+    id: "6",
+    name: "Kirtan Mini Deluxe Harmonium (27 keys) ON DEMAND",
+    slug: "kirtan-mini-deluxe",
+    priceEUR: 950,
+    originalPriceEUR: 1350,
+    priceUSD: 1100,
+    shortDescription: "A compact, travel-friendly harmonium with a rich, warm sound for kirtan, meditation, bhajans, and musical gatherings.",
+    fullDescription: "Discover the beauty of sound with the Kirtan Mini Deluxe Harmonium - thoughtfully designed to offer the perfect balance between portability and performance. Compact and travel-friendly, this harmonium delivers rich resonance and exceptional sound quality without compromising depth or volume.\n\nCrafted from high-quality Kail wood with attention to detail, the Mini Deluxe produces a full, warm, sweet, and brilliant sound ideal for kirtan, mantra meditation, bhajans, personal practice, and musical gatherings.\n\nThe Just Prem Harmonium is the ideal choice for musicians seeking a stylish, high-quality, and full-sounding harmonium that is lightweight and compact. With its elegant design, robust construction, and warm, rich tone, it is perfect for concerts, meditation, and spiritual sessions. This premium harmonium is a reliable companion that will delight with both its sound and appearance, enriching your musical journey.",
+    keyCount: 27,
+    availability: "SOLD_OUT",
+    image: "/harmonium-images/kirtan/kirtan1.webp",
+    images: [
+      "/harmonium-images/kirtan/kirtan1.webp",
+      "/harmonium-images/kirtan/kirtan2.webp",
+      "/harmonium-images/kirtan/kirtan3.webp",
+      "/harmonium-images/kirtan/kirtan4.webp",
+      "/harmonium-images/kirtan/kirtan5.webp",
+      "/harmonium-images/kirtan/kirtan6.webp",
+      "/harmonium-images/kirtan/kirtan7.webp",
+      "/harmonium-images/kirtan/kirtan8.webp"
+    ],
+    categories: ["Travel", "Kirtan"],
+    specifications: [
+      { label: "Materials", value: "Made from Kail wood (Himalayan Pine), which is known for its exceptional acoustic properties." },
+      { label: "Bellows", value: "High-quality multi-bellows guarantee a constant air supply without interruption of sound, even when playing quietly." },
+      { label: "Design", value: "Matte lilac finish with silver-colored metal hardware, matching handles, and a metal air intake grille." },
+      { label: "Keyboard", value: "27 keys, starting from F." },
+      { label: "Reeds", value: "Two sets of premium reeds (Bass & Male), providing rich low and warm mid-range tones." },
+      { label: "Tuning", value: "Every harmonium is individually tuned to A = 440 Hz before shipping." },
+      { label: "Dimensions", value: "48 x 32 x 19.5 cm (L x W x H) - ultra compact and can be carried on a plane as hand luggage." },
+      { label: "Weight", value: "Approximately 8 kg." },
+      { label: "Included", value: "A harmonium bag is included as a gift." },
+      { label: "Delivery", value: "Every Just Prem Harmonium includes a premium padded carrying case. Before dispatch, each instrument is individually inspected, tuned, and securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation. It arrives ready to play." },
+      { label: "Shipping", value: "Shipping costs are not included. International shipping typically costs around EUR120, depending on the destination country. Courier charges only; import duties, taxes, customs clearance fees, and other destination-country charges are the purchaser's responsibility." }
+    ]
+  },
+  {
+    id: "7",
+    name: "Just Prem \"Eclipse\" (32 keys) ON DEMAND",
+    slug: "eclipse",
+    priceEUR: 850,
+    originalPriceEUR: 1200,
+    priceUSD: 990,
+    shortDescription: "A handcrafted ebony-black harmonium with a rich, resonant voice for kirtan, meditation, and sacred gatherings.",
+    fullDescription: "Meet the Just Prem \"Eclipse\" - a handcrafted harmonium where timeless elegance meets soulful sound. Finished in a deep ebony black with warm brass accents, it embodies stillness, strength, and quiet beauty. Designed for musicians, teachers, and seekers, it offers a rich, resonant voice that effortlessly fills both intimate gatherings and larger sacred spaces.\n\nBuilt with 32 responsive keys, the Eclipse provides a smooth, expressive playing experience, allowing every melody, mantra, and devotional song to unfold with clarity and warmth. Its carefully balanced construction creates an instrument that is both dependable and inspiring - equally at home in a yoga studio, temple, retreat, recording session, or your own daily practice.\n\nDesigned with simplicity and reliability in mind, the Eclipse avoids unnecessary complexity while delivering exceptional performance. Its durable construction ensures it will accompany you through years of practice, travel, and sacred gatherings.\n\nWhether you are leading kirtan, composing devotional music, guiding meditation, or simply singing from the heart, the Just Prem \"Eclipse\" responds with warmth, depth, and presence - inviting every note to become an offering.\n\nGrounded in earth. Crafted for the soul. Made to travel with you.\n\nThe Just Prem Harmonium is the ideal choice for musicians seeking a stylish, high-quality, and full-sounding harmonium that is lightweight and compact. With its elegant design, robust construction, and warm, rich tone, it is perfect for concerts, meditation, and spiritual sessions. This premium harmonium is a reliable companion that will delight with both its sound and appearance, enriching your musical journey.",
+    keyCount: 32,
+    availability: "SOLD_OUT",
+    image: "/harmonium-images/eclipse/eclipse.webp",
+    images: [
+      "/harmonium-images/eclipse/eclipse.webp",
+      "/harmonium-images/eclipse/eclipse2.webp"
+    ],
+    categories: ["Travel", "Kirtan"],
+    specifications: [
+      { label: "Materials", value: "Made from Kail wood (Himalayan Pine), which is known for its exceptional acoustic properties." },
+      { label: "Bellows", value: "High-quality multi-bellows guarantee a constant air supply without interruption of sound, even when playing quietly." },
+      { label: "Design", value: "Matte black finish with silver-colored metal hardware, matching handles, and a metal air intake grille." },
+      { label: "Keyboard", value: "32 keys (2.5 octaves), starting from E." },
+      { label: "Tuning", value: "Every harmonium is individually tuned to A = 440 Hz before shipping." },
+      { label: "Dimensions", value: "45 x 25 x 21 cm (L x W x H) - ultra compact and very easy to transport." },
+      { label: "Weight", value: "Approximately 6.5 kg." },
+      { label: "Included", value: "A harmonium bag is included as a gift." },
+      { label: "Delivery", value: "Every Just Prem Harmonium includes a premium padded carrying case. Before dispatch, each instrument is individually inspected, tuned, and securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation. It arrives ready to play." },
+      { label: "Shipping", value: "Shipping costs are not included. International shipping typically costs around EUR120, depending on the destination country. Courier charges only; import duties, taxes, customs clearance fees, and other destination-country charges are the purchaser's responsibility." }
+    ]
+  },
+  {
+    id: "8",
+    name: "Just Prem \"Saffron\" (32 Keys) ON DEMAND",
+    slug: "saffron",
+    priceEUR: 850,
+    originalPriceEUR: 1200,
+    priceUSD: 990,
+    shortDescription: "A warm, radiant handcrafted harmonium with a soulful, full-bodied sound for kirtan, meditation, and travel.",
+    fullDescription: "Introducing the Just Prem \"Saffron\" Harmonium - a warm and radiant instrument inspired by earthy woods, sacred traditions and the timeless spirit of devotional music. With its natural honey-toned finish and handcrafted details, Saffron carries a grounded elegance that instantly brings warmth into any space.\n\nLightweight, compact and beautifully resonant, this harmonium is designed for traveling musicians, Kirtan leaders, yoga practitioners and seekers who wish to carry music wherever life flows. Its sculptural wooden body, delicate front carving and rich golden bellows create a harmonious blend of simplicity and artistry.\n\nCrafted with 32 responsive keys and an easy-to-carry form, the Saffron harmonium offers a soulful, full-bodied sound while remaining durable and effortless to use. Whether accompanying mantra chanting in nature, ceremonies by candlelight or quiet moments of meditation at home, it invites presence, creativity and connection through every note.\n\nThe Just Prem Harmonium is the ideal choice for musicians seeking a stylish, high-quality, and full-sounding harmonium that is lightweight and compact. With its elegant design, robust construction, and warm, rich tone, it is perfect for concerts, meditation, and spiritual sessions. This premium harmonium is a reliable companion that will delight with both its sound and appearance, enriching your musical journey.",
+    keyCount: 32,
+    availability: "SOLD_OUT",
+    image: "/harmonium-images/saffron/saffron.webp",
+    images: [
+      "/harmonium-images/saffron/saffron.webp",
+      "/harmonium-images/saffron/saffron2.webp",
+      "/harmonium-images/saffron/saffron3.webp",
+      "/harmonium-images/saffron/saffron5.webp",
+      "/harmonium-images/saffron/saffron6.webp"
+    ],
+    categories: ["Travel", "Kirtan"],
+    specifications: [
+      { label: "Materials", value: "Made from Kail wood, which is known for its exceptional acoustic properties." },
+      { label: "Bellows", value: "The high-quality multi-bellows guarantee a constant air supply without interruption of sound, even when playing quietly." },
+      { label: "Design", value: "Matte saffron finish with silver-colored metal hardware, matching handles, and a silver-colored metal air intake grille." },
+      { label: "Keyboard", value: "32 responsive keys." },
+      { label: "Dimensions", value: "45 x 25 x 21 cm (L x W x H) - ultra compact and very easy to transport." },
+      { label: "Weight", value: "6.5 kg approx." },
+      { label: "Included", value: "A harmonium bag is included as a gift." },
+      { label: "Delivery", value: "Every Just Prem Harmonium includes a premium padded carrying case. Before dispatch, each instrument is individually inspected, tuned, and securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation. It arrives ready to play." },
+      { label: "Shipping", value: "Shipping costs are not included. International shipping typically costs around EUR120-180, depending on the destination country. Courier charges only; import duties, taxes, customs clearance fees, and other destination-country charges are the purchaser's responsibility." }
+    ]
+  },
+  {
+    id: "9",
+    name: "Just Prem \"Aura\" Mini (27 keys) ON DEMAND",
+    slug: "aura-mini",
+    priceEUR: 850,
+    originalPriceEUR: 1200,
+    priceUSD: 990,
+    shortDescription: "Our most compact travel harmonium, crafted for warm, rich sound wherever your journey leads.",
+    fullDescription: "Meet the Just Prem \"Aura\" Mini - our most compact travel harmonium, lovingly crafted for musicians, yogis, and seekers who wish to carry music and devotion wherever life takes them.\n\nFeaturing 27 responsive keys, this lightweight harmonium delivers a warm, rich, and surprisingly full sound despite its compact size. Perfect for kirtan, mantra meditation, yoga classes, cacao ceremonies, retreats, or personal practice, it is designed to travel effortlessly while inspiring meaningful musical moments.\n\nFinished in a soft lavender tone and paired with a practical travel bag, the Aura Mini combines elegance, simplicity, and portability in one beautifully handcrafted instrument.\n\nIts natural wooden body showcases unique grain patterns, making every harmonium truly one of a kind. Built without delicate extras such as drone stops or split registers, its minimalist construction ensures exceptional durability, reliability, and ease of use - wherever your journey leads.\n\nWhether you're singing in the Himalayas, by the ocean, around a sacred fire, or simply in the comfort of your home, the Just Prem \"Aura\" Mini offers a grounded, heartfelt sound that invites presence, connection, and devotion.\n\nSmall in size. Rich in spirit. Made to travel with you.",
+    keyCount: 27,
+    availability: "SOLD_OUT",
+    image: "/harmonium-images/aura-mini/auramini.webp",
+    images: [
+      "/harmonium-images/aura-mini/auramini.webp",
+      "/harmonium-images/aura-mini/auramini2.webp",
+      "/harmonium-images/aura-mini/auramini3.webp",
+      "/harmonium-images/aura-mini/auramini4.webp",
+      "/harmonium-images/aura-mini/auramini6.webp"
+    ],
+    categories: ["Travel", "Kirtan"],
+    specifications: [
+      { label: "Keyboard", value: "27 responsive keys." },
+      { label: "Design", value: "Soft lavender finish with a natural wooden body and hand-finished details." },
+      { label: "Construction", value: "Minimalist construction without drone stops or split registers for durability and ease of use." },
+      { label: "Sound", value: "Warm, rich, and surprisingly full sound in a compact form." },
+      { label: "Included", value: "A practical harmonium travel bag is included." },
+      { label: "Ideal for", value: "Kirtan, mantra meditation, yoga classes, cacao ceremonies, retreats, and personal practice." }
+    ]
+  },
+  {
+    id: "10",
+    name: "Just Prem \"Sage\" (32 Keys) ON DEMAND",
+    slug: "sage",
+    priceEUR: 850,
+    originalPriceEUR: 1200,
+    priceUSD: 990,
+    shortDescription: "A sage-green handcrafted travel harmonium with rich, warm sound and a light, portable design.",
+    fullDescription: "Meet the Just Prem \"Sage\" edition - a beautifully handcrafted travel harmonium designed for those who carry music, mantra, and devotion wherever life leads them. Inspired by the calming tones of nature, its elegant sage green finish reflects harmony, grounding, and inner peace while delivering a rich, warm, and resonant sound.\n\nLightweight, compact, and crafted with care, the Sage harmonium is the perfect companion for kirtan, meditation, yoga classes, ceremonies, retreats, and intimate creative sessions. Whether you're traveling through the Himalayas, gathering by the ocean, or simply creating a sacred space at home, this harmonium is made to move with you.\n\nFeaturing 32 responsive keys and a comfortable travel-friendly design, it offers a smooth playing experience without compromising sound quality. Its simplified construction - free from delicate drone stops and split registers - makes it exceptionally durable, reliable, and easy to maintain, allowing you to focus entirely on your music.\n\nEach harmonium is handcrafted from natural wood, showcasing its own unique grain and character. No two instruments are exactly alike, making every Just Prem \"Sage\" a one-of-a-kind expression of craftsmanship and authenticity.\n\nFinished in a timeless sage green and accompanied by a practical travel bag, it blends elegance, simplicity, and portability into an instrument created for modern seekers and musicians alike.\n\nWhether you're leading sacred chants, composing devotional music, accompanying yoga practices, or simply singing for yourself, the Just Prem \"Sage\" offers a warm, balanced tone that invites stillness, presence, and heartfelt connection.\n\nGrounded in nature. Crafted with intention. Made to travel with your soul.\n\nThe Just Prem Harmonium is the ideal choice for musicians seeking a stylish, high-quality, and full-sounding harmonium that is lightweight and compact. With its elegant design, robust construction, and warm, rich tone, it is perfect for concerts, meditation, and spiritual sessions. This premium harmonium is a reliable companion that will delight with both its sound and appearance, enriching your musical journey.",
+    keyCount: 32,
+    availability: "SOLD_OUT",
+    image: "/harmonium-images/sage/sage.webp",
+    images: [
+      "/harmonium-images/sage/sage.webp",
+      "/harmonium-images/sage/sage2.webp",
+      "/harmonium-images/sage/sage3.webp",
+      "/harmonium-images/sage/sage6.webp",
+      "/harmonium-images/sage/sage7.webp",
+      "/harmonium-images/sage/sage8.webp",
+      "/harmonium-images/sage/sage9.webp"
+    ],
+    categories: ["Travel", "Kirtan"],
+    specifications: [
+      { label: "Materials", value: "Made from Kail wood (Himalayan Pine), which is known for its exceptional acoustic properties." },
+      { label: "Bellows", value: "High-quality multi-bellows guarantee a constant air supply without interruption of sound, even when playing quietly." },
+      { label: "Design", value: "Matte sage green finish with antique bronze-colored metal hardware, matching handles, and a solid wood grille." },
+      { label: "Keyboard", value: "32 keys (2.5 octaves), starting from E." },
+      { label: "Tuning", value: "Every harmonium is individually tuned to A = 440 Hz before shipping." },
+      { label: "Dimensions", value: "45 x 25 x 21 cm (L x W x H) - ultra compact and very easy to transport." },
+      { label: "Weight", value: "6.5 kg approx." },
+      { label: "Included", value: "A harmonium bag is included as a gift." },
+      { label: "Delivery", value: "Every Just Prem Harmonium includes a premium padded carrying case. Before dispatch, each instrument is individually inspected, tuned, and securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation. It arrives ready to play." },
+      { label: "Taxes/Duties", value: "International courier delivery is included in the product price for customers worldwide. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
+    ]
+  },
+  {
+    id: "11",
+    name: "Just Prem \"Essence\" (27 Keys) ON DEMAND",
+    slug: "essence",
+    priceEUR: 850,
+    originalPriceEUR: 1200,
+    priceUSD: 990,
+    shortDescription: "A compact, handcrafted 27-key travel harmonium with a warm, balanced, resonant voice.",
+    fullDescription: "Meet the Just Prem \"Essence\" - a beautifully handcrafted travel harmonium designed for musicians, yogis, and seekers who wish to carry music, mantra, and devotion wherever life leads.\n\nFeaturing 27 responsive keys, this compact harmonium delivers a warm, balanced, and resonant sound that beautifully supports kirtan, mantra meditation, yoga classes, ceremonies, retreats, and personal practice. Lightweight and easy to carry, it is the perfect companion for those who value both simplicity and exceptional sound.\n\nCrafted from natural wood, every harmonium reveals its own unique grain and character, making each instrument truly one of a kind. Its clean, minimalist construction - without fragile extras such as drone stops or split registers - offers outstanding durability, reliability, and effortless playability for life on the move.\n\nWhether you're singing in the Himalayas, leading a circle by the ocean, sharing music around a sacred fire, or practicing quietly at home, the Just Prem \"Essence\" creates a warm, grounding tone that inspires presence, connection, and devotion.\n\nDesigned for simplicity. Crafted with soul. Made to journey with you.",
+    keyCount: 27,
+    availability: "SOLD_OUT",
+    image: "/harmonium-images/essence/essence.webp",
+    images: [
+      "/harmonium-images/essence/essence.webp",
+      "/harmonium-images/essence/essence2.webp",
+      "/harmonium-images/essence/essence3.webp",
+      "/harmonium-images/essence/essence4.webp"
+    ],
+    categories: ["Travel", "Kirtan"],
+    specifications: [
+      { label: "Keyboard", value: "27 responsive keys." },
+      { label: "Materials", value: "Handcrafted from natural wood; each instrument has its own unique grain and character." },
+      { label: "Construction", value: "Minimalist construction without drone stops or split registers for durable, reliable use." },
+      { label: "Sound", value: "Warm, balanced, and resonant sound in a compact, lightweight design." },
+      { label: "Ideal for", value: "Kirtan, mantra meditation, yoga classes, ceremonies, retreats, and personal practice." }
+    ]
   }
 ];

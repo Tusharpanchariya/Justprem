@@ -1,13 +1,15 @@
 import { Hero } from "@/components/home/Hero";
-import { FeaturedHarmonium } from "@/components/home/FeaturedHarmonium";
 import { HomeCollection } from "@/components/home/HomeCollection";
+import { OnDemandProducts } from "@/components/home/OnDemandProducts";
+import { AboutCollectionSection } from "@/components/home/AboutCollectionSection";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <FeaturedHarmonium />
       <HomeCollection />
+      <OnDemandProducts />
+      <AboutCollectionSection />
     </>
   );
 }

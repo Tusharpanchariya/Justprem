@@ -19,7 +19,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-          className="font-serif text-[clamp(1.5rem,4.5vw,4rem)] tracking-[0.03em] text-[#E5E5E5] mb-6 leading-tight whitespace-nowrap"
+          className="font-serif text-[clamp(1.5rem,4.5vw,4rem)] tracking-[0.03em] text-[#E5E5E5] mb-6 leading-tight"
         >
           Shop the New Collection
         </motion.h1>

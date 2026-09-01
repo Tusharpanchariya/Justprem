@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/lib/context/CartContext";
@@ -12,6 +13,8 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { itemCount, setIsCartOpen } = useCart();
+  const pathname = usePathname();
+  const useLightHeader = pathname === "/" && !isScrolled;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,9 +27,9 @@ export function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
-        isScrolled
-          ? "bg-ivory/90 backdrop-blur-md shadow-sm py-4 text-charcoal"
-          : "bg-transparent py-6 text-ivory"
+        useLightHeader
+          ? "bg-transparent py-6 text-ivory"
+          : "bg-ivory/90 backdrop-blur-md shadow-sm py-4 text-charcoal"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">

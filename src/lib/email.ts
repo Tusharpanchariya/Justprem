@@ -15,6 +15,8 @@ export interface OrderDetails {
   name: string;
   address: string;
   city: string;
+  region: string;
+  country: string;
   postalCode: string;
   items: OrderItem[];
   cartTotal: number;
@@ -98,7 +100,8 @@ export async function sendOrderEmail(details: OrderDetails) {
                         <p style="margin: 0; font-family: sans-serif; font-size: 13px; line-height: 1.5; color: #4a3e3d;">
                           ${details.name}<br>
                           ${details.address}<br>
-                          ${details.city}, ${details.postalCode}<br>
+                          ${details.city}, ${details.region} ${details.postalCode}<br>
+                          ${details.country}<br>
                           Phone: ${details.phone}
                         </p>
                       </td>
@@ -185,7 +188,7 @@ export async function sendOrderEmail(details: OrderDetails) {
           <li><strong>Name:</strong> ${details.name}</li>
           <li><strong>Email:</strong> ${details.email}</li>
           <li><strong>Phone:</strong> ${details.phone}</li>
-          <li><strong>Address:</strong> ${details.address}, ${details.city}, ${details.postalCode}</li>
+          <li><strong>Address:</strong> ${details.address}, ${details.city}, ${details.region}, ${details.postalCode}, ${details.country}</li>
           <li><strong>Payment Method:</strong> ${details.paymentMethod}</li>
           <li><strong>Transaction ID:</strong> ${details.paymentId}</li>
           <li><strong>Total Paid:</strong> €${details.cartTotal}</li>
