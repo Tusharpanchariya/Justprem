@@ -34,6 +34,7 @@ declare global {
 
 type PayPalButtonProps = {
   items: CartItem[];
+  couponCode?: string;
   validateCheckout: () => boolean;
   onSuccess: (paymentId: string) => Promise<void>;
   onProcessingChange: (isProcessing: boolean) => void;
@@ -41,6 +42,7 @@ type PayPalButtonProps = {
 
 export function PayPalButton({
   items,
+  couponCode,
   validateCheckout,
   onSuccess,
   onProcessingChange,
@@ -76,7 +78,7 @@ export function PayPalButton({
           const response = await fetch("/api/checkout/paypal/order", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ items }),
+            body: JSON.stringify({ items, couponCode }),
           });
           const order = (await response.json()) as { id?: string; error?: string };
 
@@ -115,7 +117,7 @@ export function PayPalButton({
         setError("PayPal is unavailable at the moment. Please try again later.");
         onProcessingChange(false);
       });
-  }, [isSdkReady, items, onProcessingChange, onSuccess, validateCheckout]);
+  }, [couponCode, isSdkReady, items, onProcessingChange, onSuccess, validateCheckout]);
 
   if (!clientId) {
     return <p className="text-sm text-red-700">PayPal is not configured yet.</p>;

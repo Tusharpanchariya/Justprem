@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { mockHarmoniums } from "@/lib/data/mockProducts";
+import { applyCoupon } from "@/lib/coupons";
 
 type CartItem = { id: string; quantity: number };
 type Customer = { email: string; phone: string; name: string };
@@ -17,7 +18,7 @@ function credentials() {
 
 export async function POST(request: Request) {
   try {
-    const { items, customer } = (await request.json()) as { items?: CartItem[]; customer?: Customer };
+    const { items, customer, couponCode } = (await request.json()) as { items?: CartItem[]; customer?: Customer; couponCode?: string };
     if (!items?.length || !customer?.email || !customer.name || !customer.phone) {
       return NextResponse.json({ error: "Complete your contact information before paying." }, { status: 400 });
     }
@@ -30,7 +31,10 @@ export async function POST(request: Request) {
       }
       return { product, quantity };
     });
-    const orderAmount = orderItems.reduce((total, { product, quantity }) => total + product.priceEUR * quantity, 0);
+    const subtotal = orderItems.reduce((total, { product, quantity }) => total + product.priceEUR * quantity, 0);
+    const coupon = applyCoupon(couponCode, subtotal);
+    if (couponCode && !coupon) return NextResponse.json({ error: "That coupon code is not valid." }, { status: 400 });
+    const orderAmount = subtotal - (coupon?.discount || 0);
     const orderId = `jp_${crypto.randomUUID().replaceAll("-", "")}`;
     const { clientId, clientSecret } = credentials();
     const response = await fetch(`${apiBaseUrl}/orders`, {
@@ -52,7 +56,7 @@ export async function POST(request: Request) {
           customer_email: customer.email,
           customer_phone: customer.phone,
         },
-        order_note: "JustPrem harmonium purchase",
+        order_note: coupon ? `JustPrem harmonium purchase (${coupon.code})` : "JustPrem harmonium purchase",
       }),
       cache: "no-store",
     });
@@ -60,7 +64,7 @@ export async function POST(request: Request) {
     if (!response.ok || !data.payment_session_id) {
       throw new Error(data.message || "Cashfree could not create the order.");
     }
-    return NextResponse.json({ orderId, paymentSessionId: data.payment_session_id });
+    return NextResponse.json({ orderId, paymentSessionId: data.payment_session_id, coupon });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Cashfree could not create the order.";
     console.error("Cashfree order error:", error);

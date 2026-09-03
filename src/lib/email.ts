@@ -1,206 +1,41 @@
 import { Resend } from "resend";
+import path from "path";
+import { createInvoicePdf } from "@/lib/invoice";
 
-// Define TypeScript interfaces for our email function
-export interface OrderItem {
-  id: string;
-  name: string;
-  quantity: number;
-  priceEUR: number;
-  image?: string;
-}
-
-export interface OrderDetails {
-  email: string;
-  phone: string;
-  name: string;
-  address: string;
-  city: string;
-  region: string;
-  country: string;
-  postalCode: string;
-  items: OrderItem[];
-  cartTotal: number;
-  paymentId: string;
-  paymentMethod: string;
-}
+export interface OrderItem { id: string; name: string; quantity: number; priceEUR: number; image?: string }
+export interface OrderDetails { email: string; phone: string; name: string; address: string; city: string; region: string; country: string; postalCode: string; items: OrderItem[]; cartTotal: number; paymentId: string; paymentMethod: string; couponCode?: string; discount?: number }
 
 const resend = new Resend(process.env.RESEND_API_KEY || "re_temp_key_for_build_evaluation");
 
-/**
- * Sends an order confirmation email to the client and a copy to the shop admin.
- */
+function escapeHtml(value: string) {
+  return value.replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character] || character);
+}
+function money(amount: number) { return `EUR ${amount.toFixed(2)}`; }
+function invoiceNumber(paymentId: string) { return `JP-${paymentId.replace(/[^a-z0-9]/gi, "").slice(-16).toUpperCase() || "ORDER"}`; }
+
+function createCustomerEmail(details: OrderDetails) {
+  const safe = (value: string) => escapeHtml(value);
+  const isPending = details.paymentMethod === "wise";
+  const items = details.items.map((item) => `<tr><td style="padding:14px 0;border-bottom:1px solid #e7e0d5;color:#0e1b10;font-size:14px"><strong>${safe(item.name)}</strong><br><span style="color:#6d716d;font-size:12px">Quantity: ${item.quantity}</span></td><td style="padding:14px 0;border-bottom:1px solid #e7e0d5;text-align:right;color:#0e1b10;font-size:14px">${money(item.priceEUR * item.quantity)}</td></tr>`).join("");
+  const address = [details.name, details.address, [details.city, details.region, details.postalCode].filter(Boolean).join(", "), details.country, details.phone].filter(Boolean).map(safe).join("<br>");
+  const status = isPending ? "Payment details enclosed" : "Payment received";
+  const discountRow = details.discount ? `<tr><td style="padding-top:12px;color:#0e1b10;font-size:14px">Discount (${safe(details.couponCode || "COUPON")})</td><td style="padding-top:12px;text-align:right;color:#0e1b10;font-size:14px">-${money(details.discount)}</td></tr>` : "";
+  const wiseBlock = isPending ? `<tr><td style="padding:22px 28px;background:#f4f0e8;border:1px solid #ddd3c4"><p style="margin:0 0 10px;font-size:13px;font-weight:700;color:#0e1b10;text-transform:uppercase;letter-spacing:.08em">Wise bank transfer</p><p style="margin:0;color:#39423a;font-size:13px;line-height:1.65">Please transfer <strong>${money(details.cartTotal)}</strong> and use <strong>${safe(details.paymentId)}</strong> as the payment reference.<br><strong>Account:</strong> vitthal prem travels llp<br><strong>IBAN:</strong> BE75 9059 5938 2951 &nbsp; <strong>Swift/BIC:</strong> TRWIBEB1XXX</p></td></tr>` : "";
+  return `<!doctype html><html><body style="margin:0;padding:0;background:#f0f1f5;font-family:Arial,Helvetica,sans-serif;color:#0e1b10"><table role="presentation" width="100%" cellspacing="0" cellpadding="0"><tr><td style="padding:32px 16px"><table role="presentation" width="600" align="center" cellspacing="0" cellpadding="0" style="max-width:600px;width:100%;background:#fff"><tr><td style="padding:24px 24px 0"><img src="cid:justprem-harmonium" alt="JustPrem Harmoniums" width="552" style="display:block;width:100%;height:auto" /></td></tr><tr><td style="padding:24px 28px 12px"><p style="margin:0 0 14px;font-family:Georgia,serif;font-size:23px;font-weight:bold;color:#0e1b10">A new instrument, a new journey.</p><p style="margin:0;color:#39423a;font-size:15px;line-height:1.65">Thank you for choosing us as your companion on the path of sound and devotion. ${isPending ? "Your order is reserved while we await your transfer." : "Your harmonium is now being prepared for its journey."}</p></td></tr><tr><td style="padding:16px 28px"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-top:1px solid #bfc3c8;border-bottom:1px solid #bfc3c8"><tr><td style="padding:14px 0;font-size:12px;color:#5c615d;text-transform:uppercase;letter-spacing:.08em">Order reference</td><td style="padding:14px 0;text-align:right;font-family:monospace;font-size:12px;color:#0e1b10">${safe(details.paymentId)}</td></tr><tr><td style="padding:0 0 14px;font-size:12px;color:#5c615d;text-transform:uppercase;letter-spacing:.08em">Status</td><td style="padding:0 0 14px;text-align:right;font-size:12px;font-weight:bold;color:#0e1b10">${status}</td></tr></table></td></tr><tr><td style="padding:8px 28px 22px"><table role="presentation" width="100%" cellspacing="0" cellpadding="0"><tr><td colspan="2" style="padding-bottom:8px;font-size:12px;font-weight:bold;letter-spacing:.08em;text-transform:uppercase">Order summary</td></tr>${items}${discountRow}<tr><td style="padding-top:16px;font-size:15px;font-weight:bold">${isPending ? "Total due" : "Total paid"}</td><td style="padding-top:16px;text-align:right;font-size:16px;font-weight:bold">${money(details.cartTotal)}</td></tr></table></td></tr><tr><td style="padding:0 28px 24px"><p style="margin:0 0 7px;font-size:12px;font-weight:bold;letter-spacing:.08em;text-transform:uppercase">Shipping address</p><p style="margin:0;color:#39423a;font-size:13px;line-height:1.6">${address}</p></td></tr>${wiseBlock}<tr><td style="padding:24px 28px 30px;text-align:center"><p style="margin:0;color:#5c615d;font-size:12px;line-height:1.6">Your formal invoice is attached to this email. For any questions, reply to this message or contact <a href="mailto:connect@justprem.shop" style="color:#0e1b10">connect@justprem.shop</a>.</p></td></tr></table></td></tr></table></body></html>`;
+}
+
+/** Sends the branded invoice email to the customer and a complete copy to the shop. */
 export async function sendOrderEmail(details: OrderDetails) {
-  const itemsListHtml = details.items
-    .map(
-      (item) => `
-      <tr>
-        <td style="padding: 12px; border-bottom: 1px solid #eeeeee; font-family: sans-serif; font-size: 14px; color: #2c1810;">
-          <strong>${item.name}</strong> x ${item.quantity}
-        </td>
-        <td style="padding: 12px; border-bottom: 1px solid #eeeeee; font-family: sans-serif; font-size: 14px; color: #2c1810; text-align: right;">
-          €${(item.priceEUR * item.quantity).toFixed(2)}
-        </td>
-      </tr>
-    `
-    )
-    .join("");
-
-  const emailHtml = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="utf-8">
-      <title>Order Confirmation - Just Prem</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body style="margin: 0; padding: 0; background-color: #faf6f0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
-      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed; background-color: #faf6f0;">
-        <tr>
-          <td align="center" style="padding: 40px 0;">
-            <table border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: #ffffff; border: 1px solid #e2dcd5; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 12px rgba(44, 24, 16, 0.03);">
-              
-              <!-- Header -->
-              <tr>
-                <td align="center" style="background-color: #2c1810; padding: 40px 0;">
-                  <h1 style="margin: 0; font-family: Georgia, serif; color: #faf6f0; font-size: 28px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: normal;">JUST PREM</h1>
-                  <p style="margin: 5px 0 0 0; font-family: sans-serif; color: #dcb386; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;">Instruments of Devotion</p>
-                </td>
-              </tr>
-              
-              <!-- Body -->
-              <tr>
-                <td style="padding: 40px 30px;">
-                  <h2 style="margin: 0 0 20px 0; font-family: Georgia, serif; font-size: 20px; color: #2c1810; font-weight: normal;">Thank you for your order, ${details.name}.</h2>
-                  <p style="margin: 0 0 30px 0; font-family: sans-serif; font-size: 14px; line-height: 1.6; color: #4a3e3d;">
-                    We are preparing your instrument for its journey. You will find your order details below. We will notify you as soon as your harmonium has been tuned, packaged, and shipped.
-                  </p>
-                  
-                  <!-- Order Details Table -->
-                  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 30px; border: 1px solid #e2dcd5; border-collapse: collapse;">
-                    <thead>
-                      <tr style="background-color: #f7f2eb;">
-                        <th style="padding: 12px; border-bottom: 1px solid #e2dcd5; font-family: sans-serif; font-size: 12px; font-weight: bold; color: #2c1810; text-transform: uppercase; text-align: left; letter-spacing: 0.05em;">Product</th>
-                        <th style="padding: 12px; border-bottom: 1px solid #e2dcd5; font-family: sans-serif; font-size: 12px; font-weight: bold; color: #2c1810; text-transform: uppercase; text-align: right; letter-spacing: 0.05em;">Price</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      ${itemsListHtml}
-                      <tr>
-                        <td style="padding: 12px; font-family: sans-serif; font-size: 14px; font-weight: bold; color: #2c1810;">Total Paid</td>
-                        <td style="padding: 12px; font-family: sans-serif; font-size: 16px; font-weight: bold; color: #b38856; text-align: right;">€${details.cartTotal.toFixed(2)}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  
-                  <!-- Shipping Information -->
-                  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 35px; border-top: 1px solid #e2dcd5; padding-top: 25px;">
-                    <tr>
-                      <td width="50%" valign="top" style="padding-right: 10px;">
-                        <h3 style="margin: 0 0 10px 0; font-family: sans-serif; font-size: 12px; color: #2c1810; text-transform: uppercase; letter-spacing: 0.05em;">Shipping Address</h3>
-                        <p style="margin: 0; font-family: sans-serif; font-size: 13px; line-height: 1.5; color: #4a3e3d;">
-                          ${details.name}<br>
-                          ${details.address}<br>
-                          ${details.city}, ${details.region} ${details.postalCode}<br>
-                          ${details.country}<br>
-                          Phone: ${details.phone}
-                        </p>
-                      </td>
-                      <td width="50%" valign="top" style="padding-left: 10px;">
-                        <h3 style="margin: 0 0 10px 0; font-family: sans-serif; font-size: 12px; color: #2c1810; text-transform: uppercase; letter-spacing: 0.05em;">Payment Details</h3>
-                        <p style="margin: 0; font-family: sans-serif; font-size: 13px; line-height: 1.5; color: #4a3e3d;">
-                          Method: ${details.paymentMethod.toUpperCase()}<br>
-                          Transaction ID:<br>
-                          <span style="font-family: monospace; font-size: 11px; background-color: #f7f2eb; padding: 2px 4px; border-radius: 2px;">${details.paymentId}</span>
-                        </p>
-                      </td>
-                    </tr>
-                  </table>
-                  
-                  ${details.paymentMethod === "wise" ? `
-                  <!-- Wise Payment Instructions -->
-                  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 10px; margin-bottom: 30px; border: 1px solid #e2dcd5; background-color: #f7f2eb; border-radius: 4px; padding: 20px; box-sizing: border-box;">
-                    <tr>
-                      <td>
-                        <h4 style="margin: 0 0 10px 0; font-family: sans-serif; font-size: 13px; color: #2c1810; text-transform: uppercase; letter-spacing: 0.05em;">Wise Bank Transfer Details</h4>
-                        <p style="margin: 0 0 12px 0; font-family: sans-serif; font-size: 13px; line-height: 1.5; color: #4a3e3d;">
-                          Please transfer the exact order amount of <strong>€${details.cartTotal.toFixed(2)}</strong>. Include the Order ID reference <strong style="font-family: monospace; font-size: 14px; background-color: #ffffff; padding: 2px 6px; border-radius: 2px;">${details.paymentId}</strong> in your transfer description.
-                        </p>
-                        <p style="margin: 0; font-family: sans-serif; font-size: 12px; line-height: 1.6; color: #4a3e3d;">
-                          <strong>Account Name:</strong> vitthal prem travels llp<br>
-                          <strong>IBAN:</strong> BE75 9059 5938 2951<br>
-                          <strong>Swift/BIC:</strong> TRWIBEB1XXX<br>
-                          <strong>Bank Address:</strong> Wise, Rue du Trône 100, Brussels, 1050, Belgium
-                        </p>
-                      </td>
-                    </tr>
-                  </table>
-                  ` : ""}
-                  
-                  <!-- Footer Note -->
-                  <p style="margin: 0; font-family: sans-serif; font-size: 12px; line-height: 1.5; color: #9c8e8d; text-align: center;">
-                    If you have any questions regarding your order, please reply directly to this email or contact us at <a href="mailto:connect@justprem.shop" style="color: #b38856; text-decoration: none;">connect@justprem.shop</a>.
-                  </p>
-                </td>
-              </tr>
-              
-              <!-- Footer Background -->
-              <tr>
-                <td align="center" style="background-color: #f7f2eb; padding: 20px 30px; border-top: 1px solid #e2dcd5;">
-                  <p style="margin: 0; font-family: sans-serif; font-size: 11px; color: #9c8e8d; text-transform: uppercase; letter-spacing: 0.05em;">
-                    © ${new Date().getFullYear()} Just Prem. All Rights Reserved.
-                  </p>
-                </td>
-              </tr>
-              
-            </table>
-          </td>
-        </tr>
-      </table>
-    </body>
-    </html>
-  `;
-
-  // The user says their domain "justprem.shop" is verified. We'll use "orders@justprem.shop"
+  const invoice = createInvoicePdf(details);
+  const bannerPath = path.join(process.cwd(), "invoice_details", "images", "cfc52b1889e0ebfd5174a6aeb75381c0.png");
   const senderEmail = process.env.SMTP_FROM_EMAIL || "orders@justprem.shop";
-  // The admin email to receive order copies
   const adminEmail = process.env.SMTP_ADMIN_EMAIL || "connect@justprem.shop";
-
-  try {
-    console.log("Sending email to customer:", details.email, "from:", senderEmail);
-    // Send the email to the customer
-    const customerResponse = await resend.emails.send({
-      from: `Just Prem <${senderEmail}>`,
-      to: details.email,
-      subject: `Order Confirmation - Just Prem [${details.paymentId}]`,
-      html: emailHtml,
-    });
-    console.log("Customer email response:", customerResponse);
-
-    // Send a copy to the shop admin
-    const adminResponse = await resend.emails.send({
-      from: `Just Prem System <${senderEmail}>`,
-      to: adminEmail,
-      subject: `NEW ORDER ALERT - [${details.paymentId}]`,
-      html: `
-        <h2>New Harmonium Order Received!</h2>
-        <p>Here are the client details:</p>
-        <ul>
-          <li><strong>Name:</strong> ${details.name}</li>
-          <li><strong>Email:</strong> ${details.email}</li>
-          <li><strong>Phone:</strong> ${details.phone}</li>
-          <li><strong>Address:</strong> ${details.address}, ${details.city}, ${details.region}, ${details.postalCode}, ${details.country}</li>
-          <li><strong>Payment Method:</strong> ${details.paymentMethod}</li>
-          <li><strong>Transaction ID:</strong> ${details.paymentId}</li>
-          <li><strong>Total Paid:</strong> €${details.cartTotal}</li>
-        </ul>
-        <hr />
-        ${emailHtml}
-      `,
-    });
-    console.log("Admin email response:", adminResponse);
-    return true;
-  } catch (error) {
-    console.error("Error sending emails:", error);
-    return false;
-  }
+  const customerEmail = createCustomerEmail(details);
+  const attachments = [{ filename: invoice.filename, content: invoice.content, contentType: "application/pdf" }, { filename: "justprem-harmonium.png", path: bannerPath, contentId: "justprem-harmonium" }];
+  const subject = `${details.paymentMethod === "wise" ? "Order reserved" : "Order confirmed"} — JustPrem Harmoniums`;
+  const customerResponse = await resend.emails.send({ from: `JustPrem Harmoniums <${senderEmail}>`, to: details.email, replyTo: adminEmail, subject, html: customerEmail, text: `Thank you for your order. Reference: ${details.paymentId}. Your invoice is attached.`, attachments });
+  if (customerResponse.error) throw new Error(customerResponse.error.message || "The order email could not be sent.");
+  const adminResponse = await resend.emails.send({ from: `JustPrem Orders <${senderEmail}>`, to: adminEmail, replyTo: details.email, subject: `New order ${invoiceNumber(details.paymentId)} — ${money(details.cartTotal)}`, html: customerEmail, text: `New order from ${details.name} (${details.email}). Reference: ${details.paymentId}.`, attachments: [invoice] });
+  if (adminResponse.error) console.error("Admin order copy could not be sent:", adminResponse.error);
+  return { customerEmailId: customerResponse.data?.id, adminEmailId: adminResponse.data?.id };
 }

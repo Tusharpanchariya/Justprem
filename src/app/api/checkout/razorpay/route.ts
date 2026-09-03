@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import Razorpay from "razorpay";
 import { mockHarmoniums } from "@/lib/data/mockProducts";
+import { applyCoupon } from "@/lib/coupons";
 
 type CartRequestItem = {
   id: string;
@@ -49,12 +50,15 @@ function getValidatedItems(items: CartRequestItem[]) {
 
 export async function POST(request: Request) {
   try {
-    const { items } = (await request.json()) as { items?: CartRequestItem[] };
+    const { items, couponCode } = (await request.json()) as { items?: CartRequestItem[]; couponCode?: string };
     const validatedItems = getValidatedItems(items ?? []);
-    const amount = validatedItems.reduce(
+    const subtotal = validatedItems.reduce(
       (total, { product, quantity }) => total + product.priceEUR * quantity,
       0,
     );
+    const coupon = applyCoupon(couponCode, subtotal);
+    if (couponCode && !coupon) return NextResponse.json({ error: "That coupon code is not valid." }, { status: 400 });
+    const amount = subtotal - (coupon?.discount || 0);
     const currency = (process.env.RAZORPAY_CURRENCY || "EUR").toUpperCase();
 
     if (!/^[A-Z]{3}$/.test(currency)) {
@@ -65,10 +69,10 @@ export async function POST(request: Request) {
       amount: Math.round(amount * 100),
       currency,
       receipt: `jp_${crypto.randomUUID().replaceAll("-", "").slice(0, 32)}`,
-      notes: { item_count: String(validatedItems.length) },
+      notes: { item_count: String(validatedItems.length), coupon_code: coupon?.code || "" },
     });
 
-    return NextResponse.json({ id: order.id, amount: order.amount, currency: order.currency });
+    return NextResponse.json({ id: order.id, amount: order.amount, currency: order.currency, coupon });
   } catch (error) {
     console.error("Razorpay order creation error:", error);
     return NextResponse.json({ error: getErrorMessage(error) }, { status: 500 });

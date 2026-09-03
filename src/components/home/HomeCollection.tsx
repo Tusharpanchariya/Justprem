@@ -28,7 +28,7 @@ export function HomeCollection() {
               transition={{ delay: 0.1 }}
               className="text-charcoal/60 uppercase tracking-widest text-xs"
             >
-              Instruments of devotion
+              Unfolding the path of Bhakti
             </motion.p>
           </div>
           

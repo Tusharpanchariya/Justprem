@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { mockHarmoniums } from "@/lib/data/mockProducts";
+import { applyCoupon } from "@/lib/coupons";
 
 type CartRequestItem = {
   id: string;
@@ -80,12 +81,15 @@ function getValidatedItems(items: CartRequestItem[]) {
 
 export async function POST(request: Request) {
   try {
-    const { items } = (await request.json()) as { items?: CartRequestItem[] };
+    const { items, couponCode } = (await request.json()) as { items?: CartRequestItem[]; couponCode?: string };
     const validatedItems = getValidatedItems(items ?? []);
-    const total = validatedItems.reduce(
+    const subtotal = validatedItems.reduce(
       (sum, { product, quantity }) => sum + product.priceEUR * quantity,
       0,
     );
+    const coupon = applyCoupon(couponCode, subtotal);
+    if (couponCode && !coupon) return NextResponse.json({ error: "That coupon code is not valid." }, { status: 400 });
+    const total = subtotal - (coupon?.discount || 0);
     const accessToken = await getPayPalAccessToken();
     const response = await fetch(`${paypalApiBaseUrl}/v2/checkout/orders`, {
       method: "POST",
@@ -104,8 +108,9 @@ export async function POST(request: Request) {
               breakdown: {
                 item_total: {
                   currency_code: "EUR",
-                  value: total.toFixed(2),
+                  value: subtotal.toFixed(2),
                 },
+                discount: coupon ? { currency_code: "EUR", value: coupon.discount.toFixed(2) } : undefined,
               },
             },
             items: validatedItems.map(({ product, quantity }) => ({
@@ -128,7 +133,7 @@ export async function POST(request: Request) {
       throw new Error(order.details?.[0]?.description || "PayPal could not create the order.");
     }
 
-    return NextResponse.json({ id: order.id });
+    return NextResponse.json({ id: order.id, coupon });
   } catch (error) {
     console.error("PayPal order creation error:", error);
     return NextResponse.json({ error: getErrorMessage(error) }, { status: 500 });

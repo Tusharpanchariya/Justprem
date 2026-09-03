@@ -27,8 +27,8 @@ export default function HarmoniumsPage() {
           transition={{ duration: 1, delay: 0.2 }}
           className="font-serif italic text-xl md:text-2xl text-wood max-w-2xl"
         >
-          Every instrument carries its own character.<br />
-          Every sound becomes part of the journey.
+          Unfolding the path of Bhakti, where sound becomes devotion.<br />
+          And every instrument becomes part of the journey.
         </motion.p>
       </section>
 

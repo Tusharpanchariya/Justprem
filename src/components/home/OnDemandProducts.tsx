@@ -16,35 +16,31 @@ export function OnDemandProducts() {
   return (
     <section className="bg-ivory px-6 pb-32 pt-16">
       <div className="mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="relative aspect-[4/5] w-full overflow-hidden rounded-sm bg-sandstone/10 shadow-sm lg:aspect-square">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-12 flex max-w-md flex-col items-start lg:mb-16">
+          <span className="mb-2 text-[10px] uppercase tracking-widest text-charcoal/60 md:text-xs">Pre-order</span>
+          <h2 className="mb-4 font-serif text-[clamp(2rem,4vw,3rem)] leading-tight text-charcoal">On Demand</h2>
+          <p className="mb-6 max-w-md text-sm leading-relaxed text-charcoal/70">These harmoniums are handcrafted upon request. We will inform you by email when your order is on its way.</p>
+          <Link href="/harmoniums" className="inline-flex items-center justify-center rounded-full border border-charcoal/80 px-8 py-3 text-xs font-medium uppercase tracking-widest text-charcoal transition-colors duration-300 hover:bg-charcoal hover:text-ivory">Shop the Collection</Link>
+        </motion.div>
+
+        <div className="grid grid-cols-2 items-start gap-4 md:gap-6 lg:grid-cols-4">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="relative col-span-2 aspect-[4/5] w-full overflow-hidden rounded-sm bg-sandstone/10 shadow-sm lg:aspect-square">
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/harmonium-images/preview-section.webp')" }} />
           </motion.div>
 
-          <div className="flex flex-col">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="flex flex-col items-start">
-              <span className="mb-2 text-[10px] uppercase tracking-widest text-charcoal/60 md:text-xs">Pre-order</span>
-              <h2 className="mb-4 font-serif text-[clamp(2rem,4vw,3rem)] leading-tight text-charcoal">On Demand</h2>
-              <p className="mb-6 max-w-md text-sm leading-relaxed text-charcoal/70">These harmoniums are handcrafted upon request. Please allow 20-25 days for production before shipping.</p>
-              <Link href="/harmoniums" className="mb-12 inline-flex items-center justify-center rounded-full border border-charcoal/80 px-8 py-3 text-xs font-medium uppercase tracking-widest text-charcoal transition-colors duration-300 hover:bg-charcoal hover:text-ivory">Shop the Collection</Link>
+          {products.map((product, index) => (
+            <motion.div key={product.slug} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: (index + 1) * 0.1 }} className="group flex flex-col">
+              <Link href={`/harmoniums/${product.slug}`} className="flex flex-col">
+                <div className="relative mb-4 aspect-[4/5] overflow-hidden rounded-sm bg-sandstone/20">
+                  <div className="absolute right-3 top-3 z-10 bg-charcoal px-2.5 py-1 text-[9px] font-medium uppercase tracking-widest text-ivory">Sold Out</div>
+                  <div className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" style={{ backgroundImage: `url('${product.image}')` }} />
+                  <div className="absolute inset-0 bg-black/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                </div>
+                <h3 className="mb-1 font-serif text-sm leading-snug text-charcoal md:text-base">{product.name}</h3>
+                <div className="flex items-center gap-2 text-xs tracking-widest md:text-sm"><span className="text-charcoal/80">{product.price}</span><span className="text-charcoal/40 line-through">{product.originalPrice}</span></div>
+              </Link>
             </motion.div>
-
-            <div className="grid grid-cols-2 gap-6">
-              {products.map((product, index) => (
-                <motion.div key={product.slug} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: (index + 1) * 0.1 }} className="group flex flex-col">
-                  <Link href={`/harmoniums/${product.slug}`} className="flex flex-col">
-                    <div className="relative mb-4 aspect-[4/5] overflow-hidden rounded-sm bg-sandstone/20">
-                      <div className="absolute right-3 top-3 z-10 bg-charcoal px-2.5 py-1 text-[9px] font-medium uppercase tracking-widest text-ivory">Sold Out</div>
-                      <div className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" style={{ backgroundImage: `url('${product.image}')` }} />
-                      <div className="absolute inset-0 bg-black/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                    </div>
-                    <h3 className="mb-1 font-serif text-sm leading-snug text-charcoal md:text-base">{product.name}</h3>
-                    <div className="flex items-center gap-2 text-xs tracking-widest md:text-sm"><span className="text-charcoal/80">{product.price}</span><span className="text-charcoal/40 line-through">{product.originalPrice}</span></div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

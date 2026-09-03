@@ -49,9 +49,29 @@ export default function CheckoutPage() {
   const [region, setRegion] = useState("");
   const [country, setCountry] = useState("");
   const [postalCode, setPostalCode] = useState("");
+  const [couponInput, setCouponInput] = useState("");
+  const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; description: string; discount: number } | null>(null);
+  const [couponError, setCouponError] = useState("");
   const checkoutFormRef = useRef<HTMLFormElement>(null);
   const fullPhone = `${getDialCode(phoneCountryCode)}${phone.replace(/[^0-9]/g, "")}`;
   const shippingDetails = { address, city, region, country, postalCode };
+  const discountedTotal = Math.max(0, cartTotal - (appliedCoupon?.discount || 0));
+  const applyCoupon = async () => {
+    setCouponError("");
+    const response = await fetch("/api/coupon", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ code: couponInput, subtotal: cartTotal }) });
+    const result = (await response.json()) as { coupon?: { code: string; description: string; discount: number }; error?: string };
+    if (!response.ok || !result.coupon) { setAppliedCoupon(null); setCouponError(result.error || "That coupon code is not valid."); return; }
+    setAppliedCoupon(result.coupon); setCouponInput(result.coupon.code);
+  };
+  const sendOrderConfirmation = async (paymentId: string, method: string) => {
+    const response = await fetch("/api/checkout/success", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, phone: fullPhone, name, ...shippingDetails, items, cartTotal: discountedTotal, couponCode: appliedCoupon?.code, paymentId, paymentMethod: method }),
+    });
+    const result = (await response.json()) as { error?: string };
+    if (!response.ok) throw new Error(result.error || "We could not send your order confirmation.");
+  };
 
   const handleCashfreePayment = async () => {
     if (!window.Cashfree) {
@@ -64,7 +84,7 @@ export default function CheckoutPage() {
       const orderResponse = await fetch("/api/checkout/cashfree/order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items, customer: { email, phone: fullPhone, name } }),
+        body: JSON.stringify({ items, customer: { email, phone: fullPhone, name }, couponCode: appliedCoupon?.code }),
       });
       const order = (await orderResponse.json()) as { orderId?: string; paymentSessionId?: string; error?: string };
       if (!orderResponse.ok || !order.orderId || !order.paymentSessionId) {
@@ -86,11 +106,7 @@ export default function CheckoutPage() {
         throw new Error(verification.error || "Cashfree could not verify the payment.");
       }
 
-      await fetch("/api/checkout/success", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, phone: fullPhone, name, ...shippingDetails, items, cartTotal, paymentId: verification.paymentId, paymentMethod: "cashfree" }),
-      });
+      await sendOrderConfirmation(verification.paymentId, "cashfree");
       clearCart();
       router.push(`/checkout/success?payment_id=${verification.paymentId}&method=cashfree`);
     } catch (error) {
@@ -111,22 +127,7 @@ export default function CheckoutPage() {
       // Simulate order creation for wise
       setTimeout(async () => {
         try {
-          await fetch("/api/checkout/success", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email,
-              phone: fullPhone,
-              name,
-              ...shippingDetails,
-              items,
-              cartTotal,
-              paymentId,
-              paymentMethod: "wise"
-            }),
-          });
+          await sendOrderConfirmation(paymentId, "wise");
         } catch (error) {
           console.error("Failed to send order email:", error);
         }
@@ -153,7 +154,7 @@ export default function CheckoutPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ items }),
+        body: JSON.stringify({ items, couponCode: appliedCoupon?.code }),
       });
       
       const orderData = await response.json();
@@ -187,22 +188,7 @@ export default function CheckoutPage() {
               throw new Error(verification.error || "Razorpay could not verify your payment.");
             }
 
-            await fetch("/api/checkout/success", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                email,
-                phone: fullPhone,
-                name,
-                ...shippingDetails,
-                items,
-                cartTotal,
-                paymentId: response.razorpay_payment_id,
-                paymentMethod: "razorpay"
-              }),
-            });
+            await sendOrderConfirmation(response.razorpay_payment_id, "razorpay");
           } catch (error) {
             console.error("Razorpay payment confirmation failed:", error);
             alert("Your payment could not be verified yet. Please contact us with your Razorpay payment ID.");
@@ -240,20 +226,7 @@ export default function CheckoutPage() {
 
   const handlePayPalSuccess = async (paymentId: string) => {
     try {
-      await fetch("/api/checkout/success", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          phone: fullPhone,
-          name,
-          ...shippingDetails,
-          items,
-          cartTotal,
-          paymentId,
-          paymentMethod: "paypal",
-        }),
-      });
+      await sendOrderConfirmation(paymentId, "paypal");
       clearCart();
       router.push(`/checkout/success?payment_id=${paymentId}&method=paypal`);
     } catch (error) {
@@ -416,8 +389,9 @@ export default function CheckoutPage() {
 
               
               {paymentMethod === "paypal" ? (
-                <PayPalButton
-                  items={items}
+                        <PayPalButton
+                          items={items}
+                          couponCode={appliedCoupon?.code}
                   validateCheckout={() => checkoutFormRef.current?.reportValidity() ?? false}
                   onSuccess={handlePayPalSuccess}
                   onProcessingChange={setIsProcessing}
@@ -457,11 +431,27 @@ export default function CheckoutPage() {
               ))}
             </div>
             
+            <div className="border-t border-charcoal/10 pt-6 pb-6">
+              <label htmlFor="coupon-code" className="block text-xs uppercase tracking-widest text-charcoal/60 mb-3">Coupon code</label>
+              <div className="flex gap-2">
+                <input id="coupon-code" value={couponInput} onChange={(event) => setCouponInput(event.target.value.toUpperCase())} placeholder="Enter code" className="min-w-0 flex-1 bg-transparent border border-charcoal/20 px-3 py-2 text-sm uppercase focus:outline-none focus:border-saffron" />
+                <button type="button" onClick={applyCoupon} className="border border-forest px-4 py-2 text-xs uppercase tracking-widest text-forest hover:bg-forest hover:text-ivory">Apply</button>
+              </div>
+              {appliedCoupon && <p className="mt-2 text-sm text-forest">{appliedCoupon.description} applied.</p>}
+              {couponError && <p className="mt-2 text-sm text-red-700" role="alert">{couponError}</p>}
+            </div>
+
             <div className="border-t border-charcoal/10 pt-6 space-y-4 mb-6">
               <div className="flex justify-between text-sm text-charcoal/60">
                 <span>Subtotal</span>
                 <span>€{cartTotal.toLocaleString()}</span>
               </div>
+              {appliedCoupon && (
+                <div className="flex justify-between text-sm text-forest">
+                  <span>Discount ({appliedCoupon.code})</span>
+                  <span>-EUR {appliedCoupon.discount.toLocaleString()}</span>
+                </div>
+              )}
               <div className="flex justify-between text-sm text-charcoal/60">
                 <span>Shipping</span>
                 <span>Calculated next step</span>
@@ -475,6 +465,12 @@ export default function CheckoutPage() {
                 €{cartTotal.toLocaleString()}
               </span>
             </div>
+            {appliedCoupon && (
+              <div className="mt-4 flex justify-between items-end border-t border-forest/30 pt-4 text-forest">
+                <span className="text-sm uppercase tracking-widest">Discounted total</span>
+                <span className="font-serif text-2xl">EUR {discountedTotal.toLocaleString()}</span>
+              </div>
+            )}
           </div>
 
         </div>

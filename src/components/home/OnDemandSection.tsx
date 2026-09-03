@@ -39,7 +39,7 @@ export function OnDemandSection() {
                 On Demand
               </h2>
               <p className="text-sm text-charcoal/70 mb-6 max-w-md leading-relaxed">
-                These harmoniums are handcrafted upon request. Please allow 20–25 days for production before shipping.
+                These harmoniums are handcrafted upon request. We will inform you by email when your order is on its way.
               </p>
               
               <Link
