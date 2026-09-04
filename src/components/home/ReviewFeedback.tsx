@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const reviews = [
   { src: "/reviews/review-1.mp4", label: "Customer video review one" },
@@ -42,10 +43,11 @@ export function ReviewFeedback() {
           ))}
         </div>
 
-        <motion.blockquote initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mx-auto mt-12 max-w-xl border-l-2 border-saffron bg-ivory px-6 py-5 text-center md:mt-16 md:px-10">
-          <p className="font-serif text-xl leading-relaxed text-charcoal md:text-2xl">“The sound is incredible. I enjoy it very much and highly recommend it.”</p>
-          <footer className="mt-3 text-xs uppercase tracking-[0.18em] text-charcoal/55">A member of the JustPrem community</footer>
-        </motion.blockquote>
+        <div className="mt-12 text-center md:mt-16">
+          <Link href="/reviews" className="inline-flex items-center justify-center border border-charcoal px-7 py-3 text-xs font-medium uppercase tracking-widest text-charcoal transition-colors hover:bg-charcoal hover:text-ivory">
+            See All Reviews
+          </Link>
+        </div>
       </div>
     </section>
   );

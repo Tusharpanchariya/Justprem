@@ -34,7 +34,7 @@ export const mockHarmoniums = [
       { label: "Dimensions", value: "45 × 25 × 21 cm (L × W × H) – ultra compact and very easy to transport." },
       { label: "Weight", value: "6.5 kg approx" },
       { label: "Delivery", value: "Every Just Prem Harmonium includes a premium padded carrying case. Before dispatch, each instrument is individually inspected, tuned, and securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation. It arrives ready to play." },
-      { label: "Taxes/Duties", value: "International delivery is included. Any applicable import duties, taxes, customs clearance fees, VAT, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
+      { label: "Taxes/Duties", value: "International delivery is not included. Any applicable import duties, taxes, customs clearance fees, VAT, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
     ]
   },
   {
@@ -71,7 +71,7 @@ export const mockHarmoniums = [
       { label: "Dimensions", value: "45 × 25 × 21 cm (L × W × H) – ultra compact and very easy to transport." },
       { label: "Weight", value: "6.5 kg approx" },
       { label: "Delivery", value: "Bag for harmonium is gifted for you. Every Just Prem Harmonium includes a premium padded carrying case. Before dispatch, each instrument is individually inspected, tuned, and securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation. It arrives ready to play." },
-      { label: "Taxes/Duties", value: "International delivery is included in the product price for customers worldwide. The price covers courier shipping only. Any applicable import duties, taxes, customs clearance fees, VAT, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
+      { label: "Taxes/Duties", value: "International delivery is not included. Any applicable import duties, taxes, customs clearance fees, VAT, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
     ]
   },
   {
@@ -101,7 +101,7 @@ export const mockHarmoniums = [
       { label: "Weight", value: "Approximately 6.5 kg." },
       { label: "Travel Bag", value: "A premium padded harmonium carrying bag is included as a gift." },
       { label: "Delivery", value: "Every Just Prem Harmonium is individually inspected, tuned, and carefully prepared before dispatch. Each instrument is securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation." },
-      { label: "Taxes/Duties", value: "International courier delivery is included in the product price for customers worldwide. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
+      { label: "Taxes/Duties", value: "International delivery is not included. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
     ]
   },
   {
@@ -130,7 +130,8 @@ export const mockHarmoniums = [
       { label: "Sound", value: "Rich, warm and balanced sound" },
       { label: "Durability", value: "Durable construction for travel and everyday use" },
       { label: "Usage", value: "Perfect for kīrtan, bhajan, meditation, yoga, ceremonies and studio recording" },
-      { label: "Included", value: "Includes a premium travel bag" }
+      { label: "Included", value: "Includes a premium travel bag" },
+      { label: "Taxes/Duties", value: "International delivery is not included. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
     ]
   },
   {
@@ -165,7 +166,7 @@ export const mockHarmoniums = [
       { label: "Weight", value: "Approximately 6.5 kg." },
       { label: "Travel Bag", value: "A premium padded harmonium carrying bag is included as a gift." },
       { label: "Delivery", value: "Every Just Prem Harmonium is individually inspected, tuned, and carefully prepared before dispatch. Each instrument is securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation." },
-      { label: "Taxes/Duties", value: "International courier delivery is included in the product price for customers worldwide. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
+      { label: "Taxes/Duties", value: "International delivery is not included. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
     ]
   },
   {
@@ -202,7 +203,7 @@ export const mockHarmoniums = [
       { label: "Weight", value: "Approximately 8 kg." },
       { label: "Included", value: "A harmonium bag is included as a gift." },
       { label: "Delivery", value: "Every Just Prem Harmonium includes a premium padded carrying case. Before dispatch, each instrument is individually inspected, tuned, and securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation. It arrives ready to play." },
-      { label: "Shipping", value: "Shipping costs are not included. International shipping typically costs around EUR120, depending on the destination country. Courier charges only; import duties, taxes, customs clearance fees, and other destination-country charges are the purchaser's responsibility." }
+      { label: "Shipping", value: "Shipping costs are included. International shipping typically costs around EUR120, depending on the destination country. Courier charges only; import duties, taxes, customs clearance fees, and other destination-country charges are the purchaser's responsibility." }
     ]
   },
   {
@@ -232,7 +233,7 @@ export const mockHarmoniums = [
       { label: "Weight", value: "Approximately 6.5 kg." },
       { label: "Included", value: "A harmonium bag is included as a gift." },
       { label: "Delivery", value: "Every Just Prem Harmonium includes a premium padded carrying case. Before dispatch, each instrument is individually inspected, tuned, and securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation. It arrives ready to play." },
-      { label: "Shipping", value: "Shipping costs are not included. International shipping typically costs around EUR120, depending on the destination country. Courier charges only; import duties, taxes, customs clearance fees, and other destination-country charges are the purchaser's responsibility." }
+      { label: "Shipping", value: "Shipping costs are included. International shipping typically costs around EUR120, depending on the destination country. Courier charges only; import duties, taxes, customs clearance fees, and other destination-country charges are the purchaser's responsibility." }
     ]
   },
   {
@@ -264,7 +265,7 @@ export const mockHarmoniums = [
       { label: "Weight", value: "6.5 kg approx." },
       { label: "Included", value: "A harmonium bag is included as a gift." },
       { label: "Delivery", value: "Every Just Prem Harmonium includes a premium padded carrying case. Before dispatch, each instrument is individually inspected, tuned, and securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation. It arrives ready to play." },
-      { label: "Shipping", value: "Shipping costs are not included. International shipping typically costs around EUR120-180, depending on the destination country. Courier charges only; import duties, taxes, customs clearance fees, and other destination-country charges are the purchaser's responsibility." }
+      { label: "Shipping", value: "Shipping costs are included. International shipping typically costs around EUR120-180, depending on the destination country. Courier charges only; import duties, taxes, customs clearance fees, and other destination-country charges are the purchaser's responsibility." }
     ]
   },
   {
@@ -293,6 +294,7 @@ export const mockHarmoniums = [
       { label: "Construction", value: "Minimalist construction without drone stops or split registers for durability and ease of use." },
       { label: "Sound", value: "Warm, rich, and surprisingly full sound in a compact form." },
       { label: "Included", value: "A practical harmonium travel bag is included." },
+      { label: "Shipping", value: "Shipping costs are included." },
       { label: "Ideal for", value: "Kirtan, mantra meditation, yoga classes, cacao ceremonies, retreats, and personal practice." }
     ]
   },
@@ -328,6 +330,7 @@ export const mockHarmoniums = [
       { label: "Weight", value: "6.5 kg approx." },
       { label: "Included", value: "A harmonium bag is included as a gift." },
       { label: "Delivery", value: "Every Just Prem Harmonium includes a premium padded carrying case. Before dispatch, each instrument is individually inspected, tuned, and securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation. It arrives ready to play." },
+      { label: "Shipping", value: "Shipping costs are included." },
       { label: "Taxes/Duties", value: "International courier delivery is included in the product price for customers worldwide. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
     ]
   },
@@ -355,7 +358,8 @@ export const mockHarmoniums = [
       { label: "Materials", value: "Handcrafted from natural wood; each instrument has its own unique grain and character." },
       { label: "Construction", value: "Minimalist construction without drone stops or split registers for durable, reliable use." },
       { label: "Sound", value: "Warm, balanced, and resonant sound in a compact, lightweight design." },
-      { label: "Ideal for", value: "Kirtan, mantra meditation, yoga classes, ceremonies, retreats, and personal practice." }
+      { label: "Ideal for", value: "Kirtan, mantra meditation, yoga classes, ceremonies, retreats, and personal practice." },
+      { label: "Shipping", value: "Shipping costs are included." }
     ]
   }
 ];

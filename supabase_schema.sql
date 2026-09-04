@@ -114,3 +114,14 @@ create table public.retreat_registrations (
 );
 
 -- RLS Policies can be added here
+
+-- Customer reviews published through the website
+create table public.reviews (
+  id uuid default uuid_generate_v4() primary key,
+  name text not null,
+  email text,
+  rating integer not null check (rating between 1 and 5),
+  message text not null check (char_length(message) between 10 and 2000),
+  is_visible boolean not null default true,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);

@@ -21,7 +21,7 @@ export function Footer() {
               Explore
             </h3>
             <ul className="space-y-4 text-sm">
-              {/* Removed Harmoniums link as requested */}
+              <li><Link href="/reviews" className="hover:text-saffron transition-colors">Write a Review</Link></li>
             </ul>
           </div>
 
@@ -45,15 +45,15 @@ export function Footer() {
             </h3>
             <ul className="space-y-4 text-sm">
               <li>
-                <a href="mailto:justprem108@gmail.com" className="hover:text-saffron transition-colors">
-                  justprem108@gmail.com
+                <a href="mailto:connect@justprem.in" className="hover:text-saffron transition-colors">
+                  connect@justprem.in
                 </a>
               </li>
               <li className="pt-4 flex space-x-6">
                 <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-saffron transition-colors uppercase tracking-wider text-xs">
                   Instagram
                 </a>
-                <a href="https://youtube.com" target="_blank" rel="noreferrer" className="hover:text-saffron transition-colors uppercase tracking-wider text-xs">
+                <a href="https://www.youtube.com/@justpremfoundation" target="_blank" rel="noreferrer" className="hover:text-saffron transition-colors uppercase tracking-wider text-xs">
                   YouTube
                 </a>
               </li>
@@ -62,7 +62,7 @@ export function Footer() {
         </div>
 
         <div className="mt-20 pt-8 border-t border-white/10 text-xs opacity-50 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p>&copy; {new Date().getFullYear()} JustPrem. All rights reserved.</p>
+          <p>A brand/trading name operated by VITTHAL PREM TRAVELS LLP.</p>
           <p className="tracking-widest uppercase">Designed for the Journey</p>
         </div>
       </div>
