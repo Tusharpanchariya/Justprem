@@ -7,7 +7,10 @@ import { Menu, X, ShoppingBag } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/lib/context/CartContext";
 
-const navLinks: { name: string; href: string }[] = [];
+const navLinks = [
+  { name: "Collection", href: "/harmoniums" },
+  { name: "Reviews", href: "/reviews" },
+];
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,7 +39,7 @@ export function Header() {
         {/* Logo */}
         <Link
           href="/"
-          className="font-serif text-2xl tracking-widest relative z-50"
+          className="relative z-50 font-serif text-xl tracking-widest sm:text-2xl"
         >
           JustPrem
         </Link>
@@ -106,9 +109,9 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="fixed inset-0 bg-forest text-ivory pt-32 px-6 flex flex-col z-40"
+            className="fixed inset-0 z-40 flex flex-col bg-forest px-6 pt-28 text-ivory"
           >
-            <nav className="flex flex-col space-y-8 text-2xl font-serif">
+            <nav className="flex flex-col space-y-6 text-3xl font-serif">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}

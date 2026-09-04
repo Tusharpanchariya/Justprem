@@ -14,13 +14,13 @@ const products = [
 
 export function OnDemandProducts() {
   return (
-    <section className="bg-ivory px-6 pb-32 pt-16">
+    <section className="bg-ivory px-6 pb-20 pt-12 md:pb-32 md:pt-16">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-12 flex max-w-md flex-col items-start lg:mb-16">
           <span className="mb-2 text-[10px] uppercase tracking-widest text-charcoal/60 md:text-xs">Pre-order</span>
           <h2 className="mb-4 font-serif text-[clamp(2rem,4vw,3rem)] leading-tight text-charcoal">On Demand</h2>
           <p className="mb-6 max-w-md text-sm leading-relaxed text-charcoal/70">These harmoniums are handcrafted upon request. We will inform you by email when your order is on its way.</p>
-          <Link href="/harmoniums" className="inline-flex items-center justify-center rounded-full border border-charcoal/80 px-8 py-3 text-xs font-medium uppercase tracking-widest text-charcoal transition-colors duration-300 hover:bg-charcoal hover:text-ivory">Shop the Collection</Link>
+          <Link href="/harmoniums" className="inline-flex min-h-12 items-center justify-center rounded-full border border-charcoal/80 px-8 py-3 text-xs font-medium uppercase tracking-widest text-charcoal transition-colors duration-300 hover:bg-charcoal hover:text-ivory">Shop the Collection</Link>
         </motion.div>
 
         <div className="grid grid-cols-2 items-start gap-4 md:gap-6 lg:grid-cols-4">

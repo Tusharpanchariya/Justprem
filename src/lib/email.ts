@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import path from "path";
+import { readFile } from "fs/promises";
 import { createInvoicePdf } from "@/lib/invoice";
 
 export interface OrderItem { id: string; name: string; quantity: number; priceEUR: number; image?: string }
@@ -28,10 +29,11 @@ function createCustomerEmail(details: OrderDetails) {
 export async function sendOrderEmail(details: OrderDetails) {
   const invoice = createInvoicePdf(details);
   const bannerPath = path.join(process.cwd(), "invoice_details", "images", "cfc52b1889e0ebfd5174a6aeb75381c0.png");
+  const banner = await readFile(bannerPath);
   const senderEmail = process.env.SMTP_FROM_EMAIL || "orders@justprem.shop";
   const adminEmail = process.env.SMTP_ADMIN_EMAIL || "connect@justprem.shop";
   const customerEmail = createCustomerEmail(details);
-  const attachments = [{ filename: invoice.filename, content: invoice.content, contentType: "application/pdf" }, { filename: "justprem-harmonium.png", path: bannerPath, contentId: "justprem-harmonium" }];
+  const attachments = [{ filename: invoice.filename, content: invoice.content, contentType: "application/pdf" }, { filename: "justprem-harmonium.png", content: banner, contentType: "image/png", contentId: "justprem-harmonium" }];
   const subject = `${details.paymentMethod === "wise" ? "Order reserved" : "Order confirmed"} — JustPrem Harmoniums`;
   const customerResponse = await resend.emails.send({ from: `JustPrem Harmoniums <${senderEmail}>`, to: details.email, replyTo: adminEmail, subject, html: customerEmail, text: `Thank you for your order. Reference: ${details.paymentId}. Your invoice is attached.`, attachments });
   if (customerResponse.error) throw new Error(customerResponse.error.message || "The order email could not be sent.");

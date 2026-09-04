@@ -24,19 +24,13 @@ type RazorpayConstructor = new (options: Record<string, unknown>) => RazorpayIns
 declare global {
   interface Window {
     Razorpay: RazorpayConstructor;
-    Cashfree: (options: { mode: "sandbox" | "production" }) => {
-      checkout: (options: { paymentSessionId: string; redirectTarget: "_modal" }) => Promise<{
-        error?: unknown;
-        paymentDetails?: unknown;
-      }>;
-    };
   }
 }
 
 export default function CheckoutPage() {
   const { items, cartTotal, clearCart } = useCart();
   const [isProcessing, setIsProcessing] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<"cashfree" | "wise" | "paypal">("cashfree");
+  const [paymentMethod, setPaymentMethod] = useState<"razorpay" | "wise" | "paypal">("razorpay");
   const router = useRouter();
 
   // Form States
@@ -73,53 +67,15 @@ export default function CheckoutPage() {
     if (!response.ok) throw new Error(result.error || "We could not send your order confirmation.");
   };
 
-  const handleCashfreePayment = async () => {
-    if (!window.Cashfree) {
-      alert("Cashfree is still loading. Please try again in a moment.");
-      return;
-    }
-
-    setIsProcessing(true);
-    try {
-      const orderResponse = await fetch("/api/checkout/cashfree/order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items, customer: { email, phone: fullPhone, name }, couponCode: appliedCoupon?.code }),
-      });
-      const order = (await orderResponse.json()) as { orderId?: string; paymentSessionId?: string; error?: string };
-      if (!orderResponse.ok || !order.orderId || !order.paymentSessionId) {
-        throw new Error(order.error || "Cashfree could not create the order.");
-      }
-
-      const cashfree = window.Cashfree({
-        mode: process.env.NEXT_PUBLIC_CASHFREE_ENVIRONMENT === "sandbox" ? "sandbox" : "production",
-      });
-      const checkoutResult = await cashfree.checkout({ paymentSessionId: order.paymentSessionId, redirectTarget: "_modal" });
-      if (checkoutResult.error || !checkoutResult.paymentDetails) {
-        setIsProcessing(false);
-        return;
-      }
-
-      const verificationResponse = await fetch(`/api/checkout/cashfree/verify?orderId=${encodeURIComponent(order.orderId)}`);
-      const verification = (await verificationResponse.json()) as { paymentId?: string; error?: string };
-      if (!verificationResponse.ok || !verification.paymentId) {
-        throw new Error(verification.error || "Cashfree could not verify the payment.");
-      }
-
-      await sendOrderConfirmation(verification.paymentId, "cashfree");
-      clearCart();
-      router.push(`/checkout/success?payment_id=${verification.paymentId}&method=cashfree`);
-    } catch (error) {
-      console.error("Cashfree checkout error:", error);
-      alert(error instanceof Error ? error.message : "Cashfree could not complete the payment.");
-    } finally {
-      setIsProcessing(false);
-    }
-  };
-
   const handlePayment = async (e: React.FormEvent) => {
     e.preventDefault();
     if (items.length === 0) return;
+
+    if (paymentMethod === "razorpay" && !window.Razorpay) {
+      alert("Razorpay is still loading. Please try again in a moment.");
+      return;
+    }
+
     setIsProcessing(true);
 
     if (paymentMethod === "wise") {
@@ -139,11 +95,6 @@ export default function CheckoutPage() {
 
     if (paymentMethod === "paypal") {
       setIsProcessing(false);
-      return;
-    }
-
-    if (paymentMethod === "cashfree") {
-      await handleCashfreePayment();
       return;
     }
 
@@ -251,7 +202,7 @@ export default function CheckoutPage() {
 
   return (
     <>
-      <Script src="https://sdk.cashfree.com/js/v3/cashfree.js" />
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="afterInteractive" />
       <div className="min-h-screen bg-ivory pt-32 pb-24">
         <div className="max-w-5xl mx-auto px-6 md:px-12 flex flex-col-reverse lg:grid lg:grid-cols-2 gap-12 lg:gap-16">
           
@@ -304,17 +255,17 @@ export default function CheckoutPage() {
                   Payment Method
                 </h2>
                 <div className="space-y-4">
-                  <label className={`flex items-center gap-4 p-4 rounded-lg border cursor-pointer transition-colors ${paymentMethod === 'cashfree' ? 'border-forest bg-forest/5' : 'border-charcoal/20 hover:border-charcoal/40'}`}>
+                  <label className={`flex items-center gap-4 p-4 rounded-lg border cursor-pointer transition-colors ${paymentMethod === 'razorpay' ? 'border-forest bg-forest/5' : 'border-charcoal/20 hover:border-charcoal/40'}`}>
                     <input 
                       type="radio" 
                       name="payment_method" 
-                      value="cashfree" 
-                      checked={paymentMethod === 'cashfree'} 
-                      onChange={() => setPaymentMethod('cashfree')}
+                      value="razorpay" 
+                      checked={paymentMethod === 'razorpay'} 
+                      onChange={() => setPaymentMethod('razorpay')}
                       className="accent-forest"
                     />
                     <div>
-                      <h3 className="font-medium text-charcoal">Pay with Cashfree (Cards, UPI, Netbanking)</h3>
+                      <h3 className="font-medium text-charcoal">Pay with Razorpay (Cards, UPI, Netbanking)</h3>
                       <p className="text-xs text-charcoal/60 mt-1">Instant secure payment processing in EUR.</p>
                     </div>
                   </label>
@@ -353,14 +304,14 @@ export default function CheckoutPage() {
               
               <div className="bg-white/50 p-6 rounded-lg border border-charcoal/10">
                 <h3 className="font-medium text-charcoal mb-2">Secure Payment</h3>
-                {paymentMethod === 'cashfree' ? (
+                {paymentMethod === 'razorpay' ? (
                   <>
                     <p className="text-charcoal/80 text-sm leading-relaxed mb-4">
-                      Your payment is processed securely via Cashfree. We support all major Credit/Debit cards, UPI, and Netbanking.
+                      Your payment is processed securely via Razorpay. We support all major Credit/Debit cards, UPI, and Netbanking.
                     </p>
                     <div className="flex items-center gap-3 text-forest text-sm font-medium">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                      Pay Securely via Cashfree
+                      Pay Securely via Razorpay
                     </div>
                   </>
                 ) : paymentMethod === 'wise' ? (

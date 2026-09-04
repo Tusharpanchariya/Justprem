@@ -9,7 +9,7 @@ export function HomeCollection() {
   const displayProducts = mockHarmoniums.slice(0, 3);
 
   return (
-    <section className="bg-ivory py-32 px-6">
+    <section className="bg-ivory px-6 py-20 md:py-32">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-4 md:gap-6">
           <div>
@@ -39,7 +39,7 @@ export function HomeCollection() {
           >
             <Link 
               href="/harmoniums"
-              className="text-xs uppercase tracking-widest border-b border-charcoal pb-1 hover:text-saffron hover:border-saffron transition-colors"
+              className="inline-flex min-h-11 items-center text-xs uppercase tracking-widest border-b border-charcoal pb-1 hover:text-saffron hover:border-saffron transition-colors"
             >
               View All Instruments
             </Link>

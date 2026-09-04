@@ -125,3 +125,16 @@ create table public.reviews (
   is_visible boolean not null default true,
   created_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
+
+alter table public.reviews add column if not exists avatar_url text;
+
+insert into storage.buckets (id, name, public)
+values ('review-avatars', 'review-avatars', true)
+on conflict (id) do update set public = true;
+
+create policy "Public can upload review avatars" on storage.objects for insert with check (bucket_id = 'review-avatars');
+create policy "Public can view review avatars" on storage.objects for select using (bucket_id = 'review-avatars');
+
+alter table public.reviews enable row level security;
+create policy "Public can read visible reviews" on public.reviews for select using (is_visible = true);
+create policy "Public can submit reviews" on public.reviews for insert with check (is_visible = true);

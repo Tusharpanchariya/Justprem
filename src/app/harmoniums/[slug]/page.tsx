@@ -80,7 +80,7 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
-            className="order-1 relative aspect-[4/3] rounded-sm overflow-hidden shadow-sm flex-1 group bg-white md:order-none"
+            className="order-1 relative aspect-square rounded-sm overflow-hidden shadow-sm flex-1 group bg-white sm:aspect-[4/3] md:order-none"
           >
             <img 
               src={activeImage} 
@@ -92,7 +92,8 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
                 {/* Left Arrow Area */}
                 <button 
                   onClick={prevImage} 
-                  className="absolute inset-y-0 left-0 w-1/3 flex items-center justify-start px-4 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer outline-none"
+                  aria-label="Previous image"
+                  className="absolute inset-y-0 left-0 flex w-1/3 items-center justify-start px-3 opacity-100 transition-opacity sm:px-4 md:opacity-0 md:group-hover:opacity-100"
                 >
                   <div className="w-10 h-10 bg-white/50 backdrop-blur-sm rounded-full flex items-center justify-center text-charcoal shadow-sm">
                     <ChevronLeft className="w-6 h-6" />
@@ -101,7 +102,8 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
                 {/* Right Arrow Area */}
                 <button 
                   onClick={nextImage} 
-                  className="absolute inset-y-0 right-0 w-1/3 flex items-center justify-end px-4 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer outline-none"
+                  aria-label="Next image"
+                  className="absolute inset-y-0 right-0 flex w-1/3 items-center justify-end px-3 opacity-100 transition-opacity sm:px-4 md:opacity-0 md:group-hover:opacity-100"
                 >
                   <div className="w-10 h-10 bg-white/50 backdrop-blur-sm rounded-full flex items-center justify-center text-charcoal shadow-sm">
                     <ChevronRight className="w-6 h-6" />
