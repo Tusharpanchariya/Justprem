@@ -2,14 +2,15 @@ import Image from "next/image";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-charcoal md:min-h-screen" aria-label="JustPrem harmonium collection">
+    <section className="relative overflow-hidden bg-forest pt-20 md:min-h-screen md:bg-charcoal md:pt-0" aria-label="JustPrem harmonium collection">
       <Image
         src="/harmonium-images/mainpage.JPG"
         alt="JustPrem harmonium"
-        fill
         priority
-        sizes="100vw"
-        className="object-cover object-[54%_center] md:object-center"
+        width={6528}
+        height={4352}
+        sizes="(max-width: 767px) 100vw, 100vw"
+        className="block h-auto w-full object-contain md:absolute md:inset-0 md:h-full md:object-cover md:object-center"
       />
     </section>
   );
