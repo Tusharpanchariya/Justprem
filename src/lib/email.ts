@@ -6,7 +6,14 @@ import { createInvoicePdf } from "@/lib/invoice";
 export interface OrderItem { id: string; name: string; quantity: number; priceEUR: number; image?: string }
 export interface OrderDetails { email: string; phone: string; name: string; address: string; city: string; region: string; country: string; postalCode: string; items: OrderItem[]; cartTotal: number; paymentId: string; paymentMethod: string; couponCode?: string; discount?: number }
 
-const resend = new Resend(process.env.RESEND_API_KEY || "re_temp_key_for_build_evaluation");
+function getResendClient() {
+  const apiKey = process.env.RESEND_API_KEY?.trim();
+  if (!apiKey) {
+    throw new Error("Order emails are not configured: set RESEND_API_KEY in the production environment.");
+  }
+
+  return new Resend(apiKey);
+}
 
 function escapeHtml(value: string) {
   return value.replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character] || character);
@@ -27,11 +34,12 @@ function createCustomerEmail(details: OrderDetails) {
 
 /** Sends the branded invoice email to the customer and a complete copy to the shop. */
 export async function sendOrderEmail(details: OrderDetails) {
+  const resend = getResendClient();
   const invoice = createInvoicePdf(details);
   const bannerPath = path.join(process.cwd(), "invoice_details", "images", "cfc52b1889e0ebfd5174a6aeb75381c0.png");
   const banner = await readFile(bannerPath);
-  const senderEmail = process.env.SMTP_FROM_EMAIL || "orders@justprem.shop";
-  const adminEmail = process.env.SMTP_ADMIN_EMAIL || "connect@justprem.shop";
+  const senderEmail = (process.env.RESEND_FROM_EMAIL || process.env.SMTP_FROM_EMAIL || "orders@justprem.shop").trim();
+  const adminEmail = (process.env.RESEND_ADMIN_EMAIL || process.env.SMTP_ADMIN_EMAIL || "connect@justprem.shop").trim();
   const customerEmail = createCustomerEmail(details);
   const attachments = [{ filename: invoice.filename, content: invoice.content, contentType: "application/pdf" }, { filename: "justprem-harmonium.png", content: banner, contentType: "image/png", contentId: "justprem-harmonium" }];
   const subject = `${details.paymentMethod === "wise" ? "Order reserved" : "Order confirmed"} — JustPrem Harmoniums`;

@@ -5,8 +5,8 @@ import Link from "next/link";
 import { mockHarmoniums } from "@/lib/data/mockProducts";
 
 export function HomeCollection() {
-  // Show only the first 3 harmoniums on the homepage
-  const displayProducts = mockHarmoniums.slice(0, 3);
+  // Keep the homepage collection aligned with instruments currently available to order.
+  const displayProducts = mockHarmoniums.filter((product) => product.availability === "IN_STOCK");
 
   return (
     <section className="bg-ivory px-6 py-20 md:py-32">
