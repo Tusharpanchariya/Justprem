@@ -70,6 +70,12 @@ export function createInvoicePdf(details: OrderDetails) {
     text(`-EUR ${details.discount.toFixed(2)}`, 457, y, 10, false, "0.08 0.35 0.20");
     y -= 20;
   }
+  if (details.deliveryFee) {
+    y -= 4;
+    text("Delivery", 363, y, 10);
+    text(`EUR ${details.deliveryFee.toFixed(2)}`, 457, y, 10);
+    y -= 20;
+  }
   y -= 12;
   text(paymentPending ? "TOTAL DUE" : "TOTAL PAID", 363, y, 11, true); text(`EUR ${details.cartTotal.toFixed(2)}`, 457, y, 13, true, "0.36 0.25 0.15"); rule(y - 13, 350, 203, "0.36 0.25 0.15");
   text(paymentPending ? "Your order will be prepared once the transfer has cleared." : "Thank you for choosing JustPrem Harmoniums.", 42, Math.max(94, y - 56), 9, false, "0.35 0.32 0.28");

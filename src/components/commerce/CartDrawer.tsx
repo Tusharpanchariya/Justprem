@@ -5,9 +5,11 @@ import { X, Plus, Minus, ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/context/CartContext";
 import Link from "next/link";
 import Image from "next/image";
+import { getDeliveryFee } from "@/lib/pricing";
 
 export function CartDrawer() {
   const { isCartOpen, setIsCartOpen, items, removeItem, updateQuantity, cartTotal } = useCart();
+  const deliveryFee = getDeliveryFee(items);
 
   return (
     <AnimatePresence>
@@ -106,13 +108,12 @@ export function CartDrawer() {
             {/* Footer */}
             {items.length > 0 && (
               <div className="border-t border-wood/10 bg-sandstone/10 p-4 sm:p-6">
-                <div className="flex justify-between items-center mb-6">
+                <div className="flex justify-between items-center mb-2">
                   <span className="text-sm tracking-widest uppercase text-charcoal/60">Subtotal</span>
                   <span className="font-serif text-2xl text-charcoal">€{cartTotal.toLocaleString()}</span>
                 </div>
-                <p className="text-xs text-charcoal/50 mb-6 text-center italic">
-                  Shipping and taxes calculated at checkout.
-                </p>
+                {deliveryFee > 0 && <div className="flex justify-between items-center mb-6"><span className="text-sm tracking-widest uppercase text-charcoal/60">Delivery</span><span className="font-serif text-2xl text-charcoal">€{deliveryFee.toLocaleString()}</span></div>}
+                <p className="text-xs text-charcoal/50 mb-6 text-center italic">{deliveryFee > 0 ? `Total before any coupon: €${(cartTotal + deliveryFee).toLocaleString()}.` : "Shipping and taxes calculated at checkout."}</p>
                 <div className="flex flex-col gap-3">
                   <Link 
                     href="/checkout" 

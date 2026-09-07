@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import Razorpay from "razorpay";
 import { mockHarmoniums } from "@/lib/data/mockProducts";
-import { applyCoupon } from "@/lib/coupons";
+import { calculateOrderPricing } from "@/lib/pricing";
 
 type CartRequestItem = {
   id: string;
@@ -52,13 +52,9 @@ export async function POST(request: Request) {
   try {
     const { items, couponCode } = (await request.json()) as { items?: CartRequestItem[]; couponCode?: string };
     const validatedItems = getValidatedItems(items ?? []);
-    const subtotal = validatedItems.reduce(
-      (total, { product, quantity }) => total + product.priceEUR * quantity,
-      0,
-    );
-    const coupon = applyCoupon(couponCode, subtotal);
+    const pricingItems = validatedItems.map(({ product, quantity }) => ({ priceEUR: product.priceEUR, quantity }));
+    const { coupon, total: amount } = calculateOrderPricing(pricingItems, couponCode);
     if (couponCode && !coupon) return NextResponse.json({ error: "That coupon code is not valid." }, { status: 400 });
-    const amount = subtotal - (coupon?.discount || 0);
     const currency = (process.env.RAZORPAY_CURRENCY || "EUR").toUpperCase();
 
     if (!/^[A-Z]{3}$/.test(currency)) {

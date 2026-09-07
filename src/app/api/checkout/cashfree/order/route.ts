@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { mockHarmoniums } from "@/lib/data/mockProducts";
-import { applyCoupon } from "@/lib/coupons";
+import { calculateOrderPricing } from "@/lib/pricing";
 
 type CartItem = { id: string; quantity: number };
 type Customer = { email: string; phone: string; name: string };
@@ -31,10 +31,9 @@ export async function POST(request: Request) {
       }
       return { product, quantity };
     });
-    const subtotal = orderItems.reduce((total, { product, quantity }) => total + product.priceEUR * quantity, 0);
-    const coupon = applyCoupon(couponCode, subtotal);
+    const pricingItems = orderItems.map(({ product, quantity }) => ({ priceEUR: product.priceEUR, quantity }));
+    const { coupon, total: orderAmount } = calculateOrderPricing(pricingItems, couponCode);
     if (couponCode && !coupon) return NextResponse.json({ error: "That coupon code is not valid." }, { status: 400 });
-    const orderAmount = subtotal - (coupon?.discount || 0);
     const orderId = `jp_${crypto.randomUUID().replaceAll("-", "")}`;
     const { clientId, clientSecret } = credentials();
     const response = await fetch(`${apiBaseUrl}/orders`, {

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { mockHarmoniums } from "@/lib/data/mockProducts";
-import { applyCoupon } from "@/lib/coupons";
+import { calculateOrderPricing } from "@/lib/pricing";
 
 type CartRequestItem = {
   id: string;
@@ -83,13 +83,9 @@ export async function POST(request: Request) {
   try {
     const { items, couponCode } = (await request.json()) as { items?: CartRequestItem[]; couponCode?: string };
     const validatedItems = getValidatedItems(items ?? []);
-    const subtotal = validatedItems.reduce(
-      (sum, { product, quantity }) => sum + product.priceEUR * quantity,
-      0,
-    );
-    const coupon = applyCoupon(couponCode, subtotal);
+    const pricingItems = validatedItems.map(({ product, quantity }) => ({ priceEUR: product.priceEUR, quantity }));
+    const { subtotal, coupon, deliveryFee, total } = calculateOrderPricing(pricingItems, couponCode);
     if (couponCode && !coupon) return NextResponse.json({ error: "That coupon code is not valid." }, { status: 400 });
-    const total = subtotal - (coupon?.discount || 0);
     const accessToken = await getPayPalAccessToken();
     const response = await fetch(`${paypalApiBaseUrl}/v2/checkout/orders`, {
       method: "POST",
@@ -110,6 +106,7 @@ export async function POST(request: Request) {
                   currency_code: "EUR",
                   value: subtotal.toFixed(2),
                 },
+                shipping: deliveryFee ? { currency_code: "EUR", value: deliveryFee.toFixed(2) } : undefined,
                 discount: coupon ? { currency_code: "EUR", value: coupon.discount.toFixed(2) } : undefined,
               },
             },

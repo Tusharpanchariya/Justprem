@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendOrderEmail } from "@/lib/email";
-import { applyCoupon } from "@/lib/coupons";
+import { calculateOrderPricing } from "@/lib/pricing";
 import { mockHarmoniums } from "@/lib/data/mockProducts";
 
 export const runtime = "nodejs";
@@ -47,8 +47,7 @@ export async function POST(req: NextRequest) {
       }
       return { id: product.id, name: product.name, quantity, priceEUR: product.priceEUR, image: product.image };
     });
-    const subtotal = invoiceItems.reduce((total, item) => total + item.priceEUR * item.quantity, 0);
-    const coupon = applyCoupon(typeof couponCode === "string" ? couponCode : undefined, subtotal);
+    const { coupon, deliveryFee, total } = calculateOrderPricing(invoiceItems, typeof couponCode === "string" ? couponCode : undefined);
     if (couponCode && !coupon) return NextResponse.json({ error: "That coupon code is not valid." }, { status: 400 });
 
     // Call the email sending helper
@@ -62,9 +61,10 @@ export async function POST(req: NextRequest) {
       country: country || "",
       postalCode: postalCode || "",
       items: invoiceItems,
-      cartTotal: subtotal - (coupon?.discount || 0),
+      cartTotal: total,
       couponCode: coupon?.code,
       discount: coupon?.discount || 0,
+      deliveryFee,
       paymentId,
       paymentMethod
     });

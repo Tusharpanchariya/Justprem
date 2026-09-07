@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { PayPalButton } from "@/components/commerce/PayPalButton";
 import { getDialCode, LocationFields, PhoneCountryField } from "@/components/commerce/LocationFields";
 import Link from "next/link";
+import { getDeliveryFee } from "@/lib/pricing";
 
 type RazorpayPaymentResponse = {
   razorpay_payment_id: string;
@@ -49,7 +50,8 @@ export default function CheckoutPage() {
   const checkoutFormRef = useRef<HTMLFormElement>(null);
   const fullPhone = `${getDialCode(phoneCountryCode)}${phone.replace(/[^0-9]/g, "")}`;
   const shippingDetails = { address, city, region, country, postalCode };
-  const discountedTotal = Math.max(0, cartTotal - (appliedCoupon?.discount || 0));
+  const deliveryFee = getDeliveryFee(items);
+  const discountedTotal = Math.max(0, cartTotal + deliveryFee - (appliedCoupon?.discount || 0));
   const applyCoupon = async () => {
     setCouponError("");
     const response = await fetch("/api/coupon", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ code: couponInput, subtotal: cartTotal }) });
@@ -405,7 +407,7 @@ export default function CheckoutPage() {
               )}
               <div className="flex justify-between text-sm text-charcoal/60">
                 <span>Shipping</span>
-                <span>Calculated next step</span>
+                <span>{deliveryFee ? `€${deliveryFee.toLocaleString()}` : "Calculated next step"}</span>
               </div>
             </div>
             
@@ -413,7 +415,7 @@ export default function CheckoutPage() {
               <span className="text-sm uppercase tracking-widest text-charcoal/60">Total</span>
               <span className="font-serif text-3xl text-charcoal">
                 <span className="text-xs uppercase tracking-widest mr-2 opacity-50">EUR</span>
-                €{cartTotal.toLocaleString()}
+                €{(cartTotal + deliveryFee).toLocaleString()}
               </span>
             </div>
             {appliedCoupon && (
