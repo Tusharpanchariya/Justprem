@@ -6,6 +6,8 @@ import Link from "next/link";
 import { mockHarmoniums } from "@/lib/data/mockProducts";
 import { Filter } from "lucide-react";
 
+const collectionFilters = ["All", "Upcoming", "Retreat"];
+
 export default function HarmoniumsPage() {
   const [activeFilter, setActiveFilter] = useState("All");
 
@@ -40,7 +42,7 @@ export default function HarmoniumsPage() {
               <Filter className="w-4 h-4" /> Filters
             </h3>
             <ul className="space-y-4 text-sm tracking-wide text-charcoal">
-              {["All", "Travel", "Studio", "Kirtan", "Professional"].map(filter => (
+              {collectionFilters.map(filter => (
                 <li key={filter}>
                   <button 
                     onClick={() => setActiveFilter(filter)}
@@ -58,7 +60,7 @@ export default function HarmoniumsPage() {
         <main className="flex-1">
           {/* Mobile Filters */}
           <div className="md:hidden flex overflow-x-auto pb-4 mb-6 gap-4 no-scrollbar">
-            {["All", "Travel", "Studio", "Kirtan", "Professional"].map(filter => (
+            {collectionFilters.map(filter => (
               <button 
                 key={filter}
                 onClick={() => setActiveFilter(filter)}

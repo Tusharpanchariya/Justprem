@@ -19,9 +19,7 @@ export const mockHarmoniums = [
       "/harmonium-images/aura/aura5.webp",
       "/harmonium-images/aura/Aura6.webp",
       "/harmonium-images/aura/Aura7.webp",
-      "/harmonium-images/aura/Aura71).webp",
       "/harmonium-images/aura/aura8.webp",
-      "/harmonium-images/aura/aura9.webp",
       "/harmonium-images/aura/aura10.webp"
     ],
     categories: ["Travel", "Kirtan"],
@@ -58,8 +56,7 @@ export const mockHarmoniums = [
       "/harmonium-images/terra/terra6.webp",
       "/harmonium-images/terra/terra7.webp",
       "/harmonium-images/terra/terra8.webp",
-      "/harmonium-images/terra/terra9.webp",
-      "/harmonium-images/terra/terra10.webp"
+      "/harmonium-images/terra/terra9.webp"
     ],
     categories: ["Travel", "Kirtan"],
     specifications: [
@@ -115,13 +112,12 @@ export const mockHarmoniums = [
     fullDescription: "Meet the Just Prem “Royal Amethyst” – a handcrafted travel harmonium inspired by the depth of devotion and the quiet beauty of the Himalayas. Finished in a rich royal amethyst tone, this instrument is designed for musicians, kīrtan leaders, yogis, and seekers who wish to carry the spirit of sacred sound wherever life takes them.\n\nLightweight, compact, and full of warm, resonant tone, the Amethyst offers the perfect balance between portability and professional sound quality. Its 32 responsive keys provide a smooth, expressive playing experience, whether you're leading kīrtan, accompanying mantra meditation, teaching yoga, or composing music in the studio.\n\nThe elegant hand-carved front grille reflects timeless craftsmanship while allowing the natural beauty of the instrument to shine through. Each harmonium is individually handcrafted, revealing unique wood grain beneath its luxurious finish, making every piece beautifully one of a kind.\n\nDesigned with simplicity and durability in mind, the Amethyst features a streamlined construction without delicate extras such as drone stops or split registers. The result is a reliable travel companion that is easy to carry, effortless to play, and built to accompany you for years of devotional practice and musical expression.\n\nWhether you're singing beneath Himalayan peaks, gathering around a sacred fire, sharing music by the sea, or creating a peaceful sanctuary in your own home, the Just Prem Amethyst fills every space with warmth, presence and heartfelt resonance.\n\nElegant in design. Rich in tone. Created for the journey within.\n\nJust Prem Amethyst – Where Every Note Becomes a Prayer.",
     keyCount: 32,
     availability: "IN_STOCK",
-    image: "/harmonium-images/royaleamethyst/royaleamethyst.webp",
+    image: "/harmonium-images/royaleamethyst/royaleamethyst2.webp",
     images: [
-      "/harmonium-images/royaleamethyst/royaleamethyst.webp",
       "/harmonium-images/royaleamethyst/royaleamethyst2.webp",
+      "/harmonium-images/royaleamethyst/royaleamethyst.webp",
       "/harmonium-images/royaleamethyst/royaleamethyst3.webp",
-      "/harmonium-images/royaleamethyst/royaleamethyst4.webp",
-      "/harmonium-images/royaleamethyst/royaleamt.webp"
+      "/harmonium-images/royaleamethyst/royaleamethyst4.webp"
     ],
     categories: ["Travel", "Kirtan"],
     specifications: [
@@ -151,9 +147,7 @@ export const mockHarmoniums = [
       "/harmonium-images/radhaprema/Radhaprema.webp",
       "/harmonium-images/radhaprema/radhaprema2.webp",
       "/harmonium-images/radhaprema/Radhaprema3.webp",
-      "/harmonium-images/radhaprema/radhaprema4.webp",
-      "/harmonium-images/radhaprema/radhaprema5.webp",
-      "/harmonium-images/radhaprema/radhaprema6.webp"
+      "/harmonium-images/radhaprema/radhaprema4.webp"
     ],
     categories: ["Travel", "Kirtan"],
     specifications: [
@@ -185,8 +179,6 @@ export const mockHarmoniums = [
       "/harmonium-images/kirtan/kirtan1.webp",
       "/harmonium-images/kirtan/kirtan2.webp",
       "/harmonium-images/kirtan/kirtan3.webp",
-      "/harmonium-images/kirtan/kirtan4.webp",
-      "/harmonium-images/kirtan/kirtan5.webp",
       "/harmonium-images/kirtan/kirtan6.webp",
       "/harmonium-images/kirtan/kirtan7.webp",
       "/harmonium-images/kirtan/kirtan8.webp"
@@ -252,8 +244,7 @@ export const mockHarmoniums = [
       "/harmonium-images/saffron/saffron.webp",
       "/harmonium-images/saffron/saffron2.webp",
       "/harmonium-images/saffron/saffron3.webp",
-      "/harmonium-images/saffron/saffron5.webp",
-      "/harmonium-images/saffron/saffron6.webp"
+      "/harmonium-images/saffron/saffron5.webp"
     ],
     categories: ["Travel", "Kirtan"],
     specifications: [
@@ -316,8 +307,7 @@ export const mockHarmoniums = [
       "/harmonium-images/sage/sage3.webp",
       "/harmonium-images/sage/sage6.webp",
       "/harmonium-images/sage/sage7.webp",
-      "/harmonium-images/sage/sage8.webp",
-      "/harmonium-images/sage/sage9.webp"
+      "/harmonium-images/sage/sage8.webp"
     ],
     categories: ["Travel", "Kirtan"],
     specifications: [
@@ -349,8 +339,7 @@ export const mockHarmoniums = [
     images: [
       "/harmonium-images/essence/essence.webp",
       "/harmonium-images/essence/essence2.webp",
-      "/harmonium-images/essence/essence3.webp",
-      "/harmonium-images/essence/essence4.webp"
+      "/harmonium-images/essence/essence3.webp"
     ],
     categories: ["Travel", "Kirtan"],
     specifications: [
