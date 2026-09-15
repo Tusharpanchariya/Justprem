@@ -350,5 +350,37 @@ export const mockHarmoniums = [
       { label: "Ideal for", value: "Kirtan, mantra meditation, yoga classes, ceremonies, retreats, and personal practice." },
       { label: "Shipping", value: "Shipping costs are included." }
     ]
+  },
+  {
+    id: "12",
+    name: "Just Prem \"Ocean Bhakti\" Edition",
+    slug: "ocean-bhakti",
+    priceEUR: 500,
+    originalPriceEUR: 800,
+    priceUSD: 550,
+    shortDescription: "A beautifully handcrafted travel harmonium inspired by the vastness of the ocean and the depth of devotion.",
+    fullDescription: "Meet the Just Prem “Ocean Bhakti” Edition, a beautifully handcrafted travel harmonium inspired by the vastness of the ocean and the depth of devotion.\n\nPrem Sāgara means “Ocean of Love”. Prem means love, while Sāgara means ocean. The name expresses the feeling at the heart of Bhakti: an endless movement toward love, devotion, connection, and surrender.\n\nFinished in our distinctive ocean turquoise, #5BC2C6, the Ocean Bhakti reflects the colours and feeling of clear water, open skies, freedom, and flow. Its luminous turquoise body is complemented by silver metal detailing and silver-finished pumps, giving the instrument a fresh, elegant and distinctive character.\n\nCreated for those who carry music, mantra, and devotion wherever they go, the Ocean Bhakti is more than an instrument. It is a companion for singing, prayer, meditation, kirtan, yoga, ceremonies, retreats, concerts, and everyday moments of connection.\n\nFrom the Himalayas to the ocean, from a quiet personal practice to a room filled with voices, this harmonium is made to travel with you.",
+    keyCount: 32,
+    availability: "ON_DEMAND",
+    image: "/harmonium-images/ocean-bhakti/34.jpg",
+    images: [
+      "/harmonium-images/ocean-bhakti/34.jpg",
+      "/harmonium-images/ocean-bhakti/35.jpg",
+      "/harmonium-images/ocean-bhakti/36.jpg",
+      "/harmonium-images/ocean-bhakti/37.jpg"
+    ],
+    categories: ["Travel", "Kirtan"],
+    specifications: [
+      { label: "Materials", value: "Handcrafted from natural Kail wood (Himalayan Pine), chosen for its natural strength, character, and acoustic qualities." },
+      { label: "Bellows", value: "High-quality multi-bellows designed to provide a consistent flow of air and a steady sound." },
+      { label: "Design", value: "Ocean turquoise finish (#5BC2C6) complemented by silver-colored metal hardware and silver pumps." },
+      { label: "Keyboard", value: "32 responsive keys (2.5 octaves), starting from E." },
+      { label: "Tuning", value: "Every harmonium is individually tuned to A = 440 Hz before shipping." },
+      { label: "Dimensions", value: "45 × 25 × 21 cm (L × W × H) – compact and travel-friendly." },
+      { label: "Weight", value: "Approximately 6.5 kg." },
+      { label: "Included", value: "A premium padded harmonium carrying bag is included as a gift." },
+      { label: "Delivery", value: "Every Just Prem Harmonium is individually inspected, tuned, and securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation. Arrives ready to play." },
+      { label: "Shipping", value: "International courier delivery is included in the product price for customers worldwide. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
+    ]
   }
 ];
