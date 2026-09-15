@@ -11,8 +11,6 @@ const reviews = [
   { src: "/reviews/review-5.mp4", type: "video/mp4", label: "Customer video review five" },
   { src: "/reviews/review-6.mp4", type: "video/mp4", label: "Customer video review six" },
   { src: "/reviews/review-7.mp4", type: "video/mp4", label: "Customer video review seven" },
-  { src: "/reviews/new1.MOV", type: "video/quicktime", label: "Customer video review eight" },
-  { src: "/reviews/new2.MOV", type: "video/quicktime", label: "Customer video review nine" },
 ];
 
 export function ReviewFeedback() {
