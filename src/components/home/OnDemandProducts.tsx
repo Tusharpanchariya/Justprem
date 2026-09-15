@@ -10,6 +10,7 @@ const products = [
   { slug: "aura-mini", image: "/harmonium-images/aura-mini/auramini.webp", name: "Just Prem \"Aura\" Mini (27 keys) ON DEMAND", price: "\u20AC850.00", originalPrice: "\u20AC1,200.00" },
   { slug: "sage", image: "/harmonium-images/sage/sage.webp", name: "Just Prem \"Sage\" (32 Keys) ON DEMAND", price: "\u20AC850.00", originalPrice: "\u20AC1,200.00" },
   { slug: "essence", image: "/harmonium-images/essence/essence.webp", name: "Just Prem \"Essence\" (27 Keys) ON DEMAND", price: "\u20AC850.00", originalPrice: "\u20AC1,200.00" },
+  { slug: "ocean-bhakti", image: "/harmonium-images/ocean-bhakti/ocean-bhakti2.jpg", name: "OCEAN BHAKTI (32 Keys) | Prem Sāgara", price: "\u20AC500.00", availabilityLabel: "On Demand" },
 ];
 
 export function OnDemandProducts() {
@@ -32,12 +33,12 @@ export function OnDemandProducts() {
             <motion.div key={product.slug} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: (index + 1) * 0.1 }} className="group flex flex-col">
               <Link href={`/harmoniums/${product.slug}`} className="flex flex-col">
                 <div className="relative mb-4 aspect-[4/5] overflow-hidden rounded-sm bg-sandstone/20">
-                  <div className="absolute right-3 top-3 z-10 bg-charcoal px-2.5 py-1 text-[9px] font-medium uppercase tracking-widest text-ivory">Sold Out</div>
+                  <div className="absolute right-3 top-3 z-10 bg-charcoal px-2.5 py-1 text-[9px] font-medium uppercase tracking-widest text-ivory">{product.availabilityLabel ?? "Sold Out"}</div>
                   <div className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" style={{ backgroundImage: `url('${product.image}')` }} />
                   <div className="absolute inset-0 bg-black/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 </div>
                 <h3 className="mb-1 font-serif text-sm leading-snug text-charcoal md:text-base">{product.name}</h3>
-                <div className="flex items-center gap-2 text-xs tracking-widest md:text-sm"><span className="text-charcoal/80">{product.price}</span><span className="text-charcoal/40 line-through">{product.originalPrice}</span></div>
+                <div className="flex items-center gap-2 text-xs tracking-widest md:text-sm"><span className="text-charcoal/80">{product.price}</span>{product.originalPrice && <span className="text-charcoal/40 line-through">{product.originalPrice}</span>}</div>
               </Link>
             </motion.div>
           ))}

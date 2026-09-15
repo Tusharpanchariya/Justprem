@@ -353,34 +353,33 @@ export const mockHarmoniums = [
   },
   {
     id: "12",
-    name: "Just Prem \"Ocean Bhakti\" Edition",
+    name: "OCEAN BHAKTI (32 Keys) | Prem Sāgara, Ocean of Love",
     slug: "ocean-bhakti",
     priceEUR: 500,
-    originalPriceEUR: 800,
-    priceUSD: 550,
-    shortDescription: "A beautifully handcrafted travel harmonium inspired by the vastness of the ocean and the depth of devotion.",
-    fullDescription: "Meet the Just Prem “Ocean Bhakti” Edition, a beautifully handcrafted travel harmonium inspired by the vastness of the ocean and the depth of devotion.\n\nPrem Sāgara means “Ocean of Love”. Prem means love, while Sāgara means ocean. The name expresses the feeling at the heart of Bhakti: an endless movement toward love, devotion, connection, and surrender.\n\nFinished in our distinctive ocean turquoise, #5BC2C6, the Ocean Bhakti reflects the colours and feeling of clear water, open skies, freedom, and flow. Its luminous turquoise body is complemented by silver metal detailing and silver-finished pumps, giving the instrument a fresh, elegant and distinctive character.\n\nCreated for those who carry music, mantra, and devotion wherever they go, the Ocean Bhakti is more than an instrument. It is a companion for singing, prayer, meditation, kirtan, yoga, ceremonies, retreats, concerts, and everyday moments of connection.\n\nFrom the Himalayas to the ocean, from a quiet personal practice to a room filled with voices, this harmonium is made to travel with you.",
+    priceUSD: 590,
+    shortDescription: "A beautifully handcrafted ocean-turquoise travel harmonium inspired by the vastness of the ocean and the depth of devotion.",
+    fullDescription: "Meet the Just Prem ‘Ocean Bhakti’ Edition, a beautifully handcrafted travel harmonium inspired by the vastness of the ocean and the depth of devotion.\n\nPrem Sāgara means ‘Ocean of Love’. Prem means love, while Sāgara means ocean. The name expresses the feeling at the heart of Bhakti: an endless movement toward love, devotion, connection, and surrender.\n\nFinished in our distinctive ocean turquoise, #5BC2C6, the Ocean Bhakti reflects the colours and feeling of clear water, open skies, freedom, and flow. Its luminous turquoise body is complemented by silver metal detailing and silver-finished pumps, giving the instrument a fresh, elegant and distinctive character.\n\nCreated for those who carry music, mantra, and devotion wherever they go, the Ocean Bhakti is more than an instrument. It is a companion for singing, prayer, meditation, kirtan, yoga, ceremonies, retreats, concerts, and everyday moments of connection.\n\nFrom the Himalayas to the ocean, from a quiet personal practice to a room filled with voices, this harmonium is made to travel with you.\n\nLET DEVOTION FLOW\n\nThe Ocean Bhakti is designed around one simple idea: sound should support the voice.\n\nIts warm, balanced and resonant tone creates a beautiful foundation for singing, mantra and devotional music, allowing the human voice to remain at the heart of the experience.\n\nWith 32 responsive keys and a comfortable 2.5 octave range, it is simple to play, expressive, and particularly suited to vocal accompaniment.\n\nIts simplified construction, without delicate drone stops and split registers, makes it durable, reliable, and easy to maintain, especially for those who travel frequently.\n\nLess complexity. More freedom to sing.\n\nMADE FOR MUSIC, MANTRA & BHAKTI\n\nThe Ocean Bhakti can accompany you through:\n\nKirtan • Mantra • Meditation • Yoga • Retreats • Ceremonies • Concerts • Teaching • Home Practice\n\nWhether you are learning your first mantra or leading a room full of voices, the harmonium provides a steady musical foundation and invites you to let the breath become sound.\n\nHANDCRAFTED FROM NATURAL WOOD\n\nEach Ocean Bhakti is handcrafted from natural Kail wood (Himalayan Pine), chosen for its natural strength, character, and acoustic qualities.\n\nEvery piece of wood carries its own grain, texture, and subtle variations. These natural differences are part of what makes a handmade instrument special.\n\nThe ocean turquoise finish, #5BC2C6, is complemented by silver-colored metal hardware and silver pumps, creating a clean and luminous expression of the Ocean Bhakti.\n\nNo two Just Prem harmoniums are exactly alike. Each one carries the character of the hands, wood, and materials that brought it to life.\n\n32 RESPONSIVE KEYS\n\n32 keys • 2.5 octaves • Starting from E\n\nThe responsive keyboard offers a comfortable range for singing, devotional music, mantra, practice, and accompaniment.\n\nEvery harmonium is individually tuned to A = 440 Hz before shipping.\n\nSTEADY, EXPRESSIVE BELLOWS\n\nThe Ocean Bhakti features high-quality multi-bellows designed to provide a consistent flow of air and a steady sound.\n\nWhether you are playing softly in meditation or supporting a powerful group chant, the instrument responds naturally to the movement of your hands.\n\nBreathe. Press. Sing.\n\nThe harmonium becomes an extension of the voice.\n\nCRAFTED FOR THE JOURNEY\n\nAt approximately 6.5 kg, with dimensions of 45 × 25 × 21 cm, the Ocean Bhakti is compact and travel-friendly without compromising its warm, resonant sound.\n\nTake it with you to the places where your music lives: the mountains, the ocean, the studio, the yoga room, the temple, the retreat, and your home.\n\nA premium padded harmonium carrying bag is included as a gift.\n\nMADE WITH CARE\n\nEvery Just Prem harmonium is individually inspected, tuned, and carefully prepared before it leaves our hands. Each instrument is securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation.\n\nYour Ocean Bhakti arrives tuned and ready to play.\n\nINTERNATIONAL DELIVERY\n\nInternational courier delivery is included in the product price for customers worldwide. The included delivery covers courier shipping only. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser.\n\nPREM SĀGARA, OCEAN OF LOVE\n\nPrem is love. Sāgara is ocean.\n\nAn ocean has no fixed boundary. It moves, flows, receives, and gives. In the same way, Bhakti invites us to move beyond the limitations of the individual and into a deeper experience of love and connection.\n\nThe Ocean Bhakti is made for those moments when music becomes something more: when one voice becomes many, when a mantra is repeated until the mind becomes quiet, when the harmonium supports the first note of a kirtan, and when you sit alone, open the bellows, and allow your voice to become a prayer.\n\nThis is the spirit behind Just Prem. We create harmoniums not simply to be played, but to support the voice, carry the practice, and accompany the journey of devotion.\n\nJUST PREM OCEAN BHAKTI\nPrem Sāgara, Ocean of Love\n\nDeep like the ocean.\nFree like the breath.\nAlive with devotion.\n\nA harmonium for your voice, your practice, and your journey.",
     keyCount: 32,
     availability: "ON_DEMAND",
-    image: "/harmonium-images/ocean-bhakti/34.jpg",
+    image: "/harmonium-images/ocean-bhakti/ocean-bhakti2.jpg",
     images: [
-      "/harmonium-images/ocean-bhakti/34.jpg",
-      "/harmonium-images/ocean-bhakti/35.jpg",
-      "/harmonium-images/ocean-bhakti/36.jpg",
-      "/harmonium-images/ocean-bhakti/37.jpg"
+      "/harmonium-images/ocean-bhakti/ocean-bhakti2.jpg",
+      "/harmonium-images/ocean-bhakti/ocean-bhakti1.jpg",
+      "/harmonium-images/ocean-bhakti/ocean-bhakti3.jpg",
+      "/harmonium-images/ocean-bhakti/ocean-bhakti4.jpg"
     ],
-    categories: ["Travel", "Kirtan"],
+    categories: ["Upcoming"],
     specifications: [
-      { label: "Materials", value: "Handcrafted from natural Kail wood (Himalayan Pine), chosen for its natural strength, character, and acoustic qualities." },
-      { label: "Bellows", value: "High-quality multi-bellows designed to provide a consistent flow of air and a steady sound." },
-      { label: "Design", value: "Ocean turquoise finish (#5BC2C6) complemented by silver-colored metal hardware and silver pumps." },
+      { label: "Materials", value: "Handcrafted from natural Kail wood (Himalayan Pine), selected for its strength, character, and acoustic qualities." },
+      { label: "Design", value: "Ocean turquoise (#5BC2C6) finish with silver-colored metal detailing and silver-finished pumps." },
       { label: "Keyboard", value: "32 responsive keys (2.5 octaves), starting from E." },
-      { label: "Tuning", value: "Every harmonium is individually tuned to A = 440 Hz before shipping." },
-      { label: "Dimensions", value: "45 × 25 × 21 cm (L × W × H) – compact and travel-friendly." },
+      { label: "Tuning", value: "Individually tuned to A = 440 Hz before shipping." },
+      { label: "Bellows", value: "High-quality multi-bellows for a consistent, expressive flow of air and steady sound." },
+      { label: "Dimensions", value: "45 × 25 × 21 cm (L × W × H)." },
       { label: "Weight", value: "Approximately 6.5 kg." },
       { label: "Included", value: "A premium padded harmonium carrying bag is included as a gift." },
-      { label: "Delivery", value: "Every Just Prem Harmonium is individually inspected, tuned, and securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation. Arrives ready to play." },
-      { label: "Shipping", value: "International courier delivery is included in the product price for customers worldwide. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
+      { label: "Delivery", value: "Each instrument is inspected, tuned, and securely packaged in a reinforced shipping box with protective cushioning." },
+      { label: "Taxes/Duties", value: "International courier delivery is included in the product price. Any applicable import duties, customs clearance fees, VAT, taxes, or other destination-country charges remain the responsibility of the purchaser." }
     ]
   }
 ];

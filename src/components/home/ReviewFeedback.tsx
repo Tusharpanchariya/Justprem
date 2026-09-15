@@ -4,13 +4,15 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 const reviews = [
-  { src: "/reviews/review-1.mp4", label: "Customer video review one" },
-  { src: "/reviews/review-2.mp4", label: "Customer video review two" },
-  { src: "/reviews/review-3.mp4", label: "Customer video review three" },
-  { src: "/reviews/review-4.mp4", label: "Customer video review four" },
-  { src: "/reviews/review-5.mp4", label: "Customer video review five" },
-  { src: "/reviews/review-6.mp4", label: "Customer video review six" },
-  { src: "/reviews/review-7.mp4", label: "Customer video review seven" },
+  { src: "/reviews/review-1.mp4", type: "video/mp4", label: "Customer video review one" },
+  { src: "/reviews/review-2.mp4", type: "video/mp4", label: "Customer video review two" },
+  { src: "/reviews/review-3.mp4", type: "video/mp4", label: "Customer video review three" },
+  { src: "/reviews/review-4.mp4", type: "video/mp4", label: "Customer video review four" },
+  { src: "/reviews/review-5.mp4", type: "video/mp4", label: "Customer video review five" },
+  { src: "/reviews/review-6.mp4", type: "video/mp4", label: "Customer video review six" },
+  { src: "/reviews/review-7.mp4", type: "video/mp4", label: "Customer video review seven" },
+  { src: "/reviews/new1.MOV", type: "video/quicktime", label: "Customer video review eight" },
+  { src: "/reviews/new2.MOV", type: "video/quicktime", label: "Customer video review nine" },
 ];
 
 export function ReviewFeedback() {
@@ -33,7 +35,7 @@ export function ReviewFeedback() {
               className="group relative aspect-[9/14] overflow-hidden bg-charcoal"
             >
               <video controls playsInline preload="metadata" className="h-full w-full object-cover" aria-label={review.label}>
-                <source src={review.src} type="video/mp4" />
+                <source src={review.src} type={review.type} />
                 Your browser does not support embedded video.
               </video>
               <div className="pointer-events-none absolute inset-x-0 top-0 bg-gradient-to-b from-black/45 to-transparent px-3 py-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
