@@ -138,3 +138,19 @@ create policy "Public can view review avatars" on storage.objects for select usi
 alter table public.reviews enable row level security;
 create policy "Public can read visible reviews" on public.reviews for select using (is_visible = true);
 create policy "Public can submit reviews" on public.reviews for insert with check (is_visible = true);
+
+-- One private class application may reserve each calendar date.
+create table public.class_bookings (
+  id uuid default uuid_generate_v4() primary key,
+  course_id text not null,
+  course_name text not null,
+  full_name text not null,
+  email text not null,
+  booking_date date not null unique,
+  status text not null default 'confirmed' check (status in ('confirmed', 'cancelled')),
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+alter table public.class_bookings enable row level security;
+create policy "Public can see confirmed class dates" on public.class_bookings for select using (status = 'confirmed');
+create policy "Public can submit class applications" on public.class_bookings for insert with check (status = 'confirmed');
