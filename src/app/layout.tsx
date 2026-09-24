@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Tenor_Sans } from "next/font/google";
+import { Inter, Tenor_Sans, Bodoni_Moda } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -11,6 +11,12 @@ const tenorSans = Tenor_Sans({
   variable: "--font-tenor",
   weight: "400",
   subsets: ["latin"],
+});
+
+const bodoniModa = Bodoni_Moda({
+  variable: "--font-bodoni",
+  subsets: ["latin"],
+  style: ['normal', 'italic'],
 });
 
 export const metadata: Metadata = {
@@ -32,7 +38,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${tenorSans.variable} h-full antialiased`}
+      className={`${inter.variable} ${tenorSans.variable} ${bodoniModa.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-ivory text-charcoal">
         <CartProvider>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BhaktiYogaOffers } from "@/components/classes/BhaktiYogaOffers";
+import { ReadMoreText } from "@/components/ReadMoreText";
 
 
 const foundations = [
@@ -46,11 +47,11 @@ export default function SoundOfDevotionPage() {
       <section className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-[1.03fr_.97fr] md:items-center md:gap-16 md:px-12 md:py-28">
         <div className="max-w-2xl">
           <Eyebrow>Private 1-to-1 course · Path of Bhakti Yoga</Eyebrow>
-          <h1 className="font-serif text-[clamp(3.3rem,8.5vw,7.2rem)] leading-[.82] tracking-[-.045em]">
+          <h1 className="font-bodoni text-[clamp(2.5rem,6vw,5rem)] leading-[.82] tracking-[-.045em]">
             THE SOUND<br />
-            <em className="font-serif text-[#ad684d]">of devotion</em>
+            <em className="font-bodoni italic text-[#ad684d]">of devotion</em>
           </h1>
-          <p className="mt-9 max-w-xl text-balance font-serif text-2xl leading-tight md:text-3xl">A journey into voice, mantra, harmonium and Bhakti Yoga.</p>
+          <p className="mt-9 max-w-xl text-balance font-serif text-xl leading-tight md:text-2xl">A journey into voice, mantra, harmonium and Bhakti Yoga.</p>
           <p className="mt-4 max-w-lg text-pretty text-sm leading-7 text-charcoal/70 md:text-base">Learn to connect with your own voice, understand sacred sound, chant Sanskrit mantras with awareness, and accompany your voice on the harmonium.</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="#class-offerings" className="inline-flex min-h-12 items-center justify-center bg-[#567262] px-6 text-xs uppercase tracking-widest text-ivory transition-colors hover:bg-forest">Begin your journey&nbsp; ↗</Link>
@@ -66,25 +67,25 @@ export default function SoundOfDevotionPage() {
         </figure>
       </section>
 
-      <BhaktiYogaOffers />
-
       <section className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-2 md:gap-28 md:px-12 md:py-36">
         <div>
           <Eyebrow>01 / The idea</Eyebrow>
-          <h2 className="max-w-md font-serif text-[clamp(3rem,6vw,5.4rem)] leading-[.85]">More than a<br /><em className="text-[#ad684d]">singing course.</em></h2>
-          <div className="mt-10 w-36 border border-charcoal/10 bg-[#f1ede3] p-4 text-center font-serif text-lg leading-none">Path Of<br />Bhakti Yoga<br /><span className="mt-5 block text-[9px] uppercase tracking-widest">Voice for Devotion</span></div>
+          <h2 className="max-w-md font-serif text-[clamp(2.2rem,4vw,3.8rem)] leading-[.85]">More than a<br /><em className="text-[#ad684d]">singing course.</em></h2>
+          <div className="mt-10 relative w-48 aspect-[3/4] shadow-md">
+            <Image src="/course_images/Image-24C126EF-EyumiWlBmSz113gStulPlchY4rjGmt.jpeg" alt="Path of Bhakti Yoga - Voice for Devotion" fill className="object-cover" />
+          </div>
         </div>
         <div className="max-w-xl self-center text-base leading-7 text-charcoal/70 md:text-lg">
           <p className="text-balance font-serif text-3xl leading-tight text-charcoal">The Sound of Devotion is a journey into sound as a practice.</p>
           <p className="mt-4">This course brings together the practical foundations of harmonium and singing with breath, meditation, mantra, Sanskrit, Bhakti Yoga and the deeper experience of sacred sound.</p>
-          <p className="mt-4">You will not simply learn songs. You will learn how to listen, breathe, find your natural voice, understand the mantra, feel melody and accompany yourself.</p>
+          <p className="mt-4">You will not simply learn songs. You will learn how to listen. How to breathe. How to find your natural voice. How to understand the mantra. How to feel melody. How to accompany yourself.</p>
           <p className="mt-4 font-serif text-2xl italic text-[#ad684d]">And how to allow sound to become an expression of devotion.</p>
         </div>
       </section>
 
       <section id="journey" className="mx-auto max-w-7xl px-6 py-20 md:px-12 md:py-32">
         <div className="grid gap-8 border-b border-charcoal/15 pb-10 md:grid-cols-[1.1fr_.9fr] md:items-end">
-          <div><Eyebrow>02 / The foundations</Eyebrow><h2 className="font-serif text-[clamp(3.2rem,6vw,5.5rem)] leading-[.85]">What you will<br /><em className="text-[#ad684d]">learn</em></h2></div>
+          <div><Eyebrow>02 / The foundations</Eyebrow><h2 className="font-serif text-[clamp(2.2rem,4vw,3.8rem)] leading-[.85]">What you will<br /><em className="text-[#ad684d]">learn</em></h2></div>
           <p className="max-w-sm text-sm leading-6 text-charcoal/70 md:text-base">Eight strands of practice, woven together into one clear and personal path.</p>
         </div>
         <div className="grid border-l border-charcoal/15 sm:grid-cols-2 lg:grid-cols-4">
@@ -93,23 +94,86 @@ export default function SoundOfDevotionPage() {
       </section>
 
       <section className="mx-auto grid max-w-7xl overflow-hidden bg-[#f0ece1] md:grid-cols-2">
-        <div className="relative min-h-96"><Image src="/harmonium-images/mainpage.JPG" alt="A personal sacred sound practice" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-center" /></div>
-        <div className="p-8 md:p-14 lg:p-20"><Eyebrow>Learn through experience</Eyebrow><h2 className="font-serif text-[clamp(3rem,5vw,4.5rem)] leading-[.88]">Listen to the sound.<br /><em className="text-[#ad684d]">Feel the vibration.</em></h2><p className="mt-7 font-serif text-2xl">Discover the space within it.</p><p className="mt-2 text-sm leading-6 text-charcoal/65">We explore nāda — sacred sound — not as a promise of quick transformation, but as a contemplative and devotional practice.</p><div className="mt-8 grid grid-cols-2 gap-y-4 text-sm text-[#567262]"><span>✓&nbsp; Breath</span><span>✓&nbsp; Tone</span><span>✓&nbsp; Pitch</span><span>✓&nbsp; Resonance</span><span>✓&nbsp; Silence</span><span>✓&nbsp; Intention</span></div></div>
+        <div className="relative min-h-96"><Image src="/course_images/Image-24BA899D-bc2YY8TmvwLa4GWFYg60irwSzgbDrk.jpeg" alt="A personal sacred sound practice" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-center" /></div>
+        <div className="p-8 md:p-14 lg:p-20"><Eyebrow>Learn through experience</Eyebrow><h2 className="font-serif text-[clamp(2.2rem,4vw,3.5rem)] leading-[.88]">Listen to the sound.<br /><em className="text-[#ad684d]">Feel the vibration.</em></h2><p className="mt-7 font-serif text-2xl">Discover the space within it.</p><p className="mt-2 text-sm leading-6 text-charcoal/65">We explore nāda — sacred sound — not as a promise of quick transformation, but as a contemplative and devotional practice.</p><div className="mt-8 grid grid-cols-2 gap-y-4 text-sm text-[#567262]"><span>✓&nbsp; Breath</span><span>✓&nbsp; Tone</span><span>✓&nbsp; Pitch</span><span>✓&nbsp; Resonance</span><span>✓&nbsp; Silence</span><span>✓&nbsp; Intention</span></div></div>
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-20 md:px-12 md:py-32">
-        <div className="grid gap-8 border-b border-charcoal/15 pb-10 md:grid-cols-[1.1fr_.9fr] md:items-end"><div><Eyebrow>03 / The journey</Eyebrow><h2 className="font-serif text-[clamp(3.2rem,6vw,5.5rem)] leading-[.85]">Ten sessions.<br /><em className="text-[#ad684d]">A lasting practice.</em></h2></div><p className="max-w-sm text-sm leading-6 text-charcoal/70 md:text-base">One private session each week. A gentle progression from first breath to personal offering.</p></div>
+        <div className="grid gap-8 border-b border-charcoal/15 pb-10 md:grid-cols-[1.1fr_.9fr] md:items-end"><div><Eyebrow>03 / The journey</Eyebrow><h2 className="font-serif text-[clamp(2.2rem,4vw,3.8rem)] leading-[.85]">Ten sessions.<br /><em className="text-[#ad684d]">A lasting practice.</em></h2></div><p className="max-w-sm text-sm leading-6 text-charcoal/70 md:text-base">One private session each week. A gentle progression from first breath to personal offering.</p></div>
         <div className="grid md:grid-cols-2">{sessions.map(([number, title, description]) => <article key={number} className="grid min-h-40 grid-cols-[40px_1fr_auto] gap-3 border-b border-charcoal/15 py-7 md:px-6"><span className="pt-1 text-[10px] tracking-widest text-[#ad684d]">{number}</span><div><h3 className="font-serif text-2xl leading-tight tracking-tight">{title}</h3><p className="mt-3 max-w-md text-pretty text-sm leading-6 text-charcoal/65">{description}</p></div><span className="pt-1 text-wood">↗</span></article>)}</div>
       </section>
 
 
       <section className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-[.95fr_1.05fr] md:px-12 md:py-36"><div><Eyebrow>05 / After the course</Eyebrow><h2 className="font-serif text-[clamp(3.2rem,6vw,5.4rem)] leading-[.86]">When the course ends,<br /><em className="text-[#ad684d]">your practice begins.</em></h2><p className="mt-7 max-w-md text-sm leading-6 text-charcoal/65">The value of these ten sessions lives in what you can carry forward — with clarity, confidence and a way to keep learning.</p><ol className="mt-9 space-y-3 text-xs uppercase tracking-widest text-[#567262]"><li>Learn ↓</li><li>Practice ↓</li><li>Listen ↓</li><li>Express ↓</li><li>Devote</li></ol></div><div className="grid border-l border-t border-charcoal/15 sm:grid-cols-2">{outcomes.map(([title, copy]) => <article key={title} className="flex min-h-52 flex-col border-b border-r border-charcoal/15 p-6"><span className="text-[#ad684d]">◌</span><h3 className="mt-4 font-serif text-2xl leading-tight tracking-tight">{title}</h3><p className="mt-3 text-pretty text-sm leading-6 text-charcoal/65">{copy}</p></article>)}</div></section>
 
-      <section className="mx-auto grid max-w-6xl items-center gap-10 px-6 py-20 md:grid-cols-2 md:gap-20 md:py-36"><div className="relative aspect-[4/5] overflow-hidden shadow-[14px_14px_0_#e8e0d1]"><Image src="/harmonium-images/mainpage.JPG" alt="Prem and Ananda singing and playing harmonium" fill sizes="(max-width: 768px) 100vw, 45vw" className="object-cover object-center" /></div><div className="max-w-xl"><Eyebrow>A private experience</Eyebrow><h2 className="font-serif text-[clamp(3.3rem,6vw,5.4rem)] leading-[.86]">Your voice<br /><em className="text-[#ad684d]">is unique.</em></h2><p className="mt-8 text-pretty text-base leading-7 text-charcoal/70">Unlike a large group course, every session is adapted to your voice, musical experience, harmonium level, learning speed, repertoire, questions and personal practice.</p><ul className="mt-7 space-y-3 text-sm leading-6 text-[#567262]"><li>—&nbsp; Complete beginners welcome</li><li>—&nbsp; Direct corrections and guidance</li><li>—&nbsp; Learn at your own natural pace</li><li>—&nbsp; A harmonium is recommended between sessions</li></ul></div></section>
+      <section className="mx-auto grid max-w-6xl items-center gap-10 px-6 py-20 md:grid-cols-2 md:gap-20 md:py-36"><div className="relative aspect-[4/5] overflow-hidden"><Image src="/course_images/justprem-kirtan.png" alt="Prem and Ananda singing and playing harmonium" fill sizes="(max-width: 768px) 100vw, 45vw" className="object-cover object-center" /></div><div className="max-w-xl"><Eyebrow>A private experience</Eyebrow><h2 className="font-serif text-[clamp(2.2rem,4vw,3.8rem)] leading-[.86]">Your voice<br /><em className="text-[#ad684d]">is unique.</em></h2><p className="mt-8 text-pretty text-base leading-7 text-charcoal/70">Unlike a large group course, every session is adapted to your voice, musical experience, harmonium level, learning speed, repertoire, questions and personal practice.</p><ul className="mt-7 space-y-3 text-sm leading-6 text-[#567262]"><li>—&nbsp; Complete beginners welcome</li><li>—&nbsp; Direct corrections and guidance</li><li>—&nbsp; Learn at your own natural pace</li><li>—&nbsp; A harmonium is recommended between sessions</li></ul></div></section>
 
-      <section className="bg-[#f0ece1] px-6 py-20 md:py-32"><div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-2 md:items-center"><div className="max-w-xl"><Eyebrow>07 / Your invitation</Eyebrow><h2 className="font-serif text-[clamp(3.4rem,6vw,5.6rem)] leading-[.84]">Your voice is an<br /><em className="text-[#ad684d]">instrument of connection.</em></h2><p className="mt-7 max-w-md text-pretty text-base leading-7 text-charcoal/70">You do not need a perfect voice. You do not need to become a professional musician. You only need the willingness to listen, practice and express.</p></div><aside className="mx-auto w-full max-w-md border border-charcoal/15 bg-ivory p-8 shadow-[12px_12px_0_#e4ddce] md:p-10"><Eyebrow>The Sound of Devotion</Eyebrow><h3 className="font-serif text-3xl leading-tight">Path of Bhakti Yoga</h3><p className="mt-7 font-serif text-6xl text-[#ad684d]">€650</p><ul className="mt-7 space-y-3 border-t border-charcoal/15 pt-6 text-sm leading-6 text-charcoal/70"><li>10 private 1-to-1 sessions</li><li>90 minutes each · once a week</li><li>Approximately 2 months</li><li>Digital practice manual included</li></ul><Link href="#class-offerings" className="mt-8 flex min-h-12 items-center justify-center bg-[#567262] px-6 text-xs uppercase tracking-widest text-ivory transition-colors hover:bg-forest">Begin your journey&nbsp; ↗</Link><p className="mt-4 text-center text-xs leading-5 text-charcoal/60">A harmonium is recommended for practice between sessions.</p></aside></div></section>
+      <section className="bg-[#f0ece1] px-6 py-20 md:py-32"><div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-2 md:items-center"><div className="max-w-xl"><Eyebrow>07 / Your invitation</Eyebrow><h2 className="font-serif text-[clamp(2.2rem,4vw,3.8rem)] leading-[.84]">Your voice is an<br /><em className="text-[#ad684d]">instrument of connection.</em></h2><p className="mt-7 max-w-md text-pretty text-base leading-7 text-charcoal/70">You do not need a perfect voice. You do not need to become a professional musician. You only need the willingness to listen, practice and express.</p></div><aside className="mx-auto w-full max-w-md border border-charcoal/15 bg-ivory p-8 shadow-[12px_12px_0_#e4ddce] md:p-10"><Eyebrow>The Sound of Devotion</Eyebrow><h3 className="font-serif text-3xl leading-tight">Path of Bhakti Yoga</h3><p className="mt-7 font-serif text-6xl text-[#ad684d]">€650</p><ul className="mt-7 space-y-3 border-t border-charcoal/15 pt-6 text-sm leading-6 text-charcoal/70"><li>10 private 1-to-1 sessions</li><li>90 minutes each · once a week</li><li>Approximately 2 months</li><li>Digital practice manual included</li></ul><Link href="#class-offerings" className="mt-8 flex min-h-12 items-center justify-center bg-[#567262] px-6 text-xs uppercase tracking-widest text-ivory transition-colors hover:bg-forest">Begin your journey&nbsp; ↗</Link><p className="mt-4 text-center text-xs leading-5 text-charcoal/60">A harmonium is recommended for practice between sessions.</p></aside></div></section>
+      <BhaktiYogaOffers />
 
-      <section className="relative min-h-[620px] bg-forest px-6 py-20 text-ivory md:min-h-[680px] md:py-32"><Image src="/harmonium-images/mainpage.JPG" alt="The Sound of Devotion" fill sizes="100vw" className="object-cover object-center opacity-35" /><div className="absolute inset-0 bg-gradient-to-r from-forest via-forest/70 to-transparent" /><div className="relative mx-auto max-w-7xl"><Eyebrow>The journey begins with one sound</Eyebrow><h2 className="max-w-3xl font-serif text-[clamp(3.8rem,9vw,8rem)] leading-[.82] tracking-[-.045em]">THE SOUND<br /><em className="text-[#efc797]">of devotion</em></h2><p className="mt-9 max-w-md font-serif text-2xl italic leading-relaxed">From breath to voice.<br />From voice to vibration.<br />From vibration to devotion.</p><div className="mt-8 flex flex-wrap gap-4"><Link href="#class-offerings" className="inline-flex min-h-12 items-center justify-center bg-ivory px-6 text-xs uppercase tracking-widest text-forest transition-colors hover:bg-[#efc797]">Begin your journey&nbsp; ↗</Link><Link href="/harmoniums" className="inline-flex min-h-12 items-center justify-center px-4 text-xs uppercase tracking-widest hover:text-[#efc797]">Explore JustPrem.shop&nbsp; ↗</Link></div><p className="mt-8 text-xs uppercase tracking-widest text-ivory/70">€650 · 10 private sessions · ~2 months</p></div></section>
+      <section className="mx-auto max-w-7xl px-6 py-20 md:px-12 md:py-32">
+        <div className="grid gap-10 md:grid-cols-[1.05fr_.9fr] md:items-end mb-16">
+          <div><p className="mb-6 text-[10px] uppercase tracking-[0.22em] text-wood md:text-xs">08 / YOUR GUIDES</p><h2 className="font-serif text-[clamp(2.5rem,5vw,4.5rem)] leading-[.82] tracking-[-.045em]">Walk with<br /><em className="text-[#ad684d]">trusted guides.</em></h2></div>
+          <div><p className="max-w-md text-sm leading-6 text-charcoal/70">Every student is met with presence, patience and practical guidance throughout the journey.</p></div>
+        </div>
+
+        <div className="grid lg:grid-cols-3 bg-[#f4efe5]">
+          <div className="grid items-start gap-8 p-8 md:grid-cols-[auto_1fr] lg:grid-cols-1 lg:p-10 border-b lg:border-b-0 lg:border-r border-charcoal/15">
+            <div className="relative aspect-[4/5] w-32 md:w-40 lg:w-full shrink-0 shadow-md">
+              <Image src="/course_images/shoorsena.jpeg" alt="Shoorsena Das" fill className="object-cover" />
+            </div>
+            <div>
+              <p className="text-[10px] uppercase tracking-widest text-charcoal/50">BHAKTI GUIDE · HARMONIUM TEACHER</p>
+              <h3 className="mt-4 font-serif text-3xl lg:text-4xl text-charcoal">Shoorsena Das</h3>
+              <ReadMoreText
+                previewText={<p>Shoorasena Das alchemized the seed that was planted in his heart during his own healing journey into a vision. With the blessing of his Guru, that seed became Just Prem and is now flourishing beyond his self-transformation, in service of his dharma.</p>}
+                fullText={<div className="space-y-4">
+                  <p>Shoorasena Das alchemized the seed that was planted in his heart during his own healing journey into a vision. With the blessing of his Guru, that seed became Just Prem and is now flourishing beyond his self-transformation, in service of his dharma.</p>
+                  <p>In Sanskrit, Prem is the highest expression of Divine Love—a love that asks nothing in return, a love that transforms from the inside out. Through kirtans, pilgrimages in the Himalayas, moments of silence, yoga or casual conversations, Shoorasena&apos;s deepest wish is to help others remember who they truly are, by building bridges between the heart and the Divine, with music and sound as a prayer.</p>
+                  <p>To walk this path with an open heart. To keep healing, keep learning and keep serving. And to remind every soul he meets that they have always belonged—to love, to each other and to God.</p>
+                </div>}
+              />
+            </div>
+          </div>
+
+          <div className="grid items-start gap-8 p-8 md:grid-cols-[auto_1fr] lg:grid-cols-1 lg:p-10 border-b lg:border-b-0 lg:border-r border-charcoal/15">
+            <div className="relative aspect-[4/5] w-32 md:w-40 lg:w-full shrink-0 shadow-md bg-[#f1ede3]">
+              <Image src="/course_images/anupSingh.jpeg" alt="Anup Singh" fill className="object-cover" />
+            </div>
+            <div>
+              <p className="text-[10px] uppercase tracking-widest text-charcoal/50">VOICE · MANTRA · SACRED SOUND</p>
+              <h3 className="mt-4 font-serif text-3xl lg:text-4xl text-charcoal">Anup Singh</h3>
+              <ReadMoreText
+                previewText={<p>Anup Singh is a classically trained Indian musician and multi-instrumentalist with over 20 years of experience.</p>}
+                fullText={<div className="space-y-4">
+                  <p>Anup Singh is a classically trained Indian musician and multi-instrumentalist with over 20 years of experience.</p>
+                  <p>Through the depth of Indian classical ragas, he creates a space for people to explore their voice, reconnect with themselves, and experience music as a path of inner harmony by blending classical knowledge with intuitive, heart-centered presence, and supporting voice opening and authentic self-expression.</p>
+                </div>}
+              />
+            </div>
+          </div>
+
+          <div className="grid items-start gap-8 p-8 md:grid-cols-[auto_1fr] lg:grid-cols-1 lg:p-10">
+            <div className="relative aspect-[4/5] w-32 md:w-40 lg:w-full shrink-0 shadow-md bg-sandstone">
+              <Image src="/course_images/aika.jpeg" alt="Aika" fill className="object-cover" />
+            </div>
+            <div>
+              <p className="text-[10px] uppercase tracking-widest text-charcoal/50">YOGA · MEDITATION · INTEGRATION</p>
+              <h3 className="mt-4 font-serif text-3xl lg:text-4xl text-charcoal">Aika</h3>
+              <ReadMoreText
+                previewText={<p>Aika is an inspiring traveler who has explored much of Asia and the East. A devoted kirtan leader, gifted singer and ukulele player, her musical journey began over a decade ago and has become her main life path.</p>}
+                fullText={<div className="space-y-4">
+                  <p>Aika is an inspiring traveler who has explored much of Asia and the East. A devoted kirtan leader, gifted singer and ukulele player, her musical journey began over a decade ago and has become her main life path.</p>
+                  <p>Over time, her spiritual journey has naturally evolved into creating meaningful spaces where music and the human voice became instruments of healing, allowing people to reconnect with their true nature.</p>
+                  <p>As the Community Manager of Just Prem, Aika is the core smile of the team. Alongside her music, she brings over 8 years of experience organizing environmental and social initiatives. Her vibrant presence, compassion and dedication inspire those around her to grow and become the best version of themselves.</p>
+                </div>}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative min-h-[620px] bg-forest px-6 py-20 text-ivory md:min-h-[680px] md:py-32"><Image src="/harmonium-images/mainpage.JPG" alt="The Sound of Devotion" fill sizes="100vw" className="object-cover object-center opacity-35" /><div className="absolute inset-0 bg-gradient-to-r from-forest via-forest/70 to-transparent" /><div className="relative mx-auto max-w-7xl"><Eyebrow>The journey begins with one sound</Eyebrow><h2 className="max-w-3xl font-bodoni text-[clamp(2.8rem,6vw,5.5rem)] leading-[.82] tracking-[-.045em]">THE SOUND<br /><em className="font-bodoni italic text-[#efc797]">of devotion</em></h2><p className="mt-9 max-w-md font-serif text-2xl italic leading-relaxed">From breath to voice.<br />From voice to vibration.<br />From vibration to devotion.</p><div className="mt-8 flex flex-wrap gap-4"><Link href="#class-offerings" className="inline-flex min-h-12 items-center justify-center bg-ivory px-6 text-xs uppercase tracking-widest text-forest transition-colors hover:bg-[#efc797]">Begin your journey&nbsp; ↗</Link><Link href="/harmoniums" className="inline-flex min-h-12 items-center justify-center px-4 text-xs uppercase tracking-widest hover:text-[#efc797]">Explore JustPrem.shop&nbsp; ↗</Link></div><p className="mt-8 text-xs uppercase tracking-widest text-ivory/70">€650 · 10 private sessions · ~2 months</p></div></section>
     </div>
   );
 }
