@@ -15,6 +15,7 @@ type Coupon = {
 const coupons: Coupon[] = [
   { code: "PREM10", description: "10% off your order", percentOff: 10 },
   { code: "PREM180", description: "EUR 180 off your order", fixedDiscountEUR: 180 },
+  { code: "FABI150", description: "EUR 150 off your order", fixedDiscountEUR: 150 },
 ];
 
 export function applyCoupon(code: string | undefined, subtotal: number): AppliedCoupon | null {

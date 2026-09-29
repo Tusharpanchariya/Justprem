@@ -5,9 +5,9 @@ export type PricedCartItem = {
   quantity: number;
 };
 
-export const DELIVERY_FEE_EUR = 180;
+export const DELIVERY_FEE_EUR = 200;
 
-/** A single EUR 180 delivery fee applies when the order contains a EUR 650 harmonium. */
+/** A single EUR 200 delivery fee applies when the order contains a EUR 650 harmonium. */
 export function getDeliveryFee(items: PricedCartItem[]) {
   return items.some((item) => item.priceEUR === 650 && item.quantity > 0) ? DELIVERY_FEE_EUR : 0;
 }
