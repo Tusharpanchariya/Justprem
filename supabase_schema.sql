@@ -154,3 +154,19 @@ create table public.class_bookings (
 alter table public.class_bookings enable row level security;
 create policy "Public can see confirmed class dates" on public.class_bookings for select using (status = 'confirmed');
 create policy "Public can submit class applications" on public.class_bookings for insert with check (status = 'confirmed');
+
+-- Connect Form Inquiries
+create table if not exists public.connect_inquiries (
+  id uuid default uuid_generate_v4() primary key,
+  first_name text not null,
+  last_name text not null,
+  email text not null,
+  subscribe_news boolean default false,
+  message text not null,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+alter table public.connect_inquiries enable row level security;
+create policy "Public can submit connect inquiries" on public.connect_inquiries for insert with check (true);
+create policy "Public can read connect inquiries" on public.connect_inquiries for select using (true);
+

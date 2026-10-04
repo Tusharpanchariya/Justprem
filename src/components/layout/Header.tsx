@@ -10,6 +10,7 @@ import { useCart } from "@/lib/context/CartContext";
 const navLinks = [
   { name: "Collection", href: "/harmoniums" },
   { name: "Course", href: "/sound-of-devotion" },
+  { name: "Our Story", href: "/our-story" },
   { name: "Reviews", href: "/reviews" },
 ];
 
