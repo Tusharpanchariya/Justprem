@@ -17,6 +17,7 @@ const coupons: Coupon[] = [
   { code: "PREM180", description: "EUR 180 off your order", fixedDiscountEUR: 180 },
   { code: "FABI100", description: "EUR 100 off your order", fixedDiscountEUR: 100 },
   { code: "FABI150", description: "EUR 150 off your order", fixedDiscountEUR: 150 },
+  { code: "JUSTPREM150", description: "EUR 150 off your order", fixedDiscountEUR: 150 },
 ];
 
 export function applyCoupon(code: string | undefined, subtotal: number): AppliedCoupon | null {
