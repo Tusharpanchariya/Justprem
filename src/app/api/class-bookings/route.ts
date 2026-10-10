@@ -21,17 +21,18 @@ export async function POST(request: Request) {
   const db = database();
   if (!db) return Response.json({ error: "Class bookings are not configured yet." }, { status: 503 });
   try {
-    const { courseId, courseName, name, email, phone, bookingDate } = await request.json() as Record<string, unknown>;
+    const { courseId, courseName, name, email, phone, referralCode, bookingDate } = await request.json() as Record<string, unknown>;
     if (typeof courseId !== "string" || !allowedCourses.has(courseId) || typeof courseName !== "string" || typeof name !== "string" || typeof email !== "string" || typeof phone !== "string" || typeof bookingDate !== "string") return Response.json({ error: "Please complete the application form." }, { status: 400 });
     const cleanName = name.trim(); const cleanEmail = email.trim().toLowerCase(); const cleanPhone = phone.trim(); const cleanDate = bookingDate.trim();
+    const cleanReferralCode = typeof referralCode === "string" ? referralCode.trim().toUpperCase() : "";
     if (!cleanName || cleanName.length > 100 || !cleanPhone || !/^\S+@\S+\.\S+$/.test(cleanEmail) || !/^\d{4}-\d{2}-\d{2}$/.test(cleanDate) || cleanDate < new Date().toISOString().slice(0, 10)) return Response.json({ error: "Please provide valid details and a future date." }, { status: 400 });
-    const { error } = await db.from("class_bookings").insert({ course_id: courseId, course_name: courseName.slice(0, 120), full_name: cleanName, email: cleanEmail, booking_date: cleanDate, status: "confirmed" });
+    const { error } = await db.from("class_bookings").insert({ course_id: courseId, course_name: courseName.slice(0, 120), full_name: cleanName, email: cleanEmail, booking_date: cleanDate, referral_code: cleanReferralCode || null, status: "confirmed" });
     if (error?.code === "23505") return Response.json({ error: "That date has just been booked. Please choose another date." }, { status: 409 });
     if (error) {
       console.error("Class booking database error:", error);
       return Response.json({ error: databaseErrorMessage(error) }, { status: 500 });
     }
-    await sendClassApplicationEmail({ name: cleanName, email: cleanEmail, phone: cleanPhone, courseName: courseName.slice(0, 120), bookingDate: cleanDate });
+    await sendClassApplicationEmail({ name: cleanName, email: cleanEmail, phone: cleanPhone, courseName: courseName.slice(0, 120), referralCode: cleanReferralCode, bookingDate: cleanDate });
     return Response.json({ success: true });
   } catch (error) { console.error("Class booking error:", error); return Response.json({ error: "We could not save your application. Please check your connection and try again." }, { status: 500 }); }
 }

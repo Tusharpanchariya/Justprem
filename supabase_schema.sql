@@ -146,10 +146,13 @@ create table public.class_bookings (
   course_name text not null,
   full_name text not null,
   email text not null,
+  referral_code text,
   booking_date date not null unique,
   status text not null default 'confirmed' check (status in ('confirmed', 'cancelled')),
   created_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
+
+alter table public.class_bookings add column if not exists referral_code text;
 
 alter table public.class_bookings enable row level security;
 create policy "Public can see confirmed class dates" on public.class_bookings for select using (status = 'confirmed');

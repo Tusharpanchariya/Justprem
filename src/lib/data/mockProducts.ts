@@ -71,65 +71,65 @@ export const mockHarmoniums = [
       { label: "Taxes/Duties", value: "International delivery is not included. Any applicable import duties, taxes, customs clearance fees, VAT, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
     ]
   },
-  {
-    id: "3",
-    name: "Just Prem “Agni” (32 Keys)",
-    slug: "prem-agni",
-    priceEUR: 650,
-    originalPriceEUR: 1200,
-    priceUSD: 800,
-    shortDescription: "A beautifully handcrafted travel harmonium inspired by the sacred fire of devotion.",
-    fullDescription: "Meet the Just Prem “Agni” Edition - a beautifully handcrafted travel harmonium created for those who carry music, mantra, and devotion wherever they go.\n\nAgni, the Sanskrit word for fire, represents transformation, vitality, purification, and the sacred fire of devotion. Inspired by these qualities, the deep red Agni harmonium carries a warm, powerful presence while delivering the rich, resonant sound that brings music and mantra to life.\n\nCompact, durable, and crafted with care, the Agni is designed to accompany you wherever your practice takes you- from kirtan and meditation to yoga classes, ceremonies, retreats, concerts, and intimate creative sessions. Whether you're travelling through the Himalayas, gathering by the ocean, or creating a sacred space at home, this harmonium is made to move with you.\n\nFeaturing 32 responsive keys and a comfortable travel-friendly design, the Agni offers a smooth playing experience without compromising on sound. Its simplified construction : free from delicate drone stops and split registers - makes it exceptionally reliable, durable, and easy to maintain, allowing you to focus entirely on your music and practice.\n\nEach harmonium is handcrafted from natural Kail wood (Himalayan Pine), allowing the unique grain and character of the wood to shine through. Combined with its deep red finish, traditional carved grille, and antique-gold detailing, every Just Prem “Agni” has its own individual character. No two instruments are exactly alike.",
-    keyCount: 32,
-    availability: "IN_STOCK",
-    image: "/harmonium-images/premagni/Premagni.webp",
-    images: [
-      "/harmonium-images/premagni/Premagni.webp",
-      "/harmonium-images/premagni/premagni2.webp"
-    ],
-    categories: ["Travel", "Kirtan"],
-    specifications: [
-      { label: "Materials", value: "Handcrafted from Kail wood (Himalayan Pine), known for its natural strength and excellent acoustic properties." },
-      { label: "Bellows", value: "High-quality multi-bellows provide a consistent air supply and uninterrupted sound, even when playing softly." },
-      { label: "Design", value: "Deep red finish with antique bronze/gold-colored metal hardware, matching handles, traditional decorative grille, and solid wood construction." },
-      { label: "Keyboard", value: "32 responsive keys — 2.5 octaves, starting from E." },
-      { label: "Tuning", value: "Every harmonium is individually tuned to A = 440 Hz before shipping." },
-      { label: "Dimensions", value: "45 × 25 × 21 cm (L × W × H) — compact and easy to transport." },
-      { label: "Weight", value: "Approximately 6.5 kg." },
-      { label: "Travel Bag", value: "A premium padded harmonium carrying bag is included as a gift." },
-      { label: "Delivery", value: "Every Just Prem Harmonium is individually inspected, tuned, and carefully prepared before dispatch. Each instrument is securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation." },
-      { label: "Taxes/Duties", value: "International delivery is not included. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
-    ]
-  },
-  {
-    id: "4",
-    name: "Just Prem “Royal Amethyst” (32 Keys)",
-    slug: "royal-amethyst",
-    priceEUR: 650,
-    originalPriceEUR: 1200,
-    priceUSD: 800,
-    shortDescription: "A handcrafted travel harmonium inspired by the depth of devotion and the quiet beauty of the Himalayas.",
-    fullDescription: "Meet the Just Prem “Royal Amethyst” – a handcrafted travel harmonium inspired by the depth of devotion and the quiet beauty of the Himalayas. Finished in a rich royal amethyst tone, this instrument is designed for musicians, kīrtan leaders, yogis, and seekers who wish to carry the spirit of sacred sound wherever life takes them.\n\nLightweight, compact, and full of warm, resonant tone, the Amethyst offers the perfect balance between portability and professional sound quality. Its 32 responsive keys provide a smooth, expressive playing experience, whether you're leading kīrtan, accompanying mantra meditation, teaching yoga, or composing music in the studio.\n\nThe elegant hand-carved front grille reflects timeless craftsmanship while allowing the natural beauty of the instrument to shine through. Each harmonium is individually handcrafted, revealing unique wood grain beneath its luxurious finish, making every piece beautifully one of a kind.\n\nDesigned with simplicity and durability in mind, the Amethyst features a streamlined construction without delicate extras such as drone stops or split registers. The result is a reliable travel companion that is easy to carry, effortless to play, and built to accompany you for years of devotional practice and musical expression.\n\nWhether you're singing beneath Himalayan peaks, gathering around a sacred fire, sharing music by the sea, or creating a peaceful sanctuary in your own home, the Just Prem Amethyst fills every space with warmth, presence and heartfelt resonance.\n\nElegant in design. Rich in tone. Created for the journey within.\n\nJust Prem Amethyst – Where Every Note Becomes a Prayer.",
-    keyCount: 32,
-    availability: "IN_STOCK",
-    image: "/harmonium-images/royaleamethyst/royaleamethyst2.webp",
-    images: [
-      "/harmonium-images/royaleamethyst/royaleamethyst2.webp",
-      "/harmonium-images/royaleamethyst/royaleamethyst.webp",
-      "/harmonium-images/royaleamethyst/royaleamethyst3.webp",
-      "/harmonium-images/royaleamethyst/royaleamethyst4.webp"
-    ],
-    categories: ["Travel", "Kirtan"],
-    specifications: [
-      { label: "Keyboard", value: "32 responsive keys" },
-      { label: "Design", value: "Lightweight premium travel design, intricately carved front grille, handcrafted wooden body with royal amethyst finish" },
-      { label: "Sound", value: "Rich, warm and balanced sound" },
-      { label: "Durability", value: "Durable construction for travel and everyday use" },
-      { label: "Usage", value: "Perfect for kīrtan, bhajan, meditation, yoga, ceremonies and studio recording" },
-      { label: "Included", value: "Includes a premium travel bag" },
-      { label: "Taxes/Duties", value: "International delivery is not included. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
-    ]
-  },
+  // {
+  //   id: "3",
+  //   name: "Just Prem “Agni” (32 Keys)",
+  //   slug: "prem-agni",
+  //   priceEUR: 650,
+  //   originalPriceEUR: 1200,
+  //   priceUSD: 800,
+  //   shortDescription: "A beautifully handcrafted travel harmonium inspired by the sacred fire of devotion.",
+  //   fullDescription: "Meet the Just Prem “Agni” Edition - a beautifully handcrafted travel harmonium created for those who carry music, mantra, and devotion wherever they go.\n\nAgni, the Sanskrit word for fire, represents transformation, vitality, purification, and the sacred fire of devotion. Inspired by these qualities, the deep red Agni harmonium carries a warm, powerful presence while delivering the rich, resonant sound that brings music and mantra to life.\n\nCompact, durable, and crafted with care, the Agni is designed to accompany you wherever your practice takes you- from kirtan and meditation to yoga classes, ceremonies, retreats, concerts, and intimate creative sessions. Whether you're travelling through the Himalayas, gathering by the ocean, or creating a sacred space at home, this harmonium is made to move with you.\n\nFeaturing 32 responsive keys and a comfortable travel-friendly design, the Agni offers a smooth playing experience without compromising on sound. Its simplified construction : free from delicate drone stops and split registers - makes it exceptionally reliable, durable, and easy to maintain, allowing you to focus entirely on your music and practice.\n\nEach harmonium is handcrafted from natural Kail wood (Himalayan Pine), allowing the unique grain and character of the wood to shine through. Combined with its deep red finish, traditional carved grille, and antique-gold detailing, every Just Prem “Agni” has its own individual character. No two instruments are exactly alike.",
+  //   keyCount: 32,
+  //   availability: "IN_STOCK",
+  //   image: "/harmonium-images/premagni/Premagni.webp",
+  //   images: [
+  //     "/harmonium-images/premagni/Premagni.webp",
+  //     "/harmonium-images/premagni/premagni2.webp"
+  //   ],
+  //   categories: ["Travel", "Kirtan"],
+  //   specifications: [
+  //     { label: "Materials", value: "Handcrafted from Kail wood (Himalayan Pine), known for its natural strength and excellent acoustic properties." },
+  //     { label: "Bellows", value: "High-quality multi-bellows provide a consistent air supply and uninterrupted sound, even when playing softly." },
+  //     { label: "Design", value: "Deep red finish with antique bronze/gold-colored metal hardware, matching handles, traditional decorative grille, and solid wood construction." },
+  //     { label: "Keyboard", value: "32 responsive keys — 2.5 octaves, starting from E." },
+  //     { label: "Tuning", value: "Every harmonium is individually tuned to A = 440 Hz before shipping." },
+  //     { label: "Dimensions", value: "45 × 25 × 21 cm (L × W × H) — compact and easy to transport." },
+  //     { label: "Weight", value: "Approximately 6.5 kg." },
+  //     { label: "Travel Bag", value: "A premium padded harmonium carrying bag is included as a gift." },
+  //     { label: "Delivery", value: "Every Just Prem Harmonium is individually inspected, tuned, and carefully prepared before dispatch. Each instrument is securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation." },
+  //     { label: "Taxes/Duties", value: "International delivery is not included. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
+  //   ]
+  // },
+  // {
+  //   id: "4",
+  //   name: "Just Prem “Royal Amethyst” (32 Keys)",
+  //   slug: "royal-amethyst",
+  //   priceEUR: 650,
+  //   originalPriceEUR: 1200,
+  //   priceUSD: 800,
+  //   shortDescription: "A handcrafted travel harmonium inspired by the depth of devotion and the quiet beauty of the Himalayas.",
+  //   fullDescription: "Meet the Just Prem “Royal Amethyst” – a handcrafted travel harmonium inspired by the depth of devotion and the quiet beauty of the Himalayas. Finished in a rich royal amethyst tone, this instrument is designed for musicians, kīrtan leaders, yogis, and seekers who wish to carry the spirit of sacred sound wherever life takes them.\n\nLightweight, compact, and full of warm, resonant tone, the Amethyst offers the perfect balance between portability and professional sound quality. Its 32 responsive keys provide a smooth, expressive playing experience, whether you're leading kīrtan, accompanying mantra meditation, teaching yoga, or composing music in the studio.\n\nThe elegant hand-carved front grille reflects timeless craftsmanship while allowing the natural beauty of the instrument to shine through. Each harmonium is individually handcrafted, revealing unique wood grain beneath its luxurious finish, making every piece beautifully one of a kind.\n\nDesigned with simplicity and durability in mind, the Amethyst features a streamlined construction without delicate extras such as drone stops or split registers. The result is a reliable travel companion that is easy to carry, effortless to play, and built to accompany you for years of devotional practice and musical expression.\n\nWhether you're singing beneath Himalayan peaks, gathering around a sacred fire, sharing music by the sea, or creating a peaceful sanctuary in your own home, the Just Prem Amethyst fills every space with warmth, presence and heartfelt resonance.\n\nElegant in design. Rich in tone. Created for the journey within.\n\nJust Prem Amethyst – Where Every Note Becomes a Prayer.",
+  //   keyCount: 32,
+  //   availability: "IN_STOCK",
+  //   image: "/harmonium-images/royaleamethyst/royaleamethyst2.webp",
+  //   images: [
+  //     "/harmonium-images/royaleamethyst/royaleamethyst2.webp",
+  //     "/harmonium-images/royaleamethyst/royaleamethyst.webp",
+  //     "/harmonium-images/royaleamethyst/royaleamethyst3.webp",
+  //     "/harmonium-images/royaleamethyst/royaleamethyst4.webp"
+  //   ],
+  //   categories: ["Travel", "Kirtan"],
+  //   specifications: [
+  //     { label: "Keyboard", value: "32 responsive keys" },
+  //     { label: "Design", value: "Lightweight premium travel design, intricately carved front grille, handcrafted wooden body with royal amethyst finish" },
+  //     { label: "Sound", value: "Rich, warm and balanced sound" },
+  //     { label: "Durability", value: "Durable construction for travel and everyday use" },
+  //     { label: "Usage", value: "Perfect for kīrtan, bhajan, meditation, yoga, ceremonies and studio recording" },
+  //     { label: "Included", value: "Includes a premium travel bag" },
+  //     { label: "Taxes/Duties", value: "International delivery is not included. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
+  //   ]
+  // },
   {
     id: "5",
     name: "🌸 RĀDHĀ PREMA ( 32 keys) Royal Rose",
@@ -324,62 +324,62 @@ export const mockHarmoniums = [
       { label: "Taxes/Duties", value: "International courier delivery is included in the product price for customers worldwide. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
     ]
   },
-  {
-    id: "11",
-    name: "Just Prem \"Essence\" (27 Keys) ON DEMAND",
-    slug: "essence",
-    priceEUR: 850,
-    originalPriceEUR: 1200,
-    priceUSD: 990,
-    shortDescription: "A compact, handcrafted 27-key travel harmonium with a warm, balanced, resonant voice.",
-    fullDescription: "Meet the Just Prem \"Essence\" - a beautifully handcrafted travel harmonium designed for musicians, yogis, and seekers who wish to carry music, mantra, and devotion wherever life leads.\n\nFeaturing 27 responsive keys, this compact harmonium delivers a warm, balanced, and resonant sound that beautifully supports kirtan, mantra meditation, yoga classes, ceremonies, retreats, and personal practice. Lightweight and easy to carry, it is the perfect companion for those who value both simplicity and exceptional sound.\n\nCrafted from natural wood, every harmonium reveals its own unique grain and character, making each instrument truly one of a kind. Its clean, minimalist construction - without fragile extras such as drone stops or split registers - offers outstanding durability, reliability, and effortless playability for life on the move.\n\nWhether you're singing in the Himalayas, leading a circle by the ocean, sharing music around a sacred fire, or practicing quietly at home, the Just Prem \"Essence\" creates a warm, grounding tone that inspires presence, connection, and devotion.\n\nDesigned for simplicity. Crafted with soul. Made to journey with you.",
-    keyCount: 27,
-    availability: "SOLD_OUT",
-    image: "/harmonium-images/essence/essence.webp",
-    images: [
-      "/harmonium-images/essence/essence.webp",
-      "/harmonium-images/essence/essence2.webp",
-      "/harmonium-images/essence/essence3.webp"
-    ],
-    categories: ["Travel", "Kirtan"],
-    specifications: [
-      { label: "Keyboard", value: "27 responsive keys." },
-      { label: "Materials", value: "Handcrafted from natural wood; each instrument has its own unique grain and character." },
-      { label: "Construction", value: "Minimalist construction without drone stops or split registers for durable, reliable use." },
-      { label: "Sound", value: "Warm, balanced, and resonant sound in a compact, lightweight design." },
-      { label: "Ideal for", value: "Kirtan, mantra meditation, yoga classes, ceremonies, retreats, and personal practice." },
-      { label: "Shipping", value: "Shipping costs are included." }
-    ]
-  },
-  {
-    id: "12",
-    name: "OCEAN BHAKTI (32 Keys) | Prem Sāgara, Ocean of Love",
-    slug: "ocean-bhakti",
-    priceEUR: 850,
-    priceUSD: 963,
-    shortDescription: "A beautifully handcrafted ocean-turquoise travel harmonium inspired by the vastness of the ocean and the depth of devotion.",
-    fullDescription: "Meet the Just Prem ‘Ocean Bhakti’ Edition, a beautifully handcrafted travel harmonium inspired by the vastness of the ocean and the depth of devotion.\n\nPrem Sāgara means ‘Ocean of Love’. Prem means love, while Sāgara means ocean. The name expresses the feeling at the heart of Bhakti: an endless movement toward love, devotion, connection, and surrender.\n\nFinished in our distinctive ocean turquoise, #5BC2C6, the Ocean Bhakti reflects the colours and feeling of clear water, open skies, freedom, and flow. Its luminous turquoise body is complemented by silver metal detailing and silver-finished pumps, giving the instrument a fresh, elegant and distinctive character.\n\nCreated for those who carry music, mantra, and devotion wherever they go, the Ocean Bhakti is more than an instrument. It is a companion for singing, prayer, meditation, kirtan, yoga, ceremonies, retreats, concerts, and everyday moments of connection.\n\nFrom the Himalayas to the ocean, from a quiet personal practice to a room filled with voices, this harmonium is made to travel with you.\n\nLET DEVOTION FLOW\n\nThe Ocean Bhakti is designed around one simple idea: sound should support the voice.\n\nIts warm, balanced and resonant tone creates a beautiful foundation for singing, mantra and devotional music, allowing the human voice to remain at the heart of the experience.\n\nWith 32 responsive keys and a comfortable 2.5 octave range, it is simple to play, expressive, and particularly suited to vocal accompaniment.\n\nIts simplified construction, without delicate drone stops and split registers, makes it durable, reliable, and easy to maintain, especially for those who travel frequently.\n\nLess complexity. More freedom to sing.\n\nMADE FOR MUSIC, MANTRA & BHAKTI\n\nThe Ocean Bhakti can accompany you through:\n\nKirtan • Mantra • Meditation • Yoga • Retreats • Ceremonies • Concerts • Teaching • Home Practice\n\nWhether you are learning your first mantra or leading a room full of voices, the harmonium provides a steady musical foundation and invites you to let the breath become sound.\n\nHANDCRAFTED FROM NATURAL WOOD\n\nEach Ocean Bhakti is handcrafted from natural Kail wood (Himalayan Pine), chosen for its natural strength, character, and acoustic qualities.\n\nEvery piece of wood carries its own grain, texture, and subtle variations. These natural differences are part of what makes a handmade instrument special.\n\nThe ocean turquoise finish, #5BC2C6, is complemented by silver-colored metal hardware and silver pumps, creating a clean and luminous expression of the Ocean Bhakti.\n\nNo two Just Prem harmoniums are exactly alike. Each one carries the character of the hands, wood, and materials that brought it to life.\n\n32 RESPONSIVE KEYS\n\n32 keys • 2.5 octaves • Starting from E\n\nThe responsive keyboard offers a comfortable range for singing, devotional music, mantra, practice, and accompaniment.\n\nEvery harmonium is individually tuned to A = 440 Hz before shipping.\n\nSTEADY, EXPRESSIVE BELLOWS\n\nThe Ocean Bhakti features high-quality multi-bellows designed to provide a consistent flow of air and a steady sound.\n\nWhether you are playing softly in meditation or supporting a powerful group chant, the instrument responds naturally to the movement of your hands.\n\nBreathe. Press. Sing.\n\nThe harmonium becomes an extension of the voice.\n\nCRAFTED FOR THE JOURNEY\n\nAt approximately 6.5 kg, with dimensions of 45 × 25 × 21 cm, the Ocean Bhakti is compact and travel-friendly without compromising its warm, resonant sound.\n\nTake it with you to the places where your music lives: the mountains, the ocean, the studio, the yoga room, the temple, the retreat, and your home.\n\nA premium padded harmonium carrying bag is included as a gift.\n\nMADE WITH CARE\n\nEvery Just Prem harmonium is individually inspected, tuned, and carefully prepared before it leaves our hands. Each instrument is securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation.\n\nYour Ocean Bhakti arrives tuned and ready to play.\n\nINTERNATIONAL DELIVERY\n\nInternational courier delivery is included in the product price for customers worldwide. The included delivery covers courier shipping only. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser.\n\nPREM SĀGARA, OCEAN OF LOVE\n\nPrem is love. Sāgara is ocean.\n\nAn ocean has no fixed boundary. It moves, flows, receives, and gives. In the same way, Bhakti invites us to move beyond the limitations of the individual and into a deeper experience of love and connection.\n\nThe Ocean Bhakti is made for those moments when music becomes something more: when one voice becomes many, when a mantra is repeated until the mind becomes quiet, when the harmonium supports the first note of a kirtan, and when you sit alone, open the bellows, and allow your voice to become a prayer.\n\nThis is the spirit behind Just Prem. We create harmoniums not simply to be played, but to support the voice, carry the practice, and accompany the journey of devotion.\n\nJUST PREM OCEAN BHAKTI\nPrem Sāgara, Ocean of Love\n\nDeep like the ocean.\nFree like the breath.\nAlive with devotion.\n\nA harmonium for your voice, your practice, and your journey.",
-    keyCount: 32,
-    availability: "ON_DEMAND",
-    image: "/harmonium-images/ocean-bhakti/ocean-bhakti2.jpg",
-    images: [
-      "/harmonium-images/ocean-bhakti/ocean-bhakti2.jpg",
-      "/harmonium-images/ocean-bhakti/ocean-bhakti1.jpg",
-      "/harmonium-images/ocean-bhakti/ocean-bhakti3.jpg",
-      "/harmonium-images/ocean-bhakti/ocean-bhakti4.jpg"
-    ],
-    categories: ["Upcoming"],
-    specifications: [
-      { label: "Materials", value: "Handcrafted from natural Kail wood (Himalayan Pine), selected for its strength, character, and acoustic qualities." },
-      { label: "Design", value: "Ocean turquoise (#5BC2C6) finish with silver-colored metal detailing and silver-finished pumps." },
-      { label: "Keyboard", value: "32 responsive keys (2.5 octaves), starting from E." },
-      { label: "Tuning", value: "Individually tuned to A = 440 Hz before shipping." },
-      { label: "Bellows", value: "High-quality multi-bellows for a consistent, expressive flow of air and steady sound." },
-      { label: "Dimensions", value: "45 × 25 × 21 cm (L × W × H)." },
-      { label: "Weight", value: "Approximately 6.5 kg." },
-      { label: "Included", value: "A premium padded harmonium carrying bag is included as a gift." },
-      { label: "Delivery", value: "Each instrument is inspected, tuned, and securely packaged in a reinforced shipping box with protective cushioning." },
-      { label: "Taxes/Duties", value: "International courier delivery is included in the product price. Any applicable import duties, customs clearance fees, VAT, taxes, or other destination-country charges remain the responsibility of the purchaser." }
-    ]
-  }
+  // {
+  //   id: "11",
+  //   name: "Just Prem \"Essence\" (27 Keys) ON DEMAND",
+  //   slug: "essence",
+  //   priceEUR: 850,
+  //   originalPriceEUR: 1200,
+  //   priceUSD: 990,
+  //   shortDescription: "A compact, handcrafted 27-key travel harmonium with a warm, balanced, resonant voice.",
+  //   fullDescription: "Meet the Just Prem \"Essence\" - a beautifully handcrafted travel harmonium designed for musicians, yogis, and seekers who wish to carry music, mantra, and devotion wherever life leads.\n\nFeaturing 27 responsive keys, this compact harmonium delivers a warm, balanced, and resonant sound that beautifully supports kirtan, mantra meditation, yoga classes, ceremonies, retreats, and personal practice. Lightweight and easy to carry, it is the perfect companion for those who value both simplicity and exceptional sound.\n\nCrafted from natural wood, every harmonium reveals its own unique grain and character, making each instrument truly one of a kind. Its clean, minimalist construction - without fragile extras such as drone stops or split registers - offers outstanding durability, reliability, and effortless playability for life on the move.\n\nWhether you're singing in the Himalayas, leading a circle by the ocean, sharing music around a sacred fire, or practicing quietly at home, the Just Prem \"Essence\" creates a warm, grounding tone that inspires presence, connection, and devotion.\n\nDesigned for simplicity. Crafted with soul. Made to journey with you.",
+  //   keyCount: 27,
+  //   availability: "SOLD_OUT",
+  //   image: "/harmonium-images/essence/essence.webp",
+  //   images: [
+  //     "/harmonium-images/essence/essence.webp",
+  //     "/harmonium-images/essence/essence2.webp",
+  //     "/harmonium-images/essence/essence3.webp"
+  //   ],
+  //   categories: ["Travel", "Kirtan"],
+  //   specifications: [
+  //     { label: "Keyboard", value: "27 responsive keys." },
+  //     { label: "Materials", value: "Handcrafted from natural wood; each instrument has its own unique grain and character." },
+  //     { label: "Construction", value: "Minimalist construction without drone stops or split registers for durable, reliable use." },
+  //     { label: "Sound", value: "Warm, balanced, and resonant sound in a compact, lightweight design." },
+  //     { label: "Ideal for", value: "Kirtan, mantra meditation, yoga classes, ceremonies, retreats, and personal practice." },
+  //     { label: "Shipping", value: "Shipping costs are included." }
+  //   ]
+  // },
+  // {
+  //   id: "12",
+  //   name: "OCEAN BHAKTI (32 Keys) | Prem Sāgara, Ocean of Love",
+  //   slug: "ocean-bhakti",
+  //   priceEUR: 850,
+  //   priceUSD: 963,
+  //   shortDescription: "A beautifully handcrafted ocean-turquoise travel harmonium inspired by the vastness of the ocean and the depth of devotion.",
+  //   fullDescription: "Meet the Just Prem ‘Ocean Bhakti’ Edition, a beautifully handcrafted travel harmonium inspired by the vastness of the ocean and the depth of devotion.\n\nPrem Sāgara means ‘Ocean of Love’. Prem means love, while Sāgara means ocean. The name expresses the feeling at the heart of Bhakti: an endless movement toward love, devotion, connection, and surrender.\n\nFinished in our distinctive ocean turquoise, #5BC2C6, the Ocean Bhakti reflects the colours and feeling of clear water, open skies, freedom, and flow. Its luminous turquoise body is complemented by silver metal detailing and silver-finished pumps, giving the instrument a fresh, elegant and distinctive character.\n\nCreated for those who carry music, mantra, and devotion wherever they go, the Ocean Bhakti is more than an instrument. It is a companion for singing, prayer, meditation, kirtan, yoga, ceremonies, retreats, concerts, and everyday moments of connection.\n\nFrom the Himalayas to the ocean, from a quiet personal practice to a room filled with voices, this harmonium is made to travel with you.\n\nLET DEVOTION FLOW\n\nThe Ocean Bhakti is designed around one simple idea: sound should support the voice.\n\nIts warm, balanced and resonant tone creates a beautiful foundation for singing, mantra and devotional music, allowing the human voice to remain at the heart of the experience.\n\nWith 32 responsive keys and a comfortable 2.5 octave range, it is simple to play, expressive, and particularly suited to vocal accompaniment.\n\nIts simplified construction, without delicate drone stops and split registers, makes it durable, reliable, and easy to maintain, especially for those who travel frequently.\n\nLess complexity. More freedom to sing.\n\nMADE FOR MUSIC, MANTRA & BHAKTI\n\nThe Ocean Bhakti can accompany you through:\n\nKirtan • Mantra • Meditation • Yoga • Retreats • Ceremonies • Concerts • Teaching • Home Practice\n\nWhether you are learning your first mantra or leading a room full of voices, the harmonium provides a steady musical foundation and invites you to let the breath become sound.\n\nHANDCRAFTED FROM NATURAL WOOD\n\nEach Ocean Bhakti is handcrafted from natural Kail wood (Himalayan Pine), chosen for its natural strength, character, and acoustic qualities.\n\nEvery piece of wood carries its own grain, texture, and subtle variations. These natural differences are part of what makes a handmade instrument special.\n\nThe ocean turquoise finish, #5BC2C6, is complemented by silver-colored metal hardware and silver pumps, creating a clean and luminous expression of the Ocean Bhakti.\n\nNo two Just Prem harmoniums are exactly alike. Each one carries the character of the hands, wood, and materials that brought it to life.\n\n32 RESPONSIVE KEYS\n\n32 keys • 2.5 octaves • Starting from E\n\nThe responsive keyboard offers a comfortable range for singing, devotional music, mantra, practice, and accompaniment.\n\nEvery harmonium is individually tuned to A = 440 Hz before shipping.\n\nSTEADY, EXPRESSIVE BELLOWS\n\nThe Ocean Bhakti features high-quality multi-bellows designed to provide a consistent flow of air and a steady sound.\n\nWhether you are playing softly in meditation or supporting a powerful group chant, the instrument responds naturally to the movement of your hands.\n\nBreathe. Press. Sing.\n\nThe harmonium becomes an extension of the voice.\n\nCRAFTED FOR THE JOURNEY\n\nAt approximately 6.5 kg, with dimensions of 45 × 25 × 21 cm, the Ocean Bhakti is compact and travel-friendly without compromising its warm, resonant sound.\n\nTake it with you to the places where your music lives: the mountains, the ocean, the studio, the yoga room, the temple, the retreat, and your home.\n\nA premium padded harmonium carrying bag is included as a gift.\n\nMADE WITH CARE\n\nEvery Just Prem harmonium is individually inspected, tuned, and carefully prepared before it leaves our hands. Each instrument is securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation.\n\nYour Ocean Bhakti arrives tuned and ready to play.\n\nINTERNATIONAL DELIVERY\n\nInternational courier delivery is included in the product price for customers worldwide. The included delivery covers courier shipping only. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser.\n\nPREM SĀGARA, OCEAN OF LOVE\n\nPrem is love. Sāgara is ocean.\n\nAn ocean has no fixed boundary. It moves, flows, receives, and gives. In the same way, Bhakti invites us to move beyond the limitations of the individual and into a deeper experience of love and connection.\n\nThe Ocean Bhakti is made for those moments when music becomes something more: when one voice becomes many, when a mantra is repeated until the mind becomes quiet, when the harmonium supports the first note of a kirtan, and when you sit alone, open the bellows, and allow your voice to become a prayer.\n\nThis is the spirit behind Just Prem. We create harmoniums not simply to be played, but to support the voice, carry the practice, and accompany the journey of devotion.\n\nJUST PREM OCEAN BHAKTI\nPrem Sāgara, Ocean of Love\n\nDeep like the ocean.\nFree like the breath.\nAlive with devotion.\n\nA harmonium for your voice, your practice, and your journey.",
+  //   keyCount: 32,
+  //   availability: "ON_DEMAND",
+  //   image: "/harmonium-images/ocean-bhakti/ocean-bhakti2.jpg",
+  //   images: [
+  //     "/harmonium-images/ocean-bhakti/ocean-bhakti2.jpg",
+  //     "/harmonium-images/ocean-bhakti/ocean-bhakti1.jpg",
+  //     "/harmonium-images/ocean-bhakti/ocean-bhakti3.jpg",
+  //     "/harmonium-images/ocean-bhakti/ocean-bhakti4.jpg"
+  //   ],
+  //   categories: ["Upcoming"],
+  //   specifications: [
+  //     { label: "Materials", value: "Handcrafted from natural Kail wood (Himalayan Pine), selected for its strength, character, and acoustic qualities." },
+  //     { label: "Design", value: "Ocean turquoise (#5BC2C6) finish with silver-colored metal detailing and silver-finished pumps." },
+  //     { label: "Keyboard", value: "32 responsive keys (2.5 octaves), starting from E." },
+  //     { label: "Tuning", value: "Individually tuned to A = 440 Hz before shipping." },
+  //     { label: "Bellows", value: "High-quality multi-bellows for a consistent, expressive flow of air and steady sound." },
+  //     { label: "Dimensions", value: "45 × 25 × 21 cm (L × W × H)." },
+  //     { label: "Weight", value: "Approximately 6.5 kg." },
+  //     { label: "Included", value: "A premium padded harmonium carrying bag is included as a gift." },
+  //     { label: "Delivery", value: "Each instrument is inspected, tuned, and securely packaged in a reinforced shipping box with protective cushioning." },
+  //     { label: "Taxes/Duties", value: "International courier delivery is included in the product price. Any applicable import duties, customs clearance fees, VAT, taxes, or other destination-country charges remain the responsibility of the purchaser." }
+  //   ]
+  // }
 ];

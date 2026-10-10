@@ -9,10 +9,14 @@ create table if not exists public.class_bookings (
   course_name text not null,
   full_name text not null,
   email text not null,
+  referral_code text,
   booking_date date not null unique,
   status text not null default 'confirmed' check (status in ('confirmed', 'cancelled')),
   created_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
+
+-- Migration for existing database table:
+alter table public.class_bookings add column if not exists referral_code text;
 
 alter table public.class_bookings enable row level security;
 
