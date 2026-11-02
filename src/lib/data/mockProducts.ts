@@ -71,36 +71,39 @@ export const mockHarmoniums = [
       { label: "Taxes/Duties", value: "International delivery is not included. Any applicable import duties, taxes, customs clearance fees, VAT, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
     ]
   },
-  // {
-  //   id: "3",
-  //   name: "Just Prem “Agni” (32 Keys)",
-  //   slug: "prem-agni",
-  //   priceEUR: 650,
-  //   originalPriceEUR: 1200,
-  //   priceUSD: 800,
-  //   shortDescription: "A beautifully handcrafted travel harmonium inspired by the sacred fire of devotion.",
-  //   fullDescription: "Meet the Just Prem “Agni” Edition - a beautifully handcrafted travel harmonium created for those who carry music, mantra, and devotion wherever they go.\n\nAgni, the Sanskrit word for fire, represents transformation, vitality, purification, and the sacred fire of devotion. Inspired by these qualities, the deep red Agni harmonium carries a warm, powerful presence while delivering the rich, resonant sound that brings music and mantra to life.\n\nCompact, durable, and crafted with care, the Agni is designed to accompany you wherever your practice takes you- from kirtan and meditation to yoga classes, ceremonies, retreats, concerts, and intimate creative sessions. Whether you're travelling through the Himalayas, gathering by the ocean, or creating a sacred space at home, this harmonium is made to move with you.\n\nFeaturing 32 responsive keys and a comfortable travel-friendly design, the Agni offers a smooth playing experience without compromising on sound. Its simplified construction : free from delicate drone stops and split registers - makes it exceptionally reliable, durable, and easy to maintain, allowing you to focus entirely on your music and practice.\n\nEach harmonium is handcrafted from natural Kail wood (Himalayan Pine), allowing the unique grain and character of the wood to shine through. Combined with its deep red finish, traditional carved grille, and antique-gold detailing, every Just Prem “Agni” has its own individual character. No two instruments are exactly alike.",
-  //   keyCount: 32,
-  //   availability: "IN_STOCK",
-  //   image: "/harmonium-images/premagni/Premagni.webp",
-  //   images: [
-  //     "/harmonium-images/premagni/Premagni.webp",
-  //     "/harmonium-images/premagni/premagni2.webp"
-  //   ],
-  //   categories: ["Travel", "Kirtan"],
-  //   specifications: [
-  //     { label: "Materials", value: "Handcrafted from Kail wood (Himalayan Pine), known for its natural strength and excellent acoustic properties." },
-  //     { label: "Bellows", value: "High-quality multi-bellows provide a consistent air supply and uninterrupted sound, even when playing softly." },
-  //     { label: "Design", value: "Deep red finish with antique bronze/gold-colored metal hardware, matching handles, traditional decorative grille, and solid wood construction." },
-  //     { label: "Keyboard", value: "32 responsive keys — 2.5 octaves, starting from E." },
-  //     { label: "Tuning", value: "Every harmonium is individually tuned to A = 440 Hz before shipping." },
-  //     { label: "Dimensions", value: "45 × 25 × 21 cm (L × W × H) — compact and easy to transport." },
-  //     { label: "Weight", value: "Approximately 6.5 kg." },
-  //     { label: "Travel Bag", value: "A premium padded harmonium carrying bag is included as a gift." },
-  //     { label: "Delivery", value: "Every Just Prem Harmonium is individually inspected, tuned, and carefully prepared before dispatch. Each instrument is securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation." },
-  //     { label: "Taxes/Duties", value: "International delivery is not included. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
-  //   ]
-  // },
+  {
+    id: "3",
+    name: "Just Prem “Agni” (32 Keys)",
+    slug: "prem-agni",
+    priceEUR: 650,
+    originalPriceEUR: 1200,
+    priceUSD: 800,
+    shortDescription: "A beautifully handcrafted travel harmonium inspired by the sacred fire of devotion.",
+    fullDescription: "Meet the Just Prem “Agni” Edition - a beautifully handcrafted travel harmonium created for those who carry music, mantra, and devotion wherever they go.\n\nAgni, the Sanskrit word for fire, represents transformation, vitality, purification, and the sacred fire of devotion. Inspired by these qualities, the deep red Agni harmonium carries a warm, powerful presence while delivering the rich, resonant sound that brings music and mantra to life.\n\nCompact, durable, and crafted with care, the Agni is designed to accompany you wherever your practice takes you- from kirtan and meditation to yoga classes, ceremonies, retreats, concerts, and intimate creative sessions. Whether you're travelling through the Himalayas, gathering by the ocean, or creating a sacred space at home, this harmonium is made to move with you.\n\nFeaturing 32 responsive keys and a comfortable travel-friendly design, the Agni offers a smooth playing experience without compromising on sound. Its simplified construction : free from delicate drone stops and split registers - makes it exceptionally reliable, durable, and easy to maintain, allowing you to focus entirely on your music and practice.\n\nEach harmonium is handcrafted from natural Kail wood (Himalayan Pine), allowing the unique grain and character of the wood to shine through. Combined with its deep red finish, traditional carved grille, and antique-gold detailing, every Just Prem “Agni” has its own individual character. No two instruments are exactly alike.",
+    keyCount: 32,
+    availability: "IN_STOCK",
+    image: "/harmonium-images/premagni/agni1.jpeg",
+    images: [
+      "/harmonium-images/premagni/agni1.jpeg",
+      "/harmonium-images/premagni/agni2.jpeg",
+      "/harmonium-images/premagni/agni3.jpeg",
+      "/harmonium-images/premagni/agni4.jpeg",
+      "/harmonium-images/premagni/agni5.jpeg"
+    ],
+    categories: ["Travel", "Kirtan"],
+    specifications: [
+      { label: "Materials", value: "Handcrafted from Kail wood (Himalayan Pine), known for its natural strength and excellent acoustic properties." },
+      { label: "Bellows", value: "High-quality multi-bellows provide a consistent air supply and uninterrupted sound, even when playing softly." },
+      { label: "Design", value: "Deep red finish with antique bronze/gold-colored metal hardware, matching handles, traditional decorative grille, and solid wood construction." },
+      { label: "Keyboard", value: "32 responsive keys — 2.5 octaves, starting from E." },
+      { label: "Tuning", value: "Every harmonium is individually tuned to A = 440 Hz before shipping." },
+      { label: "Dimensions", value: "45 × 25 × 21 cm (L × W × H) — compact and easy to transport." },
+      { label: "Weight", value: "Approximately 6.5 kg." },
+      { label: "Travel Bag", value: "A premium padded harmonium carrying bag is included as a gift." },
+      { label: "Delivery", value: "Every Just Prem Harmonium is individually inspected, tuned, and carefully prepared before dispatch. Each instrument is securely packaged in a reinforced shipping box with protective cushioning to help ensure safe international transportation." },
+      { label: "Taxes/Duties", value: "International delivery is not included. Any applicable import duties, customs clearance fees, VAT, taxes, or other charges imposed by the destination country are not included and remain the responsibility of the purchaser." }
+    ]
+  },
   // {
   //   id: "4",
   //   name: "Just Prem “Royal Amethyst” (32 Keys)",
@@ -141,13 +144,12 @@ export const mockHarmoniums = [
     fullDescription: "Meet the Just Prem “Radha Prem” Edition - a beautifully handcrafted travel harmonium created for those who carry music, mantra, and devotion wherever they go.\n\nInspired by Radha, the timeless symbol of divine love and devotion, the Radha Prem edition is finished in a beautiful rose-pink tone that reflects tenderness, warmth, beauty, and the heart of bhakti. Its elegant colour and traditional handcrafted details give the instrument a graceful presence, while its rich and resonant voice creates the perfect foundation for music, mantra, and devotional singing.\n\nLightweight, compact, and made with care, the Radha Prem is designed to accompany you wherever your journey takes you - from kirtan and meditation to yoga classes, ceremonies, retreats, concerts, and intimate creative sessions. Whether you're travelling through the Himalayas, gathering with friends by the ocean, or creating a sacred space at home, this harmonium is made to move with you.\n\nFeaturing 32 responsive keys and a comfortable travel-friendly design, the Radha Prem offers a smooth playing experience while maintaining a warm, balanced, and resonant tone. Its simplified construction - free from delicate drone stops and split registers - makes it exceptionally durable, reliable, and easy to maintain, allowing you to focus on your practice rather than the instrument.\n\nEach harmonium is handcrafted from natural Kail wood (Himalayan Pine), with the natural grain and character of the wood making every instrument unique. The rose-pink finish, traditional decorative grille, and antique-gold detailing come together to create an instrument that feels both timeless and distinctive.\n\nNo two Just Prem “Radha Prem” harmoniums are exactly alike. Each one carries its own subtle variations in wood, finish, and handcrafted details - a reflection of the hands and materials that brought it to life.\n\nSoft in colour. Warm in sound. Crafted with devotion. Made to travel with your heart.\n\nJust Prem “Radha Prem” - A Harmonium of Divine Love.",
     keyCount: 32,
     availability: "IN_STOCK",
-    image: "/harmonium-images/radhaprema/Radhaprem1.webp",
+    image: "/harmonium-images/radhaprema/royalerose1.jpeg",
     images: [
-      "/harmonium-images/radhaprema/Radhaprem1.webp",
-      "/harmonium-images/radhaprema/Radhaprema.webp",
-      "/harmonium-images/radhaprema/radhaprema2.webp",
-      "/harmonium-images/radhaprema/Radhaprema3.webp",
-      "/harmonium-images/radhaprema/radhaprema4.webp"
+      "/harmonium-images/radhaprema/royalerose1.jpeg",
+      "/harmonium-images/radhaprema/royalerose2.jpeg",
+      "/harmonium-images/radhaprema/royalerose3.jpeg",
+      "/harmonium-images/radhaprema/royalerose4.jpeg"
     ],
     categories: ["Travel", "Kirtan"],
     specifications: [

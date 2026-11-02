@@ -9,7 +9,12 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = use(params);
-  const product = mockHarmoniums.find(h => h.slug === resolvedParams.slug);
+  const product = mockHarmoniums.find(
+    (h) =>
+      h.slug === resolvedParams.slug ||
+      (resolvedParams.slug === "agni" && h.slug === "prem-agni") ||
+      (resolvedParams.slug === "royal-rose" && h.slug === "radha-prema")
+  );
   const { addItem, setIsCartOpen } = useCart();
   const router = useRouter();
 
