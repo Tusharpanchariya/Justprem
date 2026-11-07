@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { CalendarDays, Check, Mail, Sparkles, X } from "lucide-react";
 
 type Course = {
@@ -14,6 +15,7 @@ type Course = {
   theme: "light" | "dark";
   buttonText?: string;
   disabled?: boolean;
+  href?: string;
 };
 
 const courses: Course[] = [
@@ -25,16 +27,17 @@ const courses: Course[] = [
     description: "A self-paced introduction to harmonium and Bhakti music.",
     price: "€108",
     details: [
-      "Fully recorded course",
+      "Fully recorded masterclass (8 modules)",
       "10 Kirtans to learn and play on harmonium",
-      "Introduction to the harmonium",
-      "Major and minor chords",
+      "Introduction to the harmonium & bellows",
+      "Major & minor chords + family chord matrix",
       "Foundations of accompanying your voice",
+      "104-page Harmonium Foundation Handbook",
       "Lifetime access to recorded material"
     ],
     theme: "light",
-    buttonText: "UPCOMING COURSE",
-    disabled: true,
+    buttonText: "VIEW FULL CURRICULUM",
+    href: "/sound-of-devotion/recorded-foundation",
   },
   {
     id: "2-months-bhakti-foundation",
@@ -152,9 +155,29 @@ export function BhaktiYogaOffers() {
               ))}
             </ul>
 
-            <button type="button" disabled={course.disabled} onClick={() => !course.disabled && openApplication(course)} className={`mt-auto pt-16 text-left text-xs uppercase tracking-widest transition-colors ${course.disabled ? "cursor-default text-charcoal/40" : course.theme === "dark" ? "text-ivory hover:text-white" : "text-charcoal/60 hover:text-charcoal"}`}>
-              {course.buttonText || "CHOOSE THIS PATH"} {course.disabled ? "" : "↗"}
-            </button>
+            {course.href ? (
+              <Link
+                href={course.href}
+                className="mt-auto pt-16 inline-flex items-center text-xs uppercase tracking-widest text-[#ad684d] hover:text-charcoal font-medium transition-colors"
+              >
+                {course.buttonText || "VIEW FULL CURRICULUM"} ↗
+              </Link>
+            ) : (
+              <button
+                type="button"
+                disabled={course.disabled}
+                onClick={() => !course.disabled && openApplication(course)}
+                className={`mt-auto pt-16 text-left text-xs uppercase tracking-widest transition-colors ${
+                  course.disabled
+                    ? "cursor-default text-charcoal/40"
+                    : course.theme === "dark"
+                    ? "text-ivory hover:text-white"
+                    : "text-charcoal/60 hover:text-charcoal"
+                }`}
+              >
+                {course.buttonText || "CHOOSE THIS PATH"} {course.disabled ? "" : "↗"}
+              </button>
+            )}
           </article>
         ))}
       </div>

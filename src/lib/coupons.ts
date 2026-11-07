@@ -14,10 +14,15 @@ type Coupon = {
 // Add or change promotional codes here. Amounts are calculated server-side.
 const coupons: Coupon[] = [
   { code: "PREM10", description: "10% off your order", percentOff: 10 },
-  { code: "PREM180", description: "EUR 180 off your order", fixedDiscountEUR: 180 },
+  { code: "JUSTPREM50", description: "EUR 50 off your order", fixedDiscountEUR: 50 },
+  { code: "PREM100", description: "EUR 100 off your order", fixedDiscountEUR: 100 },
   { code: "FABI100", description: "EUR 100 off your order", fixedDiscountEUR: 100 },
+  { code: "YOGA150", description: "EUR 150 off your order", fixedDiscountEUR: 150 },
   { code: "FABI150", description: "EUR 150 off your order", fixedDiscountEUR: 150 },
   { code: "JUSTPREM150", description: "EUR 150 off your order", fixedDiscountEUR: 150 },
+  { code: "PREM180", description: "EUR 180 off your order", fixedDiscountEUR: 180 },
+  { code: "BHAKTI200", description: "EUR 200 off your order", fixedDiscountEUR: 200 },
+  { code: "PREM250", description: "EUR 250 off your order", fixedDiscountEUR: 250 },
 ];
 
 export function applyCoupon(code: string | undefined, subtotal: number): AppliedCoupon | null {

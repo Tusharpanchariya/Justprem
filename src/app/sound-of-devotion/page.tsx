@@ -54,8 +54,8 @@ export default function SoundOfDevotionPage() {
           <p className="mt-9 max-w-xl text-balance font-serif text-xl leading-tight md:text-2xl">A journey into voice, mantra, harmonium and Bhakti Yoga.</p>
           <p className="mt-4 max-w-lg text-pretty text-sm leading-7 text-charcoal/70 md:text-base">Learn to connect with your own voice, understand sacred sound, chant Sanskrit mantras with awareness, and accompany your voice on the harmonium.</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="#class-offerings" className="inline-flex min-h-12 items-center justify-center bg-[#567262] px-6 text-xs uppercase tracking-widest text-ivory transition-colors hover:bg-forest">Begin your journey&nbsp; ↗</Link>
-            <Link href="#journey" className="inline-flex min-h-12 items-center justify-center px-5 text-xs uppercase tracking-widest hover:text-[#ad684d]">Explore the course&nbsp; ↓</Link>
+            <Link href="/sound-of-devotion/recorded-foundation" className="inline-flex min-h-12 items-center justify-center bg-[#567262] px-6 text-xs uppercase tracking-widest text-ivory transition-colors hover:bg-forest">Explore Recorded Course (€108)&nbsp; ↗</Link>
+            <Link href="#class-offerings" className="inline-flex min-h-12 items-center justify-center border border-charcoal/20 px-6 text-xs uppercase tracking-widest hover:border-charcoal transition-colors">1-on-1 Mentorship&nbsp; ↓</Link>
           </div>
           <div className="mt-10 flex flex-wrap gap-x-6 gap-y-2 border-t border-charcoal/15 pt-5 text-[10px] uppercase tracking-widest text-charcoal/65 md:text-xs">
             <span>10 private sessions</span><span>90 minutes</span><span>~2 months</span><span className="text-[#ad684d]">€850</span>
