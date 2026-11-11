@@ -224,7 +224,7 @@ export function VideoPreviewModal({ lesson, module, onClose, onEnrollClick }: Vi
                 Enjoying this lesson?
               </p>
               <p className="text-xs text-charcoal/70">
-                Unlock all 8 modules, 30+ lessons, 10 complete kirtans & the 104-page handbook.
+                Explore all five modules, 15 core lessons and your first seven kirtans.
               </p>
             </div>
 

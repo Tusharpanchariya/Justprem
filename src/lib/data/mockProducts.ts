@@ -14,13 +14,15 @@ export const mockHarmoniums = [
     images: [
       "/harmonium-images/aura/Aura.webp",
       "/harmonium-images/aura/aura2.webp",
-      "/harmonium-images/aura/aura3.webp",
       "/harmonium-images/aura/aura4.webp",
-      "/harmonium-images/aura/aura5.webp",
       "/harmonium-images/aura/Aura6.webp",
-      "/harmonium-images/aura/Aura7.webp",
       "/harmonium-images/aura/aura8.webp",
-      "/harmonium-images/aura/aura10.webp"
+      "/harmonium-images/aura/aura10.webp",
+      "/harmonium-images/aura/Auranew1.jpeg",
+      "/harmonium-images/aura/auranew2.jpeg",
+      "/harmonium-images/aura/auranew3.jpeg",
+      "/harmonium-images/aura/auranew4.jpeg",
+      "/harmonium-images/aura/auranew5.jpeg"
     ],
     categories: ["Travel", "Kirtan"],
     specifications: [

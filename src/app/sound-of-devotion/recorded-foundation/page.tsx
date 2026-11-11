@@ -8,14 +8,9 @@ import { CourseHero } from "@/components/course/CourseHero";
 import { StickyCourseEnrollCard } from "@/components/course/StickyCourseEnrollCard";
 import { CourseCurriculumAccordion } from "@/components/course/CourseCurriculumAccordion";
 import { VideoPreviewModal } from "@/components/course/VideoPreviewModal";
-import { InteractiveTheoryExplorer } from "@/components/course/InteractiveTheoryExplorer";
-import { KirtanRepertoireSection } from "@/components/course/KirtanRepertoireSection";
-import { PDFHandbookSection } from "@/components/course/PDFHandbookSection";
-import { WeeklyRoadmapTimeline } from "@/components/course/WeeklyRoadmapTimeline";
-import { TanpuraAudioPlayer } from "@/components/course/TanpuraAudioPlayer";
 import { CourseFAQ } from "@/components/course/CourseFAQ";
 import { EnrollmentModal } from "@/components/course/EnrollmentModal";
-import { Check, Sparkles, Award, ArrowRight, Music, Heart, BookOpen } from "lucide-react";
+import { Check } from "lucide-react";
 
 export default function RecordedFoundationPage() {
   const [selectedPreviewLesson, setSelectedPreviewLesson] = useState<{
@@ -47,10 +42,7 @@ export default function RecordedFoundationPage() {
           <div className="flex items-center gap-6 text-charcoal/70">
             <a href="#overview" className="hover:text-[#ad684d] transition-colors">Overview</a>
             <a href="#curriculum" className="hover:text-[#ad684d] transition-colors">Curriculum</a>
-            <a href="#kirtans" className="hover:text-[#ad684d] transition-colors">10 Kirtans</a>
-            <a href="#handbook" className="hover:text-[#ad684d] transition-colors">PDF Handbook</a>
-            <a href="#roadmap" className="hover:text-[#ad684d] transition-colors">10-Week Journey</a>
-            <a href="#instructors" className="hover:text-[#ad684d] transition-colors">Teachers</a>
+            <a href="#instructors" className="hover:text-[#ad684d] transition-colors">Your Guides</a>
             <a href="#faq" className="hover:text-[#ad684d] transition-colors">FAQ</a>
           </div>
 
@@ -86,11 +78,11 @@ export default function RecordedFoundationPage() {
                 —&nbsp;&nbsp; 01 / THE THREE PILLARS
               </p>
               <h2 className="font-serif text-[clamp(2.2rem,4vw,3.6rem)] leading-[0.88] text-charcoal">
-                Designed Around Three<br />
-                <em className="text-[#ad684d]">Sacred Pillars</em>
+                A Gentle First Step<br />
+                <em className="text-[#ad684d]">Into Devotional Music</em>
               </h2>
               <p className="mt-4 text-sm md:text-base text-charcoal/75 leading-relaxed max-w-2xl">
-                The most important principle of Sound of Devotion is that students should never feel burdened by dry music theory. You are discovering an instrument, opening your authentic voice, and learning how to express Bhakti through sacred sound.
+                A beginner-friendly introduction for anyone who has never played harmonium, does not know musical notes or feels shy about singing. No previous musical experience is needed.
               </p>
 
               <div className="mt-10 grid sm:grid-cols-3 gap-6">
@@ -115,7 +107,7 @@ export default function RecordedFoundationPage() {
                     </div>
 
                     <div className="mt-6 pt-4 border-t border-charcoal/10 flex items-center justify-between text-[11px] text-[#567262] font-medium">
-                      <span>Self-Paced Mastery</span>
+                      <span>Beginner Friendly</span>
                       <span>✦</span>
                     </div>
                   </div>
@@ -129,24 +121,22 @@ export default function RecordedFoundationPage() {
                 —&nbsp;&nbsp; 02 / LEARNING OUTCOMES
               </p>
               <h2 className="font-serif text-[clamp(2.2rem,4vw,3.6rem)] leading-[0.88] text-charcoal">
-                What You Will Walk Away With
+                Your First Musical Foundations
               </h2>
               <p className="mt-3 text-sm text-charcoal/70">
-                Tangible musical, vocal, and devotional abilities you will embody by Week 10:
+                By the end of this course, you will be able to:
               </p>
 
               <div className="mt-8 grid sm:grid-cols-2 gap-4">
                 {[
-                  "Find your notes & comfortably play both Indian Swaras (Sa Re Ga Ma) and Western notes (C D E F G A B)",
-                  "Understand the keyboard layout, octaves (Saptak), and how to set your movable Sa to your vocal range",
-                  "Master smooth, unbroken bellows pumping with relaxed wrist and natural breath flow",
-                  "Play all major and minor triad chords without feeling confused by sharps and flats",
-                  "Unlock the 'Family Chords' secret to play songs without memorizing endless chord sheets",
-                  "Free your natural voice from judgment with diaphragmatic breath, humming, and open vowels",
-                  "Match pitch effortlessly with the included C Tanpura acoustic practice track",
-                  "Confidently play and sing 10 authentic devotional kirtans (5 Major and 5 Minor)",
-                  "Understand call-and-response dynamics, hold steady tempo, and lead sacred gatherings",
-                  "Establish a joyful 20-minute daily harmonium Sadhana practice you can sustain for life",
+                  "Understand the basics of music and recognise notes on your harmonium",
+                  "Get comfortable with the harmonium, including the keys, hand position and bellows",
+                  "Sing basic Sargam exercises and connect your voice with the harmonium",
+                  "Understand the difference between major and minor scales",
+                  "Play four foundational major and minor scales: A, B, C and D",
+                  "Play four foundational major and minor chords: A, B, C and D",
+                  "Understand simple chord families and progressions",
+                  "Sing and play your first devotional kirtans",
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-3 p-3.5 bg-white/60 border border-charcoal/10 rounded">
                     <Check className="w-4 h-4 text-[#567262] shrink-0 mt-0.5" />
@@ -156,27 +146,10 @@ export default function RecordedFoundationPage() {
               </div>
             </section>
 
-            {/* Interactive Live Tanpura Synthesizer Widget */}
-            <section>
-              <TanpuraAudioPlayer />
-            </section>
-
             {/* Curriculum Accordion */}
             <CourseCurriculumAccordion
               onSelectLessonForPreview={handleSelectLessonForPreview}
             />
-
-            {/* Interactive Family Chords & Music Theory Explorer */}
-            <InteractiveTheoryExplorer />
-
-            {/* 10 Kirtan Repertoire Section */}
-            <KirtanRepertoireSection />
-
-            {/* Downloadable PDF Handbook Showcase */}
-            <PDFHandbookSection />
-
-            {/* 10-Week Roadmap Timeline */}
-            <WeeklyRoadmapTimeline />
 
             {/* Instructors Section */}
             <section id="instructors" className="border-b border-charcoal/15 pb-16">
@@ -268,13 +241,13 @@ export default function RecordedFoundationPage() {
               From vibration to devotion.
             </p>
             <p className="mt-4 text-xs md:text-sm text-ivory/70 max-w-lg leading-relaxed">
-              Enroll today and receive instant lifetime access to all 8 modules, 30+ masterclass videos, 10 complete kirtans, and the 104-page Harmonium Foundation Handbook.
+              A beginner-friendly first step into the world of devotional music, with five modules and 15 core lessons.
             </p>
           </div>
 
           <div className="border border-white/20 bg-ivory/10 backdrop-blur-md p-8 md:p-10 shadow-2xl">
             <span className="text-[10px] uppercase tracking-widest text-[#efd09a] block mb-2">
-              RECORDED BHAKTI FOUNDATION
+              LEVEL 1 · BEGIN YOUR JOURNEY
             </span>
             <h3 className="font-serif text-3xl text-ivory mb-2">
               Sound of Devotion
@@ -283,10 +256,10 @@ export default function RecordedFoundationPage() {
               {COURSE_META.priceDisplay}
             </p>
             <ul className="space-y-2.5 text-xs text-ivory/80 mb-8 border-t border-white/15 pt-5">
-              <li>✓ 8 Learning Modules & 30+ HD Masterclasses</li>
-              <li>✓ 10 Complete Kirtans with 8-Step Blueprint</li>
-              <li>✓ 104-Page Harmonium Foundation PDF Handbook</li>
-              <li>✓ C Tanpura Vocal Practice Drone Track</li>
+              <li>✓ 5 Beginner-Friendly Modules & 15 Core Lessons</li>
+              <li>✓ Seven First Kirtans to Learn and Practise</li>
+              <li>✓ Foundations of notes, scales, chords and voice</li>
+              <li>✓ No previous musical experience needed</li>
               <li>✓ Lifetime Access on Mobile, Tablet & Desktop</li>
             </ul>
 

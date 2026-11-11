@@ -29,15 +29,14 @@ export function StickyCourseEnrollCard({ onOpenVideoPreview, onEnrollClick }: St
   };
 
   const inclusions = [
-    { icon: Video, text: "30 Masterclass video lessons (5–15 mins each)" },
-    { icon: Video, text: "Dual-angle filming (overhead fingers + expressive face)" },
-    { icon: Music, text: "10 Complete Kirtans (5 Major & 5 Minor keys)" },
-    { icon: BookOpen, text: "104-Page Harmonium Foundation PDF Handbook" },
-    { icon: Download, text: "Indian Swaras & Western notes master chart" },
-    { icon: Music, text: "High-definition C Tanpura vocal practice drone" },
-    { icon: Clock, text: "10-Week structured student Sadhana journey" },
+    { icon: Video, text: "15 core lessons across five beginner-friendly modules" },
+    { icon: Music, text: "Recognise notes and practise Sargam" },
+    { icon: Music, text: "Learn seven first devotional kirtans" },
+    { icon: BookOpen, text: "Learn foundational scales, chords and chord families" },
+    { icon: Download, text: "Beginner-friendly harmonium guidance" },
+    { icon: Music, text: "Practise singing with your harmonium" },
+    { icon: Clock, text: "Self-paced learning" },
     { icon: Sparkles, text: "Lifetime access on mobile, tablet & desktop" },
-    { icon: ShieldCheck, text: "Certificate of Completion upon capstone offering" },
   ];
 
   return (
@@ -108,13 +107,13 @@ export function StickyCourseEnrollCard({ onOpenVideoPreview, onEnrollClick }: St
 
         <p className="mt-3 text-center text-[11px] text-charcoal/60 flex items-center justify-center gap-1.5">
           <ShieldCheck className="w-3.5 h-3.5 text-[#567262]" />
-          14-Day Devotional Money-Back Guarantee
+          No previous musical experience needed
         </p>
 
         {/* Course Inclusions Checklist */}
         <div className="mt-7 pt-6 border-t border-charcoal/15">
           <h4 className="text-xs uppercase tracking-widest font-semibold text-charcoal mb-4">
-            This Complete Course Includes:
+            Your Level 1 Course Includes:
           </h4>
           <ul className="space-y-3 text-xs text-charcoal/80">
             {inclusions.map((item, idx) => {

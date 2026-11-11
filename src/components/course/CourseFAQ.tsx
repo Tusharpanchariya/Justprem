@@ -23,7 +23,7 @@ export function CourseFAQ() {
             <em className="text-[#ad684d]">Questions</em>
           </h2>
           <p className="mt-4 text-sm text-charcoal/70 max-w-lg mx-auto">
-            Everything you need to know about starting your harmonium journey with Just Prem.
+            A few helpful details before you begin your first steps in devotional music.
           </p>
         </div>
 

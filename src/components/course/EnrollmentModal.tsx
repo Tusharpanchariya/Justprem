@@ -89,7 +89,7 @@ export function EnrollmentModal({ isOpen, onClose }: EnrollmentModalProps) {
                 <h4 className="font-serif text-base text-charcoal font-medium">
                   {COURSE_META.title} · Foundation
                 </h4>
-                <p className="text-[11px] text-[#567262]">Lifetime Access · 8 Modules · 10 Kirtans</p>
+                <p className="text-[11px] text-[#567262]">Lifetime Access · 5 Modules · 15 Lessons</p>
               </div>
               <span className="font-serif text-3xl text-[#ad684d] font-normal">
                 {COURSE_META.priceDisplay}
@@ -163,7 +163,7 @@ export function EnrollmentModal({ isOpen, onClose }: EnrollmentModalProps) {
             <div className="pt-2 text-center">
               <p className="text-[11px] text-charcoal/60 flex items-center justify-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#567262]" />
-                14-Day Devotional Money-Back Guarantee · Instant Lifetime Access
+                Beginner Friendly · Instant Lifetime Access
               </p>
             </div>
           </form>

@@ -111,13 +111,13 @@ export function CourseCurriculumAccordion({ onSelectLessonForPreview }: CourseCu
               <em className="text-[#ad684d]">Curriculum</em>
             </h2>
             <p className="mt-4 text-sm text-charcoal/70 max-w-xl">
-              Divided into 8 progressive modules. Designed so you never feel overwhelmed by theory, but empowered through tangible musical discovery.
+              Five gentle modules with 15 core lessons, taking you from your first notes to your first kirtans.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-center gap-3">
             <span className="text-xs uppercase tracking-wider text-charcoal/60">
-              8 Modules · {totalLessons} Lessons · ~8.5 Total Hours
+              {COURSE_MODULES.length} Modules · {totalLessons} Core Lessons
             </span>
             <div className="flex items-center gap-2">
               <button

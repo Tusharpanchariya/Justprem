@@ -23,7 +23,7 @@ export function CourseHero({ onOpenVideoPreview, onEnrollClick }: CourseHeroProp
           <span>/</span>
           <Link href="/sound-of-devotion" className="hover:text-[#ad684d] transition-colors">Academy</Link>
           <span>/</span>
-          <span className="text-wood">Recorded Foundation</span>
+          <span className="text-wood">Level 1 · Begin Your Journey</span>
         </nav>
 
         <div className="grid lg:grid-cols-[1.1fr_.9fr] gap-12 lg:gap-16 items-start">
@@ -38,7 +38,7 @@ export function CourseHero({ onOpenVideoPreview, onEnrollClick }: CourseHeroProp
                 {COURSE_META.durationWeeks}
               </span>
               <span className="inline-flex items-center px-3 py-1 bg-charcoal/5 text-charcoal/70 text-[11px] font-medium tracking-wide rounded-full">
-                Beginner Friendly · Self-Paced
+                Beginner Friendly · No Experience Needed
               </span>
             </div>
 
@@ -57,26 +57,26 @@ export function CourseHero({ onOpenVideoPreview, onEnrollClick }: CourseHeroProp
             </p>
 
             <p className="mt-3 text-sm italic text-[#567262] font-serif">
-              &ldquo;Students shouldn&apos;t feel they are studying cold music theory. They should feel they are discovering an instrument, opening their voice, and learning how to express Bhakti through music.&rdquo;
+              &ldquo;A gentle first step into devotional music. You do not need any previous musical experience.&rdquo;
             </p>
 
             {/* Quick Metrics Pills */}
             <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 py-4 border-y border-charcoal/15 text-xs text-charcoal/80">
               <div className="flex items-center gap-2">
                 <BookOpen className="w-4 h-4 text-[#ad684d] shrink-0" />
-                <span><strong>8</strong> Modules</span>
+                <span><strong>5</strong> Modules</span>
               </div>
               <div className="flex items-center gap-2">
                 <PlayCircle className="w-4 h-4 text-[#567262] shrink-0" />
-                <span><strong>30+</strong> Masterclasses</span>
+                <span><strong>15</strong> Core Lessons</span>
               </div>
               <div className="flex items-center gap-2">
                 <Music className="w-4 h-4 text-[#a07e5b] shrink-0" />
-                <span><strong>10</strong> Full Kirtans</span>
+                <span><strong>7</strong> First Kirtans</span>
               </div>
               <div className="flex items-center gap-2">
                 <Award className="w-4 h-4 text-[#ad684d] shrink-0" />
-                <span><strong>104-Pg</strong> Handbook</span>
+                <span><strong>€108</strong> One-time</span>
               </div>
             </div>
 
@@ -120,31 +120,31 @@ export function CourseHero({ onOpenVideoPreview, onEnrollClick }: CourseHeroProp
               <div className="mt-6 space-y-5">
                 <div className="group border-l-2 border-[#ad684d] pl-4 transition-colors">
                   <p className="text-xs uppercase tracking-widest font-semibold text-[#ad684d]">01 / UNDERSTAND</p>
-                  <h3 className="font-serif text-lg text-charcoal mt-0.5">Bhakti Yoga & Musical Foundations</h3>
+                  <h3 className="font-serif text-lg text-charcoal mt-0.5">The Awakening of Sound</h3>
                   <p className="text-xs text-charcoal/70 mt-1 leading-relaxed">
-                    Nāda Yoga, the harmonium, sound physics, and Indian swaras without intimidating jargon.
+                    Discover Bhakti Yoga, Nada Yoga, sound, chanting and mantra.
                   </p>
                 </div>
 
                 <div className="group border-l-2 border-[#567262] pl-4 transition-colors">
                   <p className="text-xs uppercase tracking-widest font-semibold text-[#567262]">02 / PRACTICE</p>
-                  <h3 className="font-serif text-lg text-charcoal mt-0.5">Harmonium Technique, Scales & Voice</h3>
+                  <h3 className="font-serif text-lg text-charcoal mt-0.5">Meet Your Harmonium & Find Your Voice</h3>
                   <p className="text-xs text-charcoal/70 mt-1 leading-relaxed">
-                    Smooth bellows airflow, family chords formula, vocal warmups, and hand-voice synchronization.
+                    Get comfortable with your harmonium, recognise notes and explore singing at your pace.
                   </p>
                 </div>
 
                 <div className="group border-l-2 border-[#a07e5b] pl-4 transition-colors">
                   <p className="text-xs uppercase tracking-widest font-semibold text-[#a07e5b]">03 / EXPRESS</p>
-                  <h3 className="font-serif text-lg text-charcoal mt-0.5">10 Kirtans & Devotional Leadership</h3>
+                  <h3 className="font-serif text-lg text-charcoal mt-0.5">Your First Kirtans</h3>
                   <p className="text-xs text-charcoal/70 mt-1 leading-relaxed">
-                    Play and sing 10 authentic kirtans, understand call-and-response, and lead sacred gatherings.
+                    Simple chord progressions and seven beginner-friendly devotional songs to sing and play.
                   </p>
                 </div>
               </div>
 
               <div className="mt-8 pt-4 border-t border-charcoal/15 flex items-center justify-between text-xs text-charcoal/70">
-                <span>100% Self-Paced Learning</span>
+                <span>Beginner Friendly · Self-Paced</span>
                 <span className="text-[#567262] font-medium">✓ Lifetime Access</span>
               </div>
             </div>
