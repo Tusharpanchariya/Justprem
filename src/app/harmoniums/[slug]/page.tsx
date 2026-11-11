@@ -6,12 +6,14 @@ import { motion } from "framer-motion";
 import { mockHarmoniums } from "@/lib/data/mockProducts";
 import { useCart } from "@/lib/context/CartContext";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { AURA_MINI_FINISHES, AuraFinishPreview } from "@/components/harmoniums/AuraFinishPreview";
 
 export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = use(params);
   const product = mockHarmoniums.find(
     (h) =>
       h.slug === resolvedParams.slug ||
+      (resolvedParams.slug.toLowerCase().startsWith("matangi(") && h.slug === "matangi") ||
       (resolvedParams.slug === "agni" && h.slug === "prem-agni") ||
       (resolvedParams.slug === "royal-rose" && h.slug === "radha-prema")
   );
@@ -23,11 +25,12 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
   }
 
   const [activeImageIdx, setActiveImageIdx] = useState(0);
+  const [selectedFinish, setSelectedFinish] = useState("#70291D");
   
   const handleAddToCart = () => {
     addItem({
       id: product.id,
-      name: product.name,
+      name: `${product.name}${isAuraMini ? ` · ${selectedFinish} finish` : ""}`,
       slug: product.slug,
       priceEUR: product.priceEUR,
       image: product.image
@@ -42,6 +45,8 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
 
   const images = product.images || [product.image];
   const activeImage = images[activeImageIdx];
+  const isAuraMini = product.slug === "aura-mini";
+  const selectedAuraFinish = AURA_MINI_FINISHES.find((finish) => finish.name === selectedFinish) || AURA_MINI_FINISHES[2];
   const isSoldOut = product.availability === "SOLD_OUT";
 
   const nextImage = () => {
@@ -54,17 +59,17 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
 
   return (
     <div className="min-h-screen bg-ivory pt-32 pb-24">
-      <section className="px-6 md:px-12 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <section className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-12 px-6 md:px-12 lg:grid-cols-2 lg:gap-14">
         
         {/* Left Side: Images (Sticky on Desktop) */}
-        <div className="relative flex flex-col gap-4 md:sticky md:top-32 md:h-fit md:flex-row md:gap-6">
+        <div className="relative z-20 flex min-w-0 flex-col gap-4 lg:sticky lg:top-28 lg:h-fit lg:flex-row lg:gap-6 lg:self-start lg:pt-4">
           {/* Thumbnails (Vertical on MD+) */}
           {images.length > 1 && (
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="order-2 flex w-full gap-3 overflow-x-auto overflow-y-hidden pb-1 md:order-none md:max-h-[70vh] md:w-24 md:flex-col md:overflow-x-hidden md:overflow-y-auto md:pb-0 flex-shrink-0 scrollbar-hide"
+              className="order-2 flex w-full flex-shrink-0 gap-3 overflow-x-auto overflow-y-hidden pb-1 lg:order-none lg:max-h-[calc(100vh-9rem)] lg:w-24 lg:flex-col lg:overflow-x-hidden lg:overflow-y-auto lg:pb-0 scrollbar-hide"
             >
               {images.map((img, idx) => (
                 <button
@@ -85,13 +90,13 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
-            className="order-1 relative aspect-square rounded-sm overflow-hidden shadow-sm flex-1 group bg-white sm:aspect-[4/3] md:order-none"
+            className="group order-1 relative min-w-0 flex-1 overflow-hidden rounded-sm bg-transparent shadow-sm lg:order-none"
           >
-            <img 
-              src={activeImage} 
+            {isAuraMini ? <AuraFinishPreview src={activeImage} finish={selectedAuraFinish} /> : <img
+              src={activeImage}
               alt={product.name}
-              className="w-full h-full object-cover object-center transition-opacity duration-300"
-            />
+              className="block h-auto w-full object-contain object-center transition-opacity duration-300 lg:max-h-[calc(100vh-9rem)]"
+            />}
             {images.length > 1 && (
               <>
                 {/* Left Arrow Area */}
@@ -124,7 +129,7 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="flex flex-col py-4"
+          className="relative z-0 flex min-w-0 flex-col py-4 lg:pt-4"
         >
           <h1 className="font-serif font-light text-[clamp(2rem,6vw,3rem)] text-charcoal mb-4 tracking-wide leading-tight">
             {product.name}
@@ -150,6 +155,30 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
           <div className="font-sans text-charcoal leading-relaxed whitespace-pre-line mb-10 text-base">
             {product.fullDescription || product.shortDescription}
           </div>
+
+          {isAuraMini && (
+            <section className="mb-10 border-y border-charcoal/10 py-6" aria-label="Customize Aura Mini finish">
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <h2 className="font-serif text-2xl text-charcoal">Customize your finish</h2>
+                <p className="text-xs text-charcoal/60">Selected: <span className="font-medium text-charcoal">{selectedFinish}</span></p>
+              </div>
+              <p className="mt-2 text-sm text-charcoal/65">Choose a colour to preview it on the harmonium.</p>
+              <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
+                {AURA_MINI_FINISHES.map((finish) => (
+                  <button
+                    key={finish.name}
+                    type="button"
+                    aria-pressed={selectedFinish === finish.name}
+                    onClick={() => setSelectedFinish(finish.name)}
+                    className={`flex min-h-11 items-center gap-2 border px-2.5 text-left text-xs transition-colors ${selectedFinish === finish.name ? "border-forest bg-forest/5 text-charcoal" : "border-charcoal/15 hover:border-charcoal/40"}`}
+                  >
+                    <span aria-hidden="true" className="h-5 w-5 shrink-0 rounded-full border border-charcoal/15" style={{ backgroundColor: finish.hex }} />
+                    {finish.name}
+                  </button>
+                ))}
+              </div>
+            </section>
+          )}
 
           {!isSoldOut && (
             <div className="flex flex-col sm:flex-row gap-4 mb-16">

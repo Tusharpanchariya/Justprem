@@ -90,7 +90,7 @@ export default function HarmoniumsPage() {
                 {/* Status Badge */}
                 {product.availability === "SOLD_OUT" && (
                   <div className="absolute top-2 left-2 md:top-4 md:left-4 z-10 text-[8px] md:text-[10px] uppercase tracking-widest px-2 py-1 md:px-3 md:py-1 bg-charcoal text-ivory">
-                    Sold Out
+                    On Demand
                   </div>
                 )}
                 {product.availability === "ON_DEMAND" && (

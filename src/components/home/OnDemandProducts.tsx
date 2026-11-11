@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 const products = [
-  { slug: "kirtan-mini-deluxe", image: "/harmonium-images/kirtan/kirtan1.webp", name: "Kirtan Mini Deluxe Harmonium (27 keys) ON DEMAND", price: "\u20AC950.00", originalPrice: "\u20AC1,350.00" },
-  { slug: "eclipse", image: "/harmonium-images/eclipse/eclipse.webp", name: "Just Prem \"Eclipse\" (32 keys) ON DEMAND", price: "\u20AC850.00", originalPrice: "\u20AC1,200.00" },
   { slug: "saffron", image: "/harmonium-images/saffron/saffron.webp", name: "Just Prem \"Saffron\" (32 Keys) ON DEMAND", price: "\u20AC850.00", originalPrice: "\u20AC1,200.00" },
+  { slug: "sage", image: "/harmonium-images/sage/sage2.webp", name: "Just Prem \"Sage\" (32 Keys) ON DEMAND", price: "\u20AC850.00", originalPrice: "\u20AC1,200.00" },
+  { slug: "kirtan-mini-deluxe", image: "/harmonium-images/kirtan/kirtan1.webp", name: "Kirtan Mini Deluxe Harmonium (27 keys) ON DEMAND", price: "\u20AC950.00", originalPrice: "\u20AC1,350.00" },
+  // { slug: "eclipse", image: "/harmonium-images/eclipse/eclipse.webp", name: "Just Prem \"Eclipse\" (32 keys) ON DEMAND", price: "\u20AC850.00", originalPrice: "\u20AC1,200.00" },
   { slug: "aura-mini", image: "/harmonium-images/aura-mini/auramini.webp", name: "Just Prem \"Aura\" Mini (27 keys) ON DEMAND", price: "\u20AC850.00", originalPrice: "\u20AC1,200.00" },
-  { slug: "sage", image: "/harmonium-images/sage/sage.webp", name: "Just Prem \"Sage\" (32 Keys) ON DEMAND", price: "\u20AC850.00", originalPrice: "\u20AC1,200.00" },
   // { slug: "essence", image: "/harmonium-images/essence/essence.webp", name: "Just Prem \"Essence\" (27 Keys) ON DEMAND", price: "\u20AC850.00", originalPrice: "\u20AC1,200.00" },
   // { slug: "ocean-bhakti", image: "/harmonium-images/ocean-bhakti/ocean-bhakti2.jpg", name: "OCEAN BHAKTI (32 Keys) | Prem Sāgara", price: "\u20AC500.00", availabilityLabel: "On Demand" },
 ];

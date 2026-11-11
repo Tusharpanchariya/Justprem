@@ -105,9 +105,9 @@ export function OnDemandSection() {
                   <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
                 
-                <h3 className="font-serif text-sm md:text-base text-charcoal leading-snug mb-1">
+                {/* <h3 className="font-serif text-sm md:text-base text-charcoal leading-snug mb-1">
                   Just Prem &quot;Eclipse&quot; (32 keys) ON DEMAND
-                </h3>
+                </h3> */}
                 <div className="flex items-center gap-2 text-xs md:text-sm tracking-widest">
                   <span className="text-charcoal/80">€850.00</span>
                   <span className="text-charcoal/40 line-through">€1,200.00</span>
