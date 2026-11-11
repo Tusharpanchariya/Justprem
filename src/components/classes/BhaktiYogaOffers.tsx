@@ -14,6 +14,7 @@ type Course = {
   details: string[];
   theme: "light" | "dark";
   buttonText?: string;
+  detailsHref?: string;
   disabled?: boolean;
   href?: string;
 };
@@ -42,19 +43,22 @@ const courses: Course[] = [
   {
     id: "2-months-bhakti-foundation",
     duration: "02",
-    category: "2 MONTHS · BHAKTI FOUNDATION",
-    title: "A guided foundation",
-    description: "Build a strong foundation in harmonium, voice and Bhakti practice.",
+    category: "LEVEL 2 · THE ART OF BHAKTI MUSIC",
+    title: "Go deeper into Bhakti music",
+    description: "Deepen your harmonium practice, explore Indian classical ragas, and create devotional melodies.",
     price: "€850",
     details: [
-      "2-month guided course",
-      "10 live classes",
-      "Harmonium foundations",
-      "Kirtan, voice and musical expression",
-      "Scales, chords and basic music theory",
-      "Practice and integration between classes"
+      "Starts 15 December 2026",
+      "Only 10 places available",
+      "8 learning modules · 5 live masterclasses",
+      "20–25 devotional kirtans",
+      "All 12 major and minor scales + family chords",
+      "Indian classical ragas and melody creation",
+      "Student access after successful enrolment and purchase"
     ],
     theme: "dark",
+    buttonText: "BOOK NOW",
+    detailsHref: "/sound-of-devotion/level-2",
   },
   {
     id: "6-months-deep-immersion",
@@ -163,11 +167,15 @@ export function BhaktiYogaOffers() {
                 {course.buttonText || "VIEW FULL CURRICULUM"} ↗
               </Link>
             ) : (
+              <div className="mt-auto flex flex-wrap items-center justify-between gap-4 pt-12">
+              {course.detailsHref && <Link href={course.detailsHref} className={`text-xs uppercase tracking-widest underline underline-offset-4 transition-colors ${course.theme === "dark" ? "text-[#efd09a] hover:text-white" : "text-[#ad684d] hover:text-charcoal"}`}>
+                Course details ↗
+              </Link>}
               <button
                 type="button"
                 disabled={course.disabled}
                 onClick={() => !course.disabled && openApplication(course)}
-                className={`mt-auto pt-16 text-left text-xs uppercase tracking-widest transition-colors ${
+                className={`text-left text-xs uppercase tracking-widest transition-colors ${
                   course.disabled
                     ? "cursor-default text-charcoal/40"
                     : course.theme === "dark"
@@ -177,6 +185,7 @@ export function BhaktiYogaOffers() {
               >
                 {course.buttonText || "CHOOSE THIS PATH"} {course.disabled ? "" : "↗"}
               </button>
+              </div>
             )}
           </article>
         ))}

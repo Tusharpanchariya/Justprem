@@ -67,6 +67,8 @@ export default function SoundOfDevotionPage() {
         </figure>
       </section>
 
+      <BhaktiYogaOffers />
+
       <section className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-2 md:gap-28 md:px-12 md:py-36">
         <div>
           <Eyebrow>01 / The idea</Eyebrow>
@@ -109,8 +111,6 @@ export default function SoundOfDevotionPage() {
       <section className="mx-auto grid max-w-6xl items-center gap-10 px-6 py-20 md:grid-cols-2 md:gap-20 md:py-36"><div className="relative aspect-[4/5] overflow-hidden"><Image src="/course_images/justprem-kirtan.png" alt="Prem and Ananda singing and playing harmonium" fill sizes="(max-width: 768px) 100vw, 45vw" className="object-cover object-center" /></div><div className="max-w-xl"><Eyebrow>A private experience</Eyebrow><h2 className="font-serif text-[clamp(2.2rem,4vw,3.8rem)] leading-[.86]">Your voice<br /><em className="text-[#ad684d]">is unique.</em></h2><p className="mt-8 text-pretty text-base leading-7 text-charcoal/70">Unlike a large group course, every session is adapted to your voice, musical experience, harmonium level, learning speed, repertoire, questions and personal practice.</p><ul className="mt-7 space-y-3 text-sm leading-6 text-[#567262]"><li>—&nbsp; Complete beginners welcome</li><li>—&nbsp; Direct corrections and guidance</li><li>—&nbsp; Learn at your own natural pace</li><li>—&nbsp; A harmonium is recommended between sessions</li></ul></div></section>
 
       <section className="bg-[#f0ece1] px-6 py-20 md:py-32"><div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-2 md:items-center"><div className="max-w-xl"><Eyebrow>07 / Your invitation</Eyebrow><h2 className="font-serif text-[clamp(2.2rem,4vw,3.8rem)] leading-[.84]">Your voice is an<br /><em className="text-[#ad684d]">instrument of connection.</em></h2><p className="mt-7 max-w-md text-pretty text-base leading-7 text-charcoal/70">You do not need a perfect voice. You do not need to become a professional musician. You only need the willingness to listen, practice and express.</p></div><aside className="mx-auto w-full max-w-md border border-charcoal/15 bg-ivory p-8 shadow-[12px_12px_0_#e4ddce] md:p-10"><Eyebrow>The Sound of Devotion</Eyebrow><h3 className="font-serif text-3xl leading-tight">Path of Bhakti Yoga</h3><p className="mt-7 font-serif text-6xl text-[#ad684d]">€850</p><ul className="mt-7 space-y-3 border-t border-charcoal/15 pt-6 text-sm leading-6 text-charcoal/70"><li>10 private 1-to-1 sessions</li><li>90 minutes each · once a week</li><li>Approximately 2 months</li><li>Digital practice manual included</li></ul><Link href="#class-offerings" className="mt-8 flex min-h-12 items-center justify-center bg-[#567262] px-6 text-xs uppercase tracking-widest text-ivory transition-colors hover:bg-forest">Begin your journey&nbsp; ↗</Link><p className="mt-4 text-center text-xs leading-5 text-charcoal/60">A harmonium is recommended for practice between sessions.</p></aside></div></section>
-      <BhaktiYogaOffers />
-
       <section className="mx-auto max-w-7xl px-6 py-20 md:px-12 md:py-32">
         <div className="grid gap-10 md:grid-cols-[1.05fr_.9fr] md:items-end mb-16">
           <div><p className="mb-6 text-[10px] uppercase tracking-[0.22em] text-wood md:text-xs">08 / YOUR GUIDES</p><h2 className="font-serif text-[clamp(2.5rem,5vw,4.5rem)] leading-[.82] tracking-[-.045em]">Walk with<br /><em className="text-[#ad684d]">trusted guides.</em></h2></div>
