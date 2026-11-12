@@ -22,7 +22,9 @@ const coupons: Coupon[] = [
   { code: "JUSTPREM150", description: "EUR 150 off your order", fixedDiscountEUR: 150 },
   { code: "PREM180", description: "EUR 180 off your order", fixedDiscountEUR: 180 },
   { code: "BHAKTI200", description: "EUR 200 off your order", fixedDiscountEUR: 200 },
+  { code: "JUSTPREM200", description: "EUR 200 off your order", fixedDiscountEUR: 200 },
   { code: "PREM250", description: "EUR 250 off your order", fixedDiscountEUR: 250 },
+  { code: "JUSTPREM350", description: "EUR 350 off your order", fixedDiscountEUR: 350 },
 ];
 
 export function applyCoupon(code: string | undefined, subtotal: number): AppliedCoupon | null {

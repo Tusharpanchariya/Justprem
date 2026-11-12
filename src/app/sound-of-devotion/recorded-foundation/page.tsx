@@ -7,6 +7,7 @@ import { COURSE_META, COURSE_PILLARS, INSTRUCTORS, Lesson, CourseModule, COURSE_
 import { CourseHero } from "@/components/course/CourseHero";
 import { StickyCourseEnrollCard } from "@/components/course/StickyCourseEnrollCard";
 import { CourseCurriculumAccordion } from "@/components/course/CourseCurriculumAccordion";
+import { HarmoniumScalesLibrary } from "@/components/course/HarmoniumScalesLibrary";
 import { VideoPreviewModal } from "@/components/course/VideoPreviewModal";
 import { CourseFAQ } from "@/components/course/CourseFAQ";
 import { EnrollmentModal } from "@/components/course/EnrollmentModal";
@@ -145,6 +146,8 @@ export default function RecordedFoundationPage() {
                 ))}
               </div>
             </section>
+
+            <HarmoniumScalesLibrary />
 
             {/* Curriculum Accordion */}
             <CourseCurriculumAccordion

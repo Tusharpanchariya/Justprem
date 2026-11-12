@@ -29,6 +29,7 @@
     "stripe": "^22.5.0",
     "tailwind-merge": "^3.6.0",
     "three": "^0.185.1",
+    "tone": "^15.1.22",
     "zod": "^4.4.3"
   },
   "devDependencies": {
