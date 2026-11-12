@@ -11,6 +11,19 @@ import { TanpuraMetronome } from "./TanpuraMetronome";
 const NOTES = ["C", "C♯ / D♭", "D", "D♯ / E♭", "E", "F", "F♯ / G♭", "G", "G♯ / A♭", "A", "A♯ / B♭", "B"];
 const NOTE_NAMES = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"];
 const AUDIO_NOTE_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+const CHORD_TYPES = {
+  Major: { intervals: [0, 4, 7], formula: "1 · 3 · 5" },
+  Minor: { intervals: [0, 3, 7], formula: "1 · ♭3 · 5" },
+  Diminished: { intervals: [0, 3, 6], formula: "1 · ♭3 · ♭5" },
+  Augmented: { intervals: [0, 4, 8], formula: "1 · 3 · ♯5" },
+  "Suspended 2": { intervals: [0, 2, 7], formula: "1 · 2 · 5" },
+  "Suspended 4": { intervals: [0, 5, 7], formula: "1 · 4 · 5" },
+  "Dominant 7": { intervals: [0, 4, 7, 10], formula: "1 · 3 · 5 · ♭7" },
+  "Major 7": { intervals: [0, 4, 7, 11], formula: "1 · 3 · 5 · 7" },
+  "Minor 7": { intervals: [0, 3, 7, 10], formula: "1 · ♭3 · 5 · ♭7" },
+} as const;
+type ChordType = keyof typeof CHORD_TYPES;
+type PracticeMode = "scales" | "chords";
 const SCALES = {
   "Major (Ionian)": { intervals: [0, 2, 4, 5, 7, 9, 11], family: "Major & minor", formula: "1 2 3 4 5 6 7" },
   "Natural Minor (Aeolian)": { intervals: [0, 2, 3, 5, 7, 8, 10], family: "Major & minor", formula: "1 2 ♭3 4 5 ♭6 ♭7" },
@@ -54,11 +67,15 @@ function makeScale(root: number, type: ScaleName, octave: number, descending = f
 }
 
 export function HarmoniumPlayer() {
+  const [practiceMode, setPracticeMode] = useState<PracticeMode>("scales");
   const [root, setRoot] = useState(0);
   const [scaleType, setScaleType] = useState<ScaleName>("Major (Ionian)");
   const [tempo, setTempo] = useState(80);
   const [octave, setOctave] = useState(2);
   const [showSwaras, setShowSwaras] = useState(true);
+  const [chordRoot, setChordRoot] = useState(0);
+  const [chordType, setChordType] = useState<ChordType>("Major");
+  const [chordPlaying, setChordPlaying] = useState(false);
   const [loop, setLoop] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [configuration, setConfiguration] = useState<ReedConfiguration>("recorded");
@@ -77,7 +94,14 @@ export function HarmoniumPlayer() {
   const noteReleaseTimersRef = useRef(new Map<number, number>());
 
   const scale = useMemo(() => makeScale(root, scaleType, octave), [root, scaleType, octave]);
-  const selectedPitches = useMemo(() => new Set(scale.map(pitchClass)), [scale]);
+  const chordNotes = useMemo(() => {
+    const baseMidi = 60 + (octave - 4) * 12 + chordRoot;
+    return CHORD_TYPES[chordType].intervals.map((interval) => baseMidi + interval);
+  }, [chordRoot, chordType, octave]);
+  const selectedChordNotes = useMemo(() => new Set(chordNotes), [chordNotes]);
+  const selectedPitches = useMemo(() => new Set((practiceMode === "chords" ? chordNotes : scale).map(pitchClass)), [chordNotes, practiceMode, scale]);
+  const keyboardRoot = practiceMode === "chords" ? chordRoot : root;
+  const chordName = `${NOTES[chordRoot].split(" / ")[0]} ${chordType}`;
   useEffect(() => { loopRef.current = loop; }, [loop]);
   useEffect(() => {
     if (engineRef.current?.isDisposed) engineRef.current = new HarmoniumAudioEngine();
@@ -123,6 +147,7 @@ export function HarmoniumPlayer() {
     getEngine().stop();
     setActiveNotes(new Set());
     setPlaying(false);
+    setChordPlaying(false);
     setMessage("Playback stopped.");
   }, []);
 
@@ -183,6 +208,42 @@ export function HarmoniumPlayer() {
     playSequence([...up, ...down.slice(1)]);
   };
 
+  const playChord = useCallback(async () => {
+    stopPlayback();
+    const generation = loadGenerationRef.current;
+    setLoading(true);
+    try {
+      await getEngine().load(configuration);
+      if (generation !== loadGenerationRef.current) return;
+      getEngine().setVolume(volume <= 0 ? -Infinity : -36 + volume * 0.36);
+      chordNotes.forEach((midi) => getEngine().attack(audioNoteName(midi), 0.72));
+      heldNotesRef.current = new Set(chordNotes);
+      setActiveNotes(new Set(chordNotes));
+      setChordPlaying(true);
+      setMessage(`Playing ${chordName} · ${chordNotes.map(noteName).join(" · ")}`);
+      let timer = 0;
+      timer = window.setTimeout(() => {
+        chordNotes.forEach((midi) => {
+          heldNotesRef.current.delete(midi);
+          getEngine().release(audioNoteName(midi));
+        });
+        timersRef.current = timersRef.current.filter((activeTimer) => activeTimer !== timer);
+        setActiveNotes((current) => {
+          const next = new Set(current);
+          chordNotes.forEach((midi) => next.delete(midi));
+          return next;
+        });
+        setChordPlaying(false);
+        setMessage(`${chordName} chord complete. Choose a chord to hear it again.`);
+      }, 1800);
+      timersRef.current.push(timer);
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "Unable to play the selected chord.");
+    } finally {
+      setLoading(false);
+    }
+  }, [chordName, chordNotes, configuration, stopPlayback, volume]);
+
   return (
     <section className={styles["jp-scales"]} aria-label="Interactive harmonium scale practice">
       <div className={styles["jp-scales__hero"]}>
@@ -192,39 +253,63 @@ export function HarmoniumPlayer() {
       </div>
 
       <div className={styles["jp-scales__panel"]}>
-        <div className={styles["jp-scales__selectors"]}>
-          <label className={styles["jp-scales__field"]}><span>Root note</span><select value={root} onChange={(event) => { stopPlayback(); setRoot(Number(event.target.value)); }}>{NOTES.map((name, index) => <option key={name} value={index}>{name}</option>)}</select></label>
-          <label className={`${styles["jp-scales__field"]} ${styles["jp-scales__field--wide"]}`}><span>Scale type</span><select value={scaleType} onChange={(event) => { stopPlayback(); setScaleType(event.target.value as ScaleName); }}>{SCALE_GROUPS.map((group) => <optgroup key={group.name} label={group.name}>{group.types.map((type) => <option key={type} value={type}>{type}</option>)}</optgroup>)}</select></label>
-          <label className={styles["jp-scales__field"]}><span>Octave</span><select value={octave} onChange={(event) => { stopPlayback(); setOctave(Number(event.target.value)); }}>{[2, 3].map((value) => <option key={value} value={value}>{value}</option>)}</select></label>
+        <div className={styles["jp-scales__mode-switch"]} role="group" aria-label="Harmonium practice mode">
+          <button type="button" aria-pressed={practiceMode === "scales"} onClick={() => { stopPlayback(); setPracticeMode("scales"); }}>Scale practice</button>
+          <button type="button" aria-pressed={practiceMode === "chords"} onClick={() => { stopPlayback(); setPracticeMode("chords"); }}>Find a chord</button>
         </div>
 
-        <div className={styles["jp-scales__scale-info"]}>
-          <div><p className={styles["jp-scales__eyebrow"]}>SELECTED SCALE</p><h3>{NOTES[root].split(" / ")[0]} {scaleType}</h3><p className={styles["jp-scales__formula"]}>{SCALES[scaleType].formula}</p></div>
-          <label className={styles["jp-scales__toggle"]}><input type="checkbox" checked={showSwaras} onChange={(event) => setShowSwaras(event.target.checked)} /><span>Show swaras</span></label>
-        </div>
+        {practiceMode === "scales" ? <>
+          <div className={styles["jp-scales__selectors"]}>
+            <label className={styles["jp-scales__field"]}><span>Root note</span><select value={root} onChange={(event) => { stopPlayback(); setRoot(Number(event.target.value)); }}>{NOTES.map((name, index) => <option key={name} value={index}>{name}</option>)}</select></label>
+            <label className={`${styles["jp-scales__field"]} ${styles["jp-scales__field--wide"]}`}><span>Scale type</span><select value={scaleType} onChange={(event) => { stopPlayback(); setScaleType(event.target.value as ScaleName); }}>{SCALE_GROUPS.map((group) => <optgroup key={group.name} label={group.name}>{group.types.map((type) => <option key={type} value={type}>{type}</option>)}</optgroup>)}</select></label>
+            <label className={styles["jp-scales__field"]}><span>Octave</span><select value={octave} onChange={(event) => { stopPlayback(); setOctave(Number(event.target.value)); }}>{[2, 3].map((value) => <option key={value} value={value}>{value}</option>)}</select></label>
+          </div>
 
-        <div className={styles["jp-scales__notes"]} aria-label="Notes in selected scale">
-          {scale.map((midi, index) => {
-            const interval = (pitchClass(midi) - root + 12) % 12;
-            return <span className={styles["jp-scales__note-chip"]} key={`${midi}-${index}`}><strong>{noteName(midi)}</strong>{showSwaras && <small>{interval === 0 && index === scale.length - 1 ? "Sa′" : swara(interval)}</small>}</span>;
-          })}
-        </div>
+          <div className={styles["jp-scales__scale-info"]}>
+            <div><p className={styles["jp-scales__eyebrow"]}>SELECTED SCALE</p><h3>{NOTES[root].split(" / ")[0]} {scaleType}</h3><p className={styles["jp-scales__formula"]}>{SCALES[scaleType].formula}</p></div>
+            <label className={styles["jp-scales__toggle"]}><input type="checkbox" checked={showSwaras} onChange={(event) => setShowSwaras(event.target.checked)} /><span>Show swaras</span></label>
+          </div>
+
+          <div className={styles["jp-scales__notes"]} aria-label="Notes in selected scale">
+            {scale.map((midi, index) => {
+              const interval = (pitchClass(midi) - root + 12) % 12;
+              return <span className={styles["jp-scales__note-chip"]} key={`${midi}-${index}`}><strong>{noteName(midi)}</strong>{showSwaras && <small>{interval === 0 && index === scale.length - 1 ? "Sa′" : swara(interval)}</small>}</span>;
+            })}
+          </div>
+        </> : <section className={styles["jp-scales__chord-finder"]} aria-label="Find and play a chord">
+          <p className={styles["jp-scales__eyebrow"]}>CHORD FINDER</p>
+          <h3>Choose a chord to explore</h3>
+          <p className={styles["jp-scales__formula"]}>The notes for the selected chord will light up on the keyboard and play together.</p>
+          <div className={styles["jp-scales__chord-selectors"]}>
+            <label className={styles["jp-scales__field"]}><span>Chord root</span><select value={chordRoot} onChange={(event) => { stopPlayback(); setChordRoot(Number(event.target.value)); }}>{NOTES.map((name, index) => <option key={name} value={index}>{name}</option>)}</select></label>
+            <label className={styles["jp-scales__field"]}><span>Chord type</span><select value={chordType} onChange={(event) => { stopPlayback(); setChordType(event.target.value as ChordType); }}>{Object.keys(CHORD_TYPES).map((type) => <option key={type} value={type}>{type}</option>)}</select></label>
+            <label className={styles["jp-scales__field"]}><span>Octave</span><select value={octave} onChange={(event) => { stopPlayback(); setOctave(Number(event.target.value)); }}>{[2, 3].map((value) => <option key={value} value={value}>{value}</option>)}</select></label>
+          </div>
+          <div className={styles["jp-scales__chord-summary"]}>
+            <div><h4>{chordName}</h4><p className={styles["jp-scales__formula"]}>Formula: {CHORD_TYPES[chordType].formula}</p></div>
+            <button type="button" className={`${styles["jp-scales__button"]} ${styles["jp-scales__button--primary"]}`} disabled={loading} onClick={() => chordPlaying ? stopPlayback() : void playChord()}>{loading ? "Loading harmonium…" : chordPlaying ? "Stop chord" : "Play chord"}</button>
+          </div>
+          <div className={styles["jp-scales__notes"]} aria-label={`Notes in ${chordName}`}>
+            {chordNotes.map((midi) => <span className={`${styles["jp-scales__note-chip"]} ${styles["jp-scales__note-chip--chord"]}`} key={midi}><strong>{noteName(midi)}</strong><small>{midi === chordNotes[0] ? "Root" : "Chord note"}</small></span>)}
+          </div>
+          <p className={styles["jp-scales__status"]} aria-live="polite">{loading ? "Loading harmonium recordings…" : message}</p>
+        </section>}
 
         <div className={styles["jp-scales__keyboard-wrap"]}>
-          <div className={styles["jp-scales__keyboard-caption"]}><span>Press and hold a key to hear it</span><span>Recorded harmonium · C2–C5 source range</span></div>
-          <HarmoniumKeyboard octave={octave} root={root} selectedPitches={selectedPitches} activeNotes={activeNotes} onAttack={(midi) => void startNote(midi)} onRelease={stopNote} />
-          <div className={styles["jp-scales__legend"]}><span><i className={`${styles["jp-scales__legend-dot"]} ${styles["jp-scales__legend-dot--root"]}`} /> Tonic / Sa</span><span><i className={`${styles["jp-scales__legend-dot"]} ${styles["jp-scales__legend-dot--scale"]}`} /> Scale note</span></div>
+          <div className={styles["jp-scales__keyboard-caption"]}><span>{practiceMode === "chords" ? `Keys in ${chordName} are highlighted` : "Press and hold a key to hear it"}</span><span>Recorded harmonium · C2–C5 source range</span></div>
+          <HarmoniumKeyboard octave={octave} root={keyboardRoot} rootLabel={practiceMode === "chords" ? "Root" : "Sa"} rootMidi={practiceMode === "chords" ? chordNotes[0] : undefined} selectedPitches={selectedPitches} selectedNotes={practiceMode === "chords" ? selectedChordNotes : undefined} activeNotes={activeNotes} onAttack={(midi) => void startNote(midi)} onRelease={stopNote} />
+          <div className={styles["jp-scales__legend"]}><span><i className={`${styles["jp-scales__legend-dot"]} ${styles["jp-scales__legend-dot--root"]}`} /> {practiceMode === "chords" ? "Chord root" : "Tonic / Sa"}</span><span><i className={`${styles["jp-scales__legend-dot"]} ${styles["jp-scales__legend-dot--scale"]}`} /> {practiceMode === "chords" ? "Chord note" : "Scale note"}</span></div>
           <HarmoniumControls configuration={configuration} onConfigurationChange={(value) => { stopPlayback(); setConfiguration(value); setMessage(`Selected ${value.replace("-", " ")} · licensed recordings needed`); }} volume={volume} onVolumeChange={(value) => { setVolume(value); getEngine().setVolume(value <= 0 ? -Infinity : -36 + value * 0.36); }} loading={loading} status={message} onStop={stopPlayback} />
         </div>
 
         <TanpuraMetronome />
 
-        <div className={styles["jp-scales__player"]}>
+        {practiceMode === "scales" && <div className={styles["jp-scales__player"]}>
           <div className={styles["jp-scales__player-heading"]}><div><p className={styles["jp-scales__eyebrow"]}>LISTEN & PRACTISE</p><h3>Play the scale</h3></div><label className={styles["jp-scales__toggle"]}><input type="checkbox" checked={loop} onChange={(event) => setLoop(event.target.checked)} /><span>Loop</span></label></div>
           <div className={styles["jp-scales__buttons"]}><button type="button" className={`${styles["jp-scales__button"]} ${styles["jp-scales__button--primary"]}`} onClick={ascending}>↑ Ascending</button><button type="button" className={styles["jp-scales__button"]} onClick={descending}>↓ Descending</button><button type="button" className={styles["jp-scales__button"]} onClick={both}>↕ Both</button><button type="button" className={`${styles["jp-scales__button"]} ${styles["jp-scales__button--stop"]}`} onClick={stopPlayback} disabled={!playing}>Stop</button></div>
           <label className={styles["jp-scales__tempo"]}><span>Tempo <strong>{tempo} BPM</strong></span><input type="range" min="40" max="160" step="5" value={tempo} onChange={(event) => setTempo(Number(event.target.value))} /><span className={styles["jp-scales__tempo-ends"]}><small>Slow</small><small>Fast</small></span></label>
           <p className={styles["jp-scales__status"]} aria-live="polite">{message}</p>
-        </div>
+        </div>}
       </div>
       <div className={styles["jp-scales__footer"]}><p><strong>Your practice, your offering.</strong> Choose a scale and practise slowly with recorded harmonium notes. The source files do not identify single, double, or triple reed configurations.</p><p className={styles["jp-scales__disclaimer"]}>Recordings: Donya Quick, “Harmonium Samples – All Keys and Drones,” edited by Nicholaus P. Brosowsky. Licensed CC BY 3.0 (<a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noreferrer">license</a>). <a href="https://github.com/nbrosowsky/tonejs-instruments" target="_blank" rel="noreferrer">Sample source ↗</a></p></div>
     </section>

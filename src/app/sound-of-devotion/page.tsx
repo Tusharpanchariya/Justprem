@@ -57,9 +57,6 @@ export default function SoundOfDevotionPage() {
             <Link href="/sound-of-devotion/recorded-foundation" className="inline-flex min-h-12 items-center justify-center bg-[#567262] px-6 text-xs uppercase tracking-widest text-ivory transition-colors hover:bg-forest">Explore Recorded Course (€108)&nbsp; ↗</Link>
             <Link href="#class-offerings" className="inline-flex min-h-12 items-center justify-center border border-charcoal/20 px-6 text-xs uppercase tracking-widest hover:border-charcoal transition-colors">1-on-1 Mentorship&nbsp; ↓</Link>
           </div>
-          <div className="mt-10 flex flex-wrap gap-x-6 gap-y-2 border-t border-charcoal/15 pt-5 text-[10px] uppercase tracking-widest text-charcoal/65 md:text-xs">
-            <span>10 private sessions</span><span>90 minutes</span><span>~2 months</span><span className="text-[#ad684d]">€850</span>
-          </div>
         </div>
         <figure className="relative aspect-[4/5] overflow-hidden bg-sage shadow-[16px_16px_0_#e8e0d1] md:aspect-[4/4.25]">
           <Image src="/harmonium-images/mainpage.JPG" alt="Prem and Ananda with their harmoniums" fill priority sizes="(max-width: 768px) 100vw, 48vw" className="object-cover object-center" />

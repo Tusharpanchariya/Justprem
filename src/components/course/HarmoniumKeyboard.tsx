@@ -11,13 +11,16 @@ const noteName = (midi: number) => `${NAMES[pitchClass(midi)]}${Math.floor(midi 
 type Props = {
   octave: number;
   root: number;
+  rootLabel?: string;
+  rootMidi?: number;
   selectedPitches: ReadonlySet<number>;
+  selectedNotes?: ReadonlySet<number>;
   activeNotes: ReadonlySet<number>;
   onAttack: (midi: number) => void;
   onRelease: (midi: number) => void;
 };
 
-export function HarmoniumKeyboard({ octave, root, selectedPitches, activeNotes, onAttack, onRelease }: Props) {
+export function HarmoniumKeyboard({ octave, root, rootLabel = "Sa", rootMidi, selectedPitches, selectedNotes, activeNotes, onAttack, onRelease }: Props) {
   const notes = Array.from({ length: 25 }, (_, index) => 60 + (octave - 4) * 12 + index);
   const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>, midi: number) => {
     if ((event.code === "Space" || event.code === "Enter") && !event.repeat) {
@@ -53,13 +56,17 @@ export function HarmoniumKeyboard({ octave, root, selectedPitches, activeNotes, 
     {notes.filter((midi) => !BLACK_PITCHES.has(pitchClass(midi))).map((midi) => {
       const pc = pitchClass(midi);
       const active = activeNotes.has(midi);
-      return <button key={midi} type="button" className={`${styles["jp-scales__white-key"]} ${selectedPitches.has(pc) ? styles["is-in-scale"] : ""} ${pc === root ? styles["is-root"] : ""} ${active ? styles["is-active"] : ""}`} aria-label={`Play ${noteName(midi)}`} aria-pressed={active} {...keyProps(midi)}><span className={styles["jp-scales__key-note"]}>{NAMES[pc]}</span>{pc === root && <span className={styles["jp-scales__key-root"]}>Sa</span>}</button>;
+      const selected = selectedNotes ? selectedNotes.has(midi) : selectedPitches.has(pc);
+      const isRoot = rootMidi === undefined ? pc === root : midi === rootMidi;
+      return <button key={midi} type="button" className={`${styles["jp-scales__white-key"]} ${selected ? styles["is-in-scale"] : ""} ${isRoot ? styles["is-root"] : ""} ${active ? styles["is-active"] : ""}`} aria-label={`Play ${noteName(midi)}`} aria-pressed={active} {...keyProps(midi)}><span className={styles["jp-scales__key-note"]}>{NAMES[pc]}</span>{isRoot && <span className={styles["jp-scales__key-root"]}>{rootLabel}</span>}</button>;
     })}
     <div className={styles["jp-scales__black-layer"]}>{notes.filter((midi) => BLACK_PITCHES.has(pitchClass(midi))).map((midi) => {
       const pc = pitchClass(midi);
       const whiteBefore = notes.filter((note) => note < midi && !BLACK_PITCHES.has(pitchClass(note))).length;
       const active = activeNotes.has(midi);
-      return <button key={midi} type="button" style={{ left: `calc(${whiteBefore} * (100% / 15) - (100% / 15 * 0.31))` }} className={`${styles["jp-scales__black-key"]} ${selectedPitches.has(pc) ? styles["is-in-scale"] : ""} ${pc === root ? styles["is-root"] : ""} ${active ? styles["is-active"] : ""}`} aria-label={`Play ${noteName(midi)}`} aria-pressed={active} {...keyProps(midi)}><span>{NAMES[pc]}</span></button>;
+      const selected = selectedNotes ? selectedNotes.has(midi) : selectedPitches.has(pc);
+      const isRoot = rootMidi === undefined ? pc === root : midi === rootMidi;
+      return <button key={midi} type="button" style={{ left: `calc(${whiteBefore} * (100% / 15) - (100% / 15 * 0.31))` }} className={`${styles["jp-scales__black-key"]} ${selected ? styles["is-in-scale"] : ""} ${isRoot ? styles["is-root"] : ""} ${active ? styles["is-active"] : ""}`} aria-label={`Play ${noteName(midi)}`} aria-pressed={active} {...keyProps(midi)}><span>{NAMES[pc]}</span></button>;
     })}</div>
   </div>;
 }

@@ -12,6 +12,7 @@ type Course = {
   description: string;
   price: string;
   details: string[];
+  availability?: string;
   theme: "light" | "dark";
   buttonText?: string;
   detailsHref?: string;
@@ -67,6 +68,7 @@ const courses: Course[] = [
     title: "Go deeper into the\npractice",
     description: "Six months to deepen the music, philosophy and personal sādhanā of Bhakti.",
     price: "€2,000",
+    availability: "Only 2 slots open",
     details: [
       "6-month deep immersion",
       "30 lessons",
@@ -152,6 +154,10 @@ export function BhaktiYogaOffers() {
             <p className={`mt-10 font-serif text-5xl md:text-6xl ${course.theme === "dark" ? "text-[#efd09a]" : "text-[#ad684d]"}`}>
               {course.price}
             </p>
+
+            {course.availability && <p className="mt-5 inline-flex w-fit items-center gap-2 border border-[#ad684d] bg-[#ad684d] px-4 py-3 text-[11px] font-bold uppercase tracking-[.16em] text-ivory shadow-sm">
+              <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[#efd09a]" />{course.availability}
+            </p>}
 
             <ul className={`mt-8 space-y-3 border-t pt-8 text-sm leading-6 ${course.theme === "dark" ? "border-white/20 text-ivory/80" : "border-charcoal/15 text-charcoal/70"}`}>
               {course.details.map((detail, idx) => (

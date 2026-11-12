@@ -23,7 +23,17 @@
 .jp-scales__hero h2 { color: var(--jp-forest-dark); font-family: Georgia, "Times New Roman", serif; font-weight: 500; font-size: clamp(30px, 5vw, 52px); letter-spacing: -.035em; line-height: 1.08; margin: 0 0 15px; }
 .jp-scales__intro { color: #65685f; font-size: 16px; line-height: 1.7; margin: 0 auto; max-width: 650px; }
 .jp-scales__panel { background: var(--jp-paper); border: 1px solid #e9e2d5; border-radius: 20px; padding: clamp(16px, 3vw, 30px); box-shadow: 0 12px 35px rgba(39, 56, 43, .055); }
+.jp-scales__mode-switch { display: flex; gap: 8px; margin-bottom: 22px; padding-bottom: 14px; border-bottom: 1px solid #eee8dc; }
+.jp-scales__mode-switch button { border: 1px solid #d8dfd5; border-radius: 999px; background: #fffefa; color: #5d665d; padding: 10px 16px; cursor: pointer; font-size: 12px; font-weight: 700; transition: background .15s ease, color .15s ease; }
+.jp-scales__mode-switch button[aria-pressed="true"] { border-color: var(--jp-forest); background: var(--jp-forest); color: #fffefa; }
 .jp-scales__selectors { display: grid; grid-template-columns: 1fr 2fr 110px; gap: 14px; }
+.jp-scales__chord-finder { margin: 0 0 24px; }
+.jp-scales__chord-finder h3 { margin: 0 0 7px; color: var(--jp-forest-dark); font-family: Georgia, "Times New Roman", serif; font-size: clamp(23px, 3vw, 32px); font-weight: 500; }
+.jp-scales__chord-selectors { display: grid; grid-template-columns: 1fr 1.4fr 110px; gap: 14px; margin-top: 20px; }
+.jp-scales__chord-summary { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-top: 20px; }
+.jp-scales__chord-summary h4 { margin: 0 0 5px; color: var(--jp-forest-dark); font-family: Georgia, "Times New Roman", serif; font-size: 21px; font-weight: 500; }
+.jp-scales__chord-finder > .jp-scales__notes { margin-top: 18px; margin-bottom: 14px; }
+.jp-scales__chord-finder > .jp-scales__status { margin-top: 10px; }
 .jp-scales__controls { display: grid; grid-template-columns: minmax(180px, 1.3fr) minmax(150px, 1fr) auto; gap: 14px; align-items: end; margin-top: 20px; padding-top: 18px; border-top: 1px solid #eee8dc; }
 .jp-scales__controls .jp-scales__status { grid-column: 1 / -1; margin-top: 0; }
 .jp-scales__controls input[type="range"] { width: 100%; accent-color: var(--jp-forest); }
@@ -95,6 +105,10 @@
 @media (max-width: 640px) {
   .jp-scales { border-radius: 14px; padding: 16px 12px; }
   .jp-scales__selectors { grid-template-columns: 1fr 1fr; }
+  .jp-scales__chord-selectors { grid-template-columns: 1fr 1fr; }
+  .jp-scales__chord-selectors .jp-scales__field:last-child { grid-column: 1 / -1; }
+  .jp-scales__chord-summary { align-items: stretch; flex-direction: column; }
+  .jp-scales__mode-switch button { flex: 1; padding-inline: 10px; }
   .jp-scales__controls { grid-template-columns: 1fr 1fr; }
   .jp-scales__controls > button { grid-column: 1 / -1; }
   .jp-scales__tanpura-controls { grid-template-columns: 1fr 1fr; }
