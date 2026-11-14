@@ -1,7 +1,7 @@
 "use client";
 
 import { useCart } from "@/lib/context/CartContext";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Script from "next/script";
 import { useRouter } from "next/navigation";
@@ -9,6 +9,8 @@ import { PayPalButton } from "@/components/commerce/PayPalButton";
 import { getDialCode, LocationFields, PhoneCountryField } from "@/components/commerce/LocationFields";
 import Link from "next/link";
 import { getDeliveryFee } from "@/lib/pricing";
+import { PurchaseTermsAgreement } from "@/components/commerce/PurchaseTermsAgreement";
+import { HARMONIUM_POLICY_VERSION } from "@/lib/harmoniumPurchasePolicies";
 
 type RazorpayPaymentResponse = {
   razorpay_payment_id: string;
@@ -43,13 +45,28 @@ export default function CheckoutPage() {
   const [city, setCity] = useState("");
   const [region, setRegion] = useState("");
   const [country, setCountry] = useState("");
+  const [countryCode, setCountryCode] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [couponInput, setCouponInput] = useState("");
   const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; description: string; discount: number } | null>(null);
   const [couponError, setCouponError] = useState("");
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [acceptedFingerprint, setAcceptedFingerprint] = useState("");
+  const [termsError, setTermsError] = useState(false);
   const checkoutFormRef = useRef<HTMLFormElement>(null);
   const fullPhone = `${getDialCode(phoneCountryCode)}${phone.replace(/[^0-9]/g, "")}`;
-  const shippingDetails = { address, city, region, country, postalCode };
+  const previousFingerprint = useRef("");
+  const checkoutFingerprint = JSON.stringify([items.map(({ id, quantity }) => [id, quantity]), cartTotal, appliedCoupon?.code, email, name, fullPhone, address, city, region, country, countryCode, postalCode]);
+  const termsAreCurrent = termsAccepted && acceptedFingerprint === checkoutFingerprint;
+  const consentInput = { accepted: termsAreCurrent, policyVersion: HARMONIUM_POLICY_VERSION, countryCode, country, email, name, phone: fullPhone, address, city, region, postalCode };
+  useEffect(() => {
+    if (previousFingerprint.current && previousFingerprint.current !== checkoutFingerprint) {
+      setTermsAccepted(false);
+      setAcceptedFingerprint("");
+      setTermsError(false);
+    }
+    previousFingerprint.current = checkoutFingerprint;
+  }, [checkoutFingerprint]);
   const deliveryFee = getDeliveryFee(items);
   const discountedTotal = Math.max(0, cartTotal + deliveryFee - (appliedCoupon?.discount || 0));
   const applyCoupon = async () => {
@@ -59,11 +76,11 @@ export default function CheckoutPage() {
     if (!response.ok || !result.coupon) { setAppliedCoupon(null); setCouponError(result.error || "That coupon code is not valid."); return; }
     setAppliedCoupon(result.coupon); setCouponInput(result.coupon.code);
   };
-  const sendOrderConfirmation = async (paymentId: string, method: string) => {
+  const sendOrderConfirmation = async (paymentId: string, method: string, consentId: string) => {
     const response = await fetch("/api/checkout/success", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, phone: fullPhone, name, ...shippingDetails, items, cartTotal: discountedTotal, couponCode: appliedCoupon?.code, paymentId, paymentMethod: method }),
+      body: JSON.stringify({ consentId, paymentId, paymentMethod: method }),
     });
     const result = (await response.json()) as { error?: string };
     if (!response.ok) throw new Error(result.error || "We could not send your order confirmation.");
@@ -72,6 +89,8 @@ export default function CheckoutPage() {
   const handlePayment = async (e: React.FormEvent) => {
     e.preventDefault();
     if (items.length === 0) return;
+    if (!termsAreCurrent) { setTermsError(true); return; }
+    if (!checkoutFormRef.current?.reportValidity()) return;
 
     if (paymentMethod === "razorpay" && !window.Razorpay) {
       alert("Razorpay is still loading. Please try again in a moment.");
@@ -81,17 +100,15 @@ export default function CheckoutPage() {
     setIsProcessing(true);
 
     if (paymentMethod === "wise") {
-      const paymentId = `WISE_${Math.random().toString(36).substring(7)}`;
-      // Simulate order creation for wise
-      setTimeout(async () => {
-        try {
-          await sendOrderConfirmation(paymentId, "wise");
-        } catch (error) {
-          console.error("Failed to send order email:", error);
-        }
-        clearCart();
-        router.push(`/checkout/success?payment_id=${paymentId}&method=wise`);
-      }, 1500);
+      try {
+        const response = await fetch("/api/checkout/accept-terms", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...consentInput, items, couponCode: appliedCoupon?.code }) });
+        const result = (await response.json()) as { consentId?: string; error?: string };
+        if (!response.ok || !result.consentId) throw new Error(result.error || "We could not record your terms acceptance.");
+        const reservation = await fetch("/api/checkout/wise", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ consentId: result.consentId }) });
+        if (!reservation.ok) { const failure = await reservation.json() as { error?: string }; throw new Error(failure.error || "Unable to reserve your order."); }
+        router.push(`/checkout/success?payment_id=${encodeURIComponent(result.consentId)}&method=wise`);
+      } catch (error) { alert(error instanceof Error ? error.message : "Unable to continue."); }
+      finally { setIsProcessing(false); }
       return;
     }
 
@@ -101,13 +118,16 @@ export default function CheckoutPage() {
     }
 
     try {
+      const acceptanceResponse = await fetch("/api/checkout/accept-terms", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...consentInput, items, couponCode: appliedCoupon?.code }) });
+      const acceptance = (await acceptanceResponse.json()) as { consentId?: string; error?: string };
+      if (!acceptanceResponse.ok || !acceptance.consentId) throw new Error(acceptance.error || "We could not record your terms acceptance.");
       // 1. Create order on backend
       const response = await fetch("/api/checkout/razorpay", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ items, couponCode: appliedCoupon?.code }),
+        body: JSON.stringify({ items, couponCode: appliedCoupon?.code, consentId: acceptance.consentId }),
       });
       
       const orderData = await response.json();
@@ -131,6 +151,7 @@ export default function CheckoutPage() {
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
                 orderId: orderData.id,
+                consentId: acceptance.consentId,
                 paymentId: response.razorpay_payment_id,
                 signature: response.razorpay_signature,
               }),
@@ -141,7 +162,7 @@ export default function CheckoutPage() {
               throw new Error(verification.error || "Razorpay could not verify your payment.");
             }
 
-            await sendOrderConfirmation(response.razorpay_payment_id, "razorpay");
+            await sendOrderConfirmation(response.razorpay_payment_id, "razorpay", acceptance.consentId!);
           } catch (error) {
             console.error("Razorpay payment confirmation failed:", error);
             alert("Your payment could not be verified yet. Please contact us with your Razorpay payment ID.");
@@ -177,9 +198,9 @@ export default function CheckoutPage() {
     }
   };
 
-  const handlePayPalSuccess = async (paymentId: string) => {
+  const handlePayPalSuccess = async (paymentId: string, consentId: string) => {
     try {
-      await sendOrderConfirmation(paymentId, "paypal");
+      await sendOrderConfirmation(paymentId, "paypal", consentId);
       clearCart();
       router.push(`/checkout/success?payment_id=${paymentId}&method=paypal`);
     } catch (error) {
@@ -244,6 +265,8 @@ export default function CheckoutPage() {
                     setRegion={setRegion}
                     country={country}
                     setCountry={setCountry}
+                    countryCode={countryCode}
+                    setCountryCode={setCountryCode}
                     postalCode={postalCode}
                     setPostalCode={setPostalCode}
                   />
@@ -339,23 +362,25 @@ export default function CheckoutPage() {
                 )}
               </div>
               
-
+              <PurchaseTermsAgreement countryCode={countryCode} accepted={termsAreCurrent} onAcceptedChange={(value) => { setTermsAccepted(value); setAcceptedFingerprint(value ? checkoutFingerprint : ""); if (value) setTermsError(false); }} showError={!termsAreCurrent || termsError} />
               
               {paymentMethod === "paypal" ? (
-                        <PayPalButton
+                termsAreCurrent ? <PayPalButton
                           items={items}
                           couponCode={appliedCoupon?.code}
+                  consentInput={consentInput}
+                  termsAccepted={termsAreCurrent}
                   validateCheckout={() => checkoutFormRef.current?.reportValidity() ?? false}
                   onSuccess={handlePayPalSuccess}
                   onProcessingChange={setIsProcessing}
-                />
+                /> : <button type="button" disabled className="w-full py-4 bg-forest text-ivory uppercase tracking-widest text-xs opacity-50 cursor-not-allowed">Agree &amp; Continue to Payment</button>
               ) : (
                 <button
                   type="submit"
-                  disabled={isProcessing}
+                  disabled={isProcessing || !termsAreCurrent}
                   className="w-full py-4 bg-forest text-ivory uppercase tracking-widest text-xs hover:bg-forest/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                 >
-                  {isProcessing ? "Processing..." : "Continue to Payment"}
+                  {isProcessing ? "Processing..." : "Agree & Continue to Payment"}
                 </button>
               )}
             </form>

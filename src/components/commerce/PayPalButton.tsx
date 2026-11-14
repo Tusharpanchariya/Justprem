@@ -35,14 +35,18 @@ declare global {
 type PayPalButtonProps = {
   items: CartItem[];
   couponCode?: string;
+  consentInput: Record<string, unknown>;
+  termsAccepted: boolean;
   validateCheckout: () => boolean;
-  onSuccess: (paymentId: string) => Promise<void>;
+  onSuccess: (paymentId: string, consentId: string) => Promise<void>;
   onProcessingChange: (isProcessing: boolean) => void;
 };
 
 export function PayPalButton({
   items,
   couponCode,
+  consentInput,
+  termsAccepted,
   validateCheckout,
   onSuccess,
   onProcessingChange,
@@ -54,6 +58,11 @@ export function PayPalButton({
   );
   const [error, setError] = useState("");
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
+  const latestRef = useRef({ consentInput, termsAccepted, items, couponCode, validateCheckout, onSuccess, onProcessingChange });
+  const consentIdRef = useRef("");
+  useEffect(() => {
+    latestRef.current = { consentInput, termsAccepted, items, couponCode, validateCheckout, onSuccess, onProcessingChange };
+  }, [consentInput, termsAccepted, items, couponCode, validateCheckout, onSuccess, onProcessingChange]);
 
   useEffect(() => {
     if (!isSdkReady || !window.paypal || !containerRef.current || renderedRef.current) {
@@ -65,7 +74,7 @@ export function PayPalButton({
       .Buttons({
         style: { layout: "vertical", color: "gold", shape: "rect", label: "paypal" },
         onClick: (_data, actions) => {
-          if (validateCheckout()) {
+          if (latestRef.current.termsAccepted && latestRef.current.validateCheckout()) {
             actions.resolve();
             return;
           }
@@ -74,20 +83,25 @@ export function PayPalButton({
         },
         createOrder: async () => {
           setError("");
-          onProcessingChange(true);
-          const response = await fetch("/api/checkout/paypal/order", {
+          latestRef.current.onProcessingChange(true);
+          const response = await fetch("/api/checkout/accept-terms", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ items, couponCode }),
+            body: JSON.stringify({ ...latestRef.current.consentInput, accepted: latestRef.current.termsAccepted, items: latestRef.current.items, couponCode: latestRef.current.couponCode, policyVersion: latestRef.current.consentInput.policyVersion }),
           });
-          const order = (await response.json()) as { id?: string; error?: string };
+          const order = (await response.json()) as { id?: string; error?: string; consentId?: string };
 
-          if (!response.ok || !order.id) {
-            onProcessingChange(false);
-            throw new Error(order.error || "Unable to start the PayPal checkout.");
+          if (!response.ok || !order.consentId) {
+            latestRef.current.onProcessingChange(false);
+            throw new Error(order.error || "Unable to record your terms acceptance.");
           }
+          consentIdRef.current = order.consentId;
 
-          return order.id;
+          const paymentResponse = await fetch("/api/checkout/paypal/order", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ items: latestRef.current.items, couponCode: latestRef.current.couponCode, consentId: order.consentId }) });
+          const paymentOrder = (await paymentResponse.json()) as { id?: string; error?: string };
+          if (!paymentResponse.ok || !paymentOrder.id) { latestRef.current.onProcessingChange(false); throw new Error(paymentOrder.error || "Unable to start the PayPal checkout."); }
+
+          return paymentOrder.id;
         },
         onApprove: async ({ orderID }) => {
           const response = await fetch("/api/checkout/paypal/capture", {
@@ -95,29 +109,29 @@ export function PayPalButton({
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ orderId: orderID }),
           });
-          const result = (await response.json()) as { paymentId?: string; error?: string };
+          const result = (await response.json()) as { paymentId?: string; consentId?: string; error?: string };
 
           if (!response.ok || !result.paymentId) {
-            onProcessingChange(false);
+            latestRef.current.onProcessingChange(false);
             throw new Error(result.error || "PayPal could not confirm your payment.");
           }
 
-          await onSuccess(result.paymentId);
+          await latestRef.current.onSuccess(result.paymentId, result.consentId || consentIdRef.current);
         },
-        onCancel: () => onProcessingChange(false),
+        onCancel: () => latestRef.current.onProcessingChange(false),
         onError: (paypalError) => {
           console.error("PayPal checkout error:", paypalError);
           setError("PayPal could not start the checkout. Please try again.");
-          onProcessingChange(false);
+          latestRef.current.onProcessingChange(false);
         },
       })
       .render(containerRef.current)
       .catch((renderError: unknown) => {
         console.error("PayPal button render error:", renderError);
         setError("PayPal is unavailable at the moment. Please try again later.");
-        onProcessingChange(false);
+        latestRef.current.onProcessingChange(false);
       });
-  }, [couponCode, isSdkReady, items, onProcessingChange, onSuccess, validateCheckout]);
+  }, [isSdkReady]);
 
   if (!clientId) {
     return <p className="text-sm text-red-700">PayPal is not configured yet.</p>;

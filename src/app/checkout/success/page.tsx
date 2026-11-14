@@ -43,14 +43,14 @@ function CheckoutSuccessContent() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h1 className="font-serif text-4xl text-forest mb-2">Order Successful!</h1>
+          <h1 className="font-serif text-4xl text-forest mb-2">{paymentMethod === "wise" ? "Order Reserved" : "Order Successful!"}</h1>
           <p className="text-charcoal/80 mb-2">Order ID: <span className="font-mono font-medium">{paymentId}</span></p>
           
           {paymentMethod === 'wise' ? (
             <div className="bg-white/80 p-8 rounded-lg border border-charcoal/10 text-left max-w-lg mx-auto mb-8 shadow-sm">
               <h3 className="font-medium text-lg text-charcoal mb-4 border-b border-charcoal/10 pb-2">Wise Bank Transfer Instructions</h3>
               <p className="text-sm text-charcoal/80 mb-4">
-                Please transfer the exact total amount to the following bank account. Include your <strong>Order ID</strong> in the reference.
+                Payment has not been received yet. Please transfer the total shown in your checkout to the following bank account. Include your <strong>Order ID</strong> in the reference.
               </p>
               <div className="space-y-3 text-sm text-charcoal mb-6">
                 <div className="grid grid-cols-2"><span className="text-charcoal/60">Account Name:</span> <span className="font-medium">vitthal prem travels llp</span></div>

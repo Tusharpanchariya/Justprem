@@ -1,6 +1,7 @@
 import { createHmac, timingSafeEqual } from "crypto";
 import { NextResponse } from "next/server";
 import Razorpay from "razorpay";
+import { updateCheckoutPayment } from "@/lib/checkoutConsent";
 
 type RazorpayPayment = { status?: string };
 
@@ -25,17 +26,20 @@ function getRazorpayClient() {
 
 export async function POST(request: Request) {
   try {
-    const { orderId, paymentId, signature } = (await request.json()) as {
+    const { orderId, paymentId, signature, consentId } = (await request.json()) as {
       orderId?: string;
       paymentId?: string;
       signature?: string;
+      consentId?: string;
     };
 
-    if (!orderId || !paymentId || !signature) {
+    if (!orderId || !paymentId || !signature || !consentId) {
       return NextResponse.json({ error: "Missing Razorpay payment details." }, { status: 400 });
     }
 
     const { client, keySecret } = getRazorpayClient();
+    const gatewayOrder = await client.orders.fetch(orderId) as unknown as { notes?: Record<string, string> };
+    if (gatewayOrder.notes?.consent_id !== consentId) return NextResponse.json({ error: "The payment does not match the accepted purchase terms." }, { status: 400 });
     const expectedSignature = createHmac("sha256", keySecret)
       .update(`${orderId}|${paymentId}`)
       .digest("hex");
@@ -57,6 +61,7 @@ export async function POST(request: Request) {
       );
     }
 
+    await updateCheckoutPayment(consentId, { provider: "razorpay", status: "paid", reference: paymentId });
     return NextResponse.json({ paymentId });
   } catch (error) {
     console.error("Razorpay payment verification error:", error);

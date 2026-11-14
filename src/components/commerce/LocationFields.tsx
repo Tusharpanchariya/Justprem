@@ -18,6 +18,8 @@ type LocationFieldsProps = {
   setRegion: (value: string) => void;
   country: string;
   setCountry: (value: string) => void;
+  countryCode: string;
+  setCountryCode: (value: string) => void;
   postalCode: string;
   setPostalCode: (value: string) => void;
 };
@@ -25,7 +27,7 @@ type LocationFieldsProps = {
 const fieldClassName = "w-full appearance-none bg-transparent border-b border-charcoal/20 py-3 text-base md:text-sm focus:outline-none focus:border-saffron transition-colors";
 
 const fallbackCountries: Country[] = [
-  ["AF", "Afghanistan", "+93"], ["AL", "Albania", "+355"], ["DZ", "Algeria", "+213"], ["AR", "Argentina", "+54"], ["AU", "Australia", "+61"], ["AT", "Austria", "+43"], ["BD", "Bangladesh", "+880"], ["BE", "Belgium", "+32"], ["BR", "Brazil", "+55"], ["BG", "Bulgaria", "+359"], ["CA", "Canada", "+1"], ["CL", "Chile", "+56"], ["CN", "China", "+86"], ["CO", "Colombia", "+57"], ["HR", "Croatia", "+385"], ["CY", "Cyprus", "+357"], ["CZ", "Czechia", "+420"], ["DK", "Denmark", "+45"], ["EG", "Egypt", "+20"], ["EE", "Estonia", "+372"], ["FI", "Finland", "+358"], ["FR", "France", "+33"], ["DE", "Germany", "+49"], ["GR", "Greece", "+30"], ["HK", "Hong Kong", "+852"], ["HU", "Hungary", "+36"], ["IS", "Iceland", "+354"], ["IN", "India", "+91"], ["ID", "Indonesia", "+62"], ["IE", "Ireland", "+353"], ["IL", "Israel", "+972"], ["IT", "Italy", "+39"], ["JP", "Japan", "+81"], ["KE", "Kenya", "+254"], ["MY", "Malaysia", "+60"], ["MX", "Mexico", "+52"], ["MT", "Malta", "+356"], ["MA", "Morocco", "+212"], ["NL", "Netherlands", "+31"], ["NZ", "New Zealand", "+64"], ["NG", "Nigeria", "+234"], ["NO", "Norway", "+47"], ["PK", "Pakistan", "+92"], ["PH", "Philippines", "+63"], ["PL", "Poland", "+48"], ["PT", "Portugal", "+351"], ["QA", "Qatar", "+974"], ["RO", "Romania", "+40"], ["RU", "Russia", "+7"], ["SA", "Saudi Arabia", "+966"], ["SG", "Singapore", "+65"], ["SK", "Slovakia", "+421"], ["SI", "Slovenia", "+386"], ["ZA", "South Africa", "+27"], ["KR", "South Korea", "+82"], ["ES", "Spain", "+34"], ["SE", "Sweden", "+46"], ["CH", "Switzerland", "+41"], ["TH", "Thailand", "+66"], ["TR", "Turkey", "+90"], ["AE", "United Arab Emirates", "+971"], ["GB", "United Kingdom", "+44"], ["US", "United States", "+1"], ["VN", "Vietnam", "+84"], ["ZW", "Zimbabwe", "+263"],
+  ["AF", "Afghanistan", "+93"], ["AL", "Albania", "+355"], ["DZ", "Algeria", "+213"], ["AR", "Argentina", "+54"], ["AU", "Australia", "+61"], ["AT", "Austria", "+43"], ["BD", "Bangladesh", "+880"], ["BE", "Belgium", "+32"], ["BR", "Brazil", "+55"], ["BG", "Bulgaria", "+359"], ["CA", "Canada", "+1"], ["CL", "Chile", "+56"], ["CN", "China", "+86"], ["CO", "Colombia", "+57"], ["HR", "Croatia", "+385"], ["CY", "Cyprus", "+357"], ["CZ", "Czechia", "+420"], ["DK", "Denmark", "+45"], ["EG", "Egypt", "+20"], ["EE", "Estonia", "+372"], ["FI", "Finland", "+358"], ["FR", "France", "+33"], ["DE", "Germany", "+49"], ["GR", "Greece", "+30"], ["HK", "Hong Kong", "+852"], ["HU", "Hungary", "+36"], ["IS", "Iceland", "+354"], ["IN", "India", "+91"], ["ID", "Indonesia", "+62"], ["IE", "Ireland", "+353"], ["IL", "Israel", "+972"], ["IT", "Italy", "+39"], ["JP", "Japan", "+81"], ["KE", "Kenya", "+254"], ["LV", "Latvia", "+371"], ["LT", "Lithuania", "+370"], ["LU", "Luxembourg", "+352"], ["MY", "Malaysia", "+60"], ["MX", "Mexico", "+52"], ["MT", "Malta", "+356"], ["MA", "Morocco", "+212"], ["NL", "Netherlands", "+31"], ["NZ", "New Zealand", "+64"], ["NG", "Nigeria", "+234"], ["NO", "Norway", "+47"], ["PK", "Pakistan", "+92"], ["PH", "Philippines", "+63"], ["PL", "Poland", "+48"], ["PT", "Portugal", "+351"], ["QA", "Qatar", "+974"], ["RO", "Romania", "+40"], ["RU", "Russia", "+7"], ["SA", "Saudi Arabia", "+966"], ["SG", "Singapore", "+65"], ["SK", "Slovakia", "+421"], ["SI", "Slovenia", "+386"], ["ZA", "South Africa", "+27"], ["KR", "South Korea", "+82"], ["ES", "Spain", "+34"], ["SE", "Sweden", "+46"], ["CH", "Switzerland", "+41"], ["TH", "Thailand", "+66"], ["TR", "Turkey", "+90"], ["AE", "United Arab Emirates", "+971"], ["GB", "United Kingdom", "+44"], ["US", "United States", "+1"], ["VN", "Vietnam", "+84"], ["ZW", "Zimbabwe", "+263"],
 ].map(([code, name, dialCode]) => ({ code, name, dialCode }));
 
 function sortCountries(countries: Country[]) {
@@ -140,6 +142,7 @@ export function LocationFields(props: LocationFieldsProps) {
 
   const chooseCountry = (country: string) => {
     props.setCountry(country);
+    props.setCountryCode(countries.find((item) => item.name === country)?.code ?? "");
     props.setRegion("");
     props.setCity("");
     if (country) void loadRegions(country);
@@ -195,6 +198,7 @@ export function LocationFields(props: LocationFieldsProps) {
     const selectedCountry = matchedCountry?.name || details.country;
     if (selectedCountry) {
       props.setCountry(selectedCountry);
+      props.setCountryCode(matchedCountry?.code ?? countryCode ?? "");
       void loadRegions(selectedCountry);
       if (region) void loadCities(selectedCountry, region);
     }

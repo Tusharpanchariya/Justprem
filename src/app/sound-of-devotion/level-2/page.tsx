@@ -3,21 +3,23 @@ import Link from "next/link";
 import { Level2Curriculum } from "@/components/course/Level2Curriculum";
 
 const inclusions = [
-  "Eight recorded learning modules",
-  "Five interactive live masterclasses; dates and meeting links will be shared with enrolled students",
-  "A 20–25 kirtan learning collection and one personal kirtan request",
-  "A downloadable handbook covering scales, chords, ragas, notation and practice",
-  "Five meditation tracks as a bonus; audio access will be added when the recordings are available",
-  "Lifetime access to recorded lessons after successful enrolment and purchase",
+  "Eight comprehensive recorded learning modules",
+  "Five interactive live masterclasses; dates and meeting links shared with enrolled students",
+  "A 15-kirtan repertoire collection with notation, chords and pronunciation tutorials",
+  "A downloadable study handbook covering scales, chords, ragas, notation and practice",
+  "Five meditation tracks as a bonus for personal meditation and relaxation",
+  "Lifetime access to recorded lessons and course updates after enrolment",
 ];
 
 const outcomes = [
-  "Play major and natural minor scales in all 12 keys",
-  "Build family chords and find simple progressions independently",
-  "Pronounce Sanskrit mantras with more confidence",
-  "Understand foundational ideas in Indian classical ragas",
-  "Play and sing devotional kirtans using Sargam and chord sheets",
-  "Create simple devotional melodies and lead a basic kirtan gathering",
+  "A deeper understanding of Bhakti Yoga and establishing a personal Sādhana",
+  "The ability to pronounce and chant traditional Sanskrit mantras accurately",
+  "Confidence playing scales, Sargam exercises and melodies in all 12 keys",
+  "Greater understanding of family chords, inversions, and finding chords by ear",
+  "An authentic introduction to Indian Classical Ragas (Yaman, Bhupali, Kafi)",
+  "The ability to play and sing 15 selected devotional Kīrtans",
+  "The confidence to create original devotional melodies and mantra variations",
+  "The ability to prepare, structure and lead a complete Kīrtan gathering",
 ];
 
 export default function SoundOfDevotionLevel2Page() {
@@ -27,13 +29,25 @@ export default function SoundOfDevotionLevel2Page() {
         <Image src="/harmonium-images/mainpage.JPG" alt="Harmonium for devotional music practice" fill priority sizes="100vw" className="object-cover object-center opacity-[.12]" />
         <div className="relative mx-auto max-w-6xl">
           <Link href="/sound-of-devotion#class-offerings" className="text-[10px] uppercase tracking-[.2em] text-charcoal/55 hover:text-[#ad684d]">← Sound of Devotion</Link>
-          <p className="mt-10 text-[10px] uppercase tracking-[.22em] text-[#ad684d]">Just Prem Academy presents</p>
-          <h1 className="mt-5 max-w-4xl font-bodoni text-[clamp(3rem,8vw,6.5rem)] leading-[.84] tracking-[-.045em]">SOUND OF<br /><em className="text-[#ad684d]">DEVOTION</em></h1>
-          <p className="mt-7 font-serif text-2xl md:text-4xl">Level 2 — The Art of Bhakti Music</p>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-charcoal/70 md:text-lg">Go deeper into the art of devotional music. Deepen your understanding of harmonium, discover Indian classical ragas, explore Sanskrit pronunciation and learn to create devotional melodies.</p>
-          <p className="mt-3 font-serif text-lg italic text-[#567262]">A journey of music, knowledge and devotion.</p>
+          <p className="mt-10 text-[10px] uppercase tracking-[.22em] text-[#ad684d] font-semibold">Just Prem Academy presents</p>
+          <h1 className="mt-5 max-w-4xl font-bodoni text-[clamp(2.8rem,7.5vw,5.8rem)] leading-[.88] tracking-[-.04em]">
+            LEVEL 02<br />
+            <em className="text-[#ad684d] font-serif not-italic">THE PATH OF BHAKTI</em>
+          </h1>
+          <p className="mt-6 font-serif text-2xl md:text-3xl text-charcoal">
+            From Musical Foundations to Devotional Expression
+          </p>
+          <p className="mt-2 text-xs font-bold uppercase tracking-[.2em] text-[#567262]">
+            Eight Modules · A Complete Learning Journey
+          </p>
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-charcoal/75 md:text-lg">
+            Level 2 is designed to take students beyond the foundations of harmonium playing and introduce them to the deeper world of Bhakti Yoga, Sanskrit, Indian Classical Music, musical creativity and Kirtan leadership.
+          </p>
+          <p className="mt-3 font-serif text-lg italic text-[#567262]">
+            Through practical lessons, guided exercises, devotional understanding and musical application, develop the confidence to play independently, create your own melodies and share the experience of Kirtan.
+          </p>
           <div className="mt-8 grid max-w-4xl gap-3 border-y border-charcoal/15 py-5 text-xs uppercase tracking-wider text-charcoal/70 sm:grid-cols-2 lg:grid-cols-4">
-            <span>Intermediate level</span><span>8 learning modules</span><span>5 live masterclasses</span><span>20–25 kirtans</span><span>Complete study handbook</span><span>5 meditation tracks bonus</span><span>Lifetime recorded access</span><span>€850 · 2-month guided course</span>
+            <span>Intermediate level</span><span>8 in-depth modules</span><span>5 live masterclasses</span><span>15 selected kirtans</span><span>Complete study handbook</span><span>5 meditation tracks bonus</span><span>Lifetime recorded access</span><span>€850 · 2-month guided course</span>
           </div>
           <div className="mt-8 flex flex-wrap items-center gap-5">
             <Link href="/sound-of-devotion#class-offerings" className="inline-flex min-h-12 items-center justify-center bg-[#567262] px-7 text-xs uppercase tracking-[.18em] text-ivory transition-colors hover:bg-forest">Book your place · €850 ↗</Link>

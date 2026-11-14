@@ -1,7 +1,7 @@
 export const mockHarmoniums = [
   {
     id: "1",
-    name: "SARASWATI – Lavender (32 Keys)",
+    name: "Just Prem \" SARASWATI\" – Lavender (32 Keys)",
     slug: "saraswati",
     priceEUR: 650,
     originalPriceEUR: 990,
@@ -39,7 +39,7 @@ export const mockHarmoniums = [
   },
   {
     id: "2",
-    name: "PRITHVI (TERRA) – Brown (32 Keys)",
+    name: "Just Prem \"PRITHVI\" (TERRA) – Brown (32 Keys)",
     slug: "terra",
     priceEUR: 650,
     originalPriceEUR: 990,
@@ -75,7 +75,7 @@ export const mockHarmoniums = [
   },
   {
     id: "3",
-    name: "KALI – Red (32 Keys)",
+    name: "Just Prem \"KALI\" – Red (32 Keys)",
     slug: "prem-agni",
     priceEUR: 650,
     originalPriceEUR: 990,
@@ -108,7 +108,7 @@ export const mockHarmoniums = [
   },
   {
     id: "4",
-    name: "LALITA – Purple (32 Keys)",
+    name: " Just Prem \"LALITA\" – Purple (32 Keys)",
     slug: "royal-amethyst",
     priceEUR: 650,
     originalPriceEUR: 990,
@@ -136,7 +136,7 @@ export const mockHarmoniums = [
   },
   {
     id: "5",
-    name: "RADHA PREMA– Royal Rose (32 Keys)",
+    name: "Just Prem \"RADHA PREMA\"– Royal Rose (32 Keys)",
     slug: "radha-prema",
     priceEUR: 650,
     originalPriceEUR: 990,

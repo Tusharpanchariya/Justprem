@@ -43,6 +43,8 @@ export function Footer() {
 
           {/* Right: Contact Information */}
           <div className="flex flex-col items-center md:items-end text-center md:text-right text-xs space-y-1.5 text-neutral-300">
+            <Link href="/withdraw-from-contract" className="hover:underline hover:text-white transition-colors">Withdraw from contract here</Link>
+            <Link href="/harmonium-purchase-terms" className="hover:underline hover:text-white transition-colors">Harmonium purchase terms</Link>
             <a
               href="mailto:justprem108@gmail.com"
               className="hover:underline hover:text-white transition-colors"

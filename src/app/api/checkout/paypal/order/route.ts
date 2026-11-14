@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { mockHarmoniums } from "@/lib/data/mockProducts";
 import { calculateOrderPricing } from "@/lib/pricing";
+import { requireCheckoutConsent, updateCheckoutPayment } from "@/lib/checkoutConsent";
 
 type CartRequestItem = {
   id: string;
@@ -81,10 +82,12 @@ function getValidatedItems(items: CartRequestItem[]) {
 
 export async function POST(request: Request) {
   try {
-    const { items, couponCode } = (await request.json()) as { items?: CartRequestItem[]; couponCode?: string };
+    const { items, couponCode, consentId } = (await request.json()) as { items?: CartRequestItem[]; couponCode?: string; consentId?: string };
+    const consent = await requireCheckoutConsent(consentId);
     const validatedItems = getValidatedItems(items ?? []);
     const pricingItems = validatedItems.map(({ product, quantity }) => ({ priceEUR: product.priceEUR, quantity }));
     const { subtotal, coupon, deliveryFee, total } = calculateOrderPricing(pricingItems, couponCode);
+    if (Math.abs(total - Number(consent.order_total)) > 0.01) throw new Error("Your cart changed after accepting the terms. Please review and accept them again.");
     if (couponCode && !coupon) return NextResponse.json({ error: "That coupon code is not valid." }, { status: 400 });
     const accessToken = await getPayPalAccessToken();
     const response = await fetch(`${paypalApiBaseUrl}/v2/checkout/orders`, {
@@ -119,6 +122,7 @@ export async function POST(request: Request) {
                 value: product.priceEUR.toFixed(2),
               },
             })),
+            custom_id: consent.id,
           },
         ],
       }),
@@ -129,6 +133,7 @@ export async function POST(request: Request) {
     if (!response.ok || !order.id) {
       throw new Error(order.details?.[0]?.description || "PayPal could not create the order.");
     }
+    await updateCheckoutPayment(consent.id, { provider: "paypal", status: "awaiting_payment", reference: order.id });
 
     return NextResponse.json({ id: order.id, coupon });
   } catch (error) {

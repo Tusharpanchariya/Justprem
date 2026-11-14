@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { updateCheckoutPayment } from "@/lib/checkoutConsent";
 
 type PayPalCapture = {
   id?: string;
@@ -9,6 +10,7 @@ type PayPalOrder = {
   status?: string;
   details?: Array<{ description?: string }>;
   purchase_units?: Array<{
+    custom_id?: string;
     payments?: {
       captures?: PayPalCapture[];
     };
@@ -74,12 +76,14 @@ export async function POST(request: Request) {
     });
     const order = (await response.json()) as PayPalOrder;
     const capture = order.purchase_units?.[0]?.payments?.captures?.[0];
+    const consentId = order.purchase_units?.[0]?.custom_id;
 
     if (!response.ok || order.status !== "COMPLETED" || capture?.status !== "COMPLETED" || !capture.id) {
       throw new Error(order.details?.[0]?.description || "PayPal could not confirm the payment.");
     }
 
-    return NextResponse.json({ paymentId: capture.id });
+    await updateCheckoutPayment(consentId, { provider: "paypal", status: "paid", reference: capture.id });
+    return NextResponse.json({ paymentId: capture.id, consentId });
   } catch (error) {
     console.error("PayPal capture error:", error);
     return NextResponse.json({ error: getErrorMessage(error) }, { status: 500 });

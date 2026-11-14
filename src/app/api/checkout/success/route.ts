@@ -1,76 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendOrderEmail } from "@/lib/email";
-import { calculateOrderPricing } from "@/lib/pricing";
-import { mockHarmoniums } from "@/lib/data/mockProducts";
+import { requireCheckoutConsent } from "@/lib/checkoutConsent";
 
 export const runtime = "nodejs";
 
+type StoredOrder = {
+  order_id: string; order_total: number; policy_version: string;
+  checkout_orders: { customer_email: string; country_code: string; payment_status: string; payment_provider: string; payment_reference: string; order_snapshot: { items: Array<{ id: string; name: string; quantity: number; priceEUR: number }>; deliveryFee: number; discount: number; couponCode?: string }; customer_snapshot: { name: string; phone: string; address: string; city: string; region: string; country: string; postalCode: string } };
+};
+
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { 
-      email, 
-      phone, 
-      name, 
-      address, 
-      city, 
-      region,
-      country,
-      postalCode, 
-      items, 
-      cartTotal, 
-      couponCode,
-      paymentId, 
-      paymentMethod 
-    } = body;
-
-    // Validate inputs
-    if (
-      typeof email !== "string" ||
-      typeof name !== "string" ||
-      !Array.isArray(items) ||
-      items.length === 0 ||
-      typeof cartTotal !== "number" ||
-      !Number.isFinite(cartTotal) ||
-      cartTotal < 0 ||
-      typeof paymentId !== "string" ||
-      typeof paymentMethod !== "string"
-    ) {
-      return NextResponse.json({ error: "Missing required order information" }, { status: 400 });
-    }
-
-    const invoiceItems = items.map((item: { id?: string; quantity?: number }) => {
-      const product = mockHarmoniums.find((entry) => entry.id === item.id);
-      const quantity = Number(item.quantity);
-      if (!product || !Number.isInteger(quantity) || quantity < 1 || quantity > 10) {
-        throw new Error("Your cart contains an invalid item.");
-      }
-      return { id: product.id, name: product.name, quantity, priceEUR: product.priceEUR, image: product.image };
-    });
-    const { coupon, deliveryFee, total } = calculateOrderPricing(invoiceItems, typeof couponCode === "string" ? couponCode : undefined);
-    if (couponCode && !coupon) return NextResponse.json({ error: "That coupon code is not valid." }, { status: 400 });
-
-    // Call the email sending helper
+    const { consentId, paymentId, paymentMethod } = await req.json() as { consentId?: string; paymentId?: string; paymentMethod?: string };
+    if (!paymentId || !consentId || !["razorpay", "paypal"].includes(paymentMethod || "")) return NextResponse.json({ error: "A verified paid order is required." }, { status: 400 });
+    const consent = await requireCheckoutConsent(consentId, false) as unknown as StoredOrder;
+    const order = consent.checkout_orders;
+    if (order.payment_status !== "paid" || order.payment_provider !== paymentMethod || order.payment_reference !== paymentId) return NextResponse.json({ error: "The payment could not be matched to this accepted order." }, { status: 409 });
+    const customer = order.customer_snapshot;
+    const snapshot = order.order_snapshot;
     const delivery = await sendOrderEmail({
-      email,
-      phone: phone || "",
-      name,
-      address: address || "",
-      city: city || "",
-      region: region || "",
-      country: country || "",
-      postalCode: postalCode || "",
-      items: invoiceItems,
-      cartTotal: total,
-      couponCode: coupon?.code,
-      discount: coupon?.discount || 0,
-      deliveryFee,
-      paymentId,
-      paymentMethod
+      email: order.customer_email, phone: customer.phone, name: customer.name, address: customer.address,
+      city: customer.city, region: customer.region, country: customer.country, postalCode: customer.postalCode,
+      items: snapshot.items, cartTotal: Number(consent.order_total), couponCode: snapshot.couponCode,
+      discount: snapshot.discount, deliveryFee: snapshot.deliveryFee, paymentId, paymentMethod,
+      policyVersion: consent.policy_version,
     });
-
     return NextResponse.json({ success: true, delivery });
-  } catch (error: unknown) {
+  } catch (error) {
     console.error("Order email error:", error);
     return NextResponse.json({ error: error instanceof Error ? error.message : "Failed to process order email" }, { status: 500 });
   }

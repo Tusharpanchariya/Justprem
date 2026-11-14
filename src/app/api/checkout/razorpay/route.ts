@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import Razorpay from "razorpay";
 import { mockHarmoniums } from "@/lib/data/mockProducts";
 import { calculateOrderPricing } from "@/lib/pricing";
+import { requireCheckoutConsent, updateCheckoutPayment } from "@/lib/checkoutConsent";
 
 type CartRequestItem = {
   id: string;
@@ -50,10 +51,12 @@ function getValidatedItems(items: CartRequestItem[]) {
 
 export async function POST(request: Request) {
   try {
-    const { items, couponCode } = (await request.json()) as { items?: CartRequestItem[]; couponCode?: string };
+    const { items, couponCode, consentId } = (await request.json()) as { items?: CartRequestItem[]; couponCode?: string; consentId?: string };
+    const consent = await requireCheckoutConsent(consentId);
     const validatedItems = getValidatedItems(items ?? []);
     const pricingItems = validatedItems.map(({ product, quantity }) => ({ priceEUR: product.priceEUR, quantity }));
     const { coupon, total: amount } = calculateOrderPricing(pricingItems, couponCode);
+    if (Math.abs(amount - Number(consent.order_total)) > 0.01) throw new Error("Your cart changed after accepting the terms. Please review and accept them again.");
     if (couponCode && !coupon) return NextResponse.json({ error: "That coupon code is not valid." }, { status: 400 });
     const currency = (process.env.RAZORPAY_CURRENCY || "EUR").toUpperCase();
 
@@ -65,8 +68,9 @@ export async function POST(request: Request) {
       amount: Math.round(amount * 100),
       currency,
       receipt: `jp_${crypto.randomUUID().replaceAll("-", "").slice(0, 32)}`,
-      notes: { item_count: String(validatedItems.length), coupon_code: coupon?.code || "" },
+      notes: { item_count: String(validatedItems.length), coupon_code: coupon?.code || "", consent_id: consent.id },
     });
+    await updateCheckoutPayment(consent.id, { provider: "razorpay", status: "awaiting_payment", reference: order.id });
 
     return NextResponse.json({ id: order.id, amount: order.amount, currency: order.currency, coupon });
   } catch (error) {
