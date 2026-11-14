@@ -46,6 +46,9 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
   const images = product.images || [product.image];
   const activeImage = images[activeImageIdx];
   const isAuraMini = product.slug === "aura-mini";
+  const isAuraSaraswati = product.slug === "saraswati";
+  const description = product.fullDescription || product.shortDescription;
+  const auraDescriptionParts = description.split("“Aura” – a");
   const selectedAuraFinish = AURA_MINI_FINISHES.find((finish) => finish.name === selectedFinish) || AURA_MINI_FINISHES[2];
   const isSoldOut = product.availability === "SOLD_OUT";
 
@@ -153,7 +156,9 @@ export default function HarmoniumDetailPage({ params }: { params: Promise<{ slug
           </div>
 
           <div className="font-sans text-charcoal leading-relaxed whitespace-pre-line mb-10 text-base">
-            {product.fullDescription || product.shortDescription}
+            {isAuraSaraswati && auraDescriptionParts.length > 1 ? <>
+              {auraDescriptionParts[0]}“Aura” –<br className="sm:hidden" />{" "}a{auraDescriptionParts.slice(1).join("“Aura” – a")}
+            </> : description}
           </div>
 
           {isAuraMini && (
